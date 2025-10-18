@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maths Adventure - Learn &amp; Practice</title>
+    <style>
+        /* Design System CSS */
+        :root {
+            /* Primitive Color Tokens */
+            --color-white: rgba(255, 255, 255, 1);
+            --color-black: rgba(0, 0, 0, 1);
+            --color-cream-50: rgba(252, 252, 249, 1);
+            --color-cream-100: rgba(255, 255, 253, 1);
+            --color-gray-200: rgba(245, 245, 245, 1);
+            --color-gray-300: rgba(167, 169, 169, 1);
+            --color-gray-400: rgba(119, 124, 124, 1);
+            --color-slate-500: rgba(98, 108, 113, 1);
+            --color-brown-600: rgba(94, 82, 64, 1);
+            --color-charcoal-700: rgba(31, 33, 33, 1);
+            --color-charcoal-800: rgba(38, 40, 40, 1);
+            --color-slate-900: rgba(19, 52, 59, 1);
+            --color-teal-300: rgba(50, 184, 198, 1);
+            --color-teal-400: rgba(45, 166, 178, 1);
+            --color-teal-500: rgba(33, 128, 141, 1);
+            --color-teal-600: rgba(29, 116, 128, 1);
+            --color-teal-700: rgba(26, 104, 115, 1);
+            --color-teal-800: rgba(41, 150, 161, 1);
+            --color-red-400: rgba(255, 84, 89, 1);
+            --color-red-500: rgba(192, 21, 47, 1);
+            --color-orange-400: rgba(230, 129, 97, 1);
+            --color-orange-500: rgba(168, 75, 47, 1);
+
+            /* RGB versions for opacity control */
+            --color-brown-600-rgb: 94, 82, 64;
+            --color-teal-500-rgb: 33, 128, 141;
+            --color-slate-900-rgb: 19, 52, 59;
+            --color-slate-500-rgb: 98, 108, 113;
+            --color-red-500-rgb: 192, 21, 47;
+            --color-red-400-rgb: 255, 84, 89;
+            --color-orange-500-rgb: 168, 75, 47;
+            --color-orange-400-rgb: 230, 129, 97;
+
+            /* Background color tokens */
+            --color-bg-1: rgba(59, 130, 246, 0.08);
+            --color-bg-2: rgba(245, 158, 11, 0.08);
+            --color-bg-3: rgba(34, 197, 94, 0.08);
+            --color-bg-4: rgba(239, 68, 68, 0.08);
+            --color-bg-5: rgba(147, 51, 234, 0.08);
+            --color-bg-6: rgba(249, 115, 22, 0.08);
+            --color-bg-7: rgba(236, 72, 153, 0.08);
+            --color-bg-8: rgba(6, 182, 212, 0.08);
+
+            /* Semantic Color Tokens */
+            --color-background: var(--color-cream-50);
+            --color-surface: var(--color-cream-100);
+            --color-text: var(--color-slate-900);
+            --color-text-secondary: var(--color-slate-500);
+            --color-primary: var(--color-teal-500);
+            --color-primary-hover: var(--color-teal-600);
+            --color-primary-active: var(--color-teal-700);
+            --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+            --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+            --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+            --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+            --color-btn-primary-text: var(--color-cream-50);
+            --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+            --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+            --color-error: var(--color-red-500);
+            --color-success: var(--color-teal-500);
+            --color-warning: var(--color-orange-500);
+            --color-info: var(--color-slate-500);
+            --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+
+            /* Custom colors for the app */
+            --app-primary: #4A90E2;
+            --app-secondary: #7B68EE;
+            --app-success: #50C878;
+            --app-error: #FF6B6B;
+            --app-warning: #FFB347;
+
+            /* Typography */
+            --font-family-heading: "Comic Sans MS", cursive, var(--font-family-base);
+            --font-family-base: "Arial", sans-serif;
+            --font-family-mono: "Berkeley Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            --font-size-xs: 11px;
+            --font-size-sm: 12px;
+            --font-size-base: 14px;
+            --font-size-md: 16px;
+            --font-size-lg: 18px;
+            --font-size-xl: 20px;
+            --font-size-2xl: 24px;
+            --font-size-3xl: 28px;
+            --font-size-4xl: 36px;
+            --font-weight-normal: 400;
+            --font-weight-medium: 500;
+            --font-weight-semibold: 550;
+            --font-weight-bold: 600;
+            --line-height-tight: 1.2;
+            --line-height-normal: 1.5;
+            --letter-spacing-tight: -0.01em;
+
+            /* Spacing */
+            --space-0: 0;
+            --space-1: 1px;
+            --space-2: 2px;
+            --space-4: 4px;
+            --space-6: 6px;
+            --space-8: 8px;
+            --space-10: 10px;
+            --space-12: 12px;
+            --space-16: 16px;
+            --space-20: 20px;
+            --space-24: 24px;
+            --space-32: 32px;
+            --space-48: 48px;
+
+            /* Border Radius */
+            --radius-sm: 6px;
+            --radius-base: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+            --radius-full: 9999px;
+
+            /* Shadows */
+            --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.02);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+            --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.15), inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+
+            /* Animation */
+            --duration-fast: 150ms;
+            --duration-normal: 250ms;
+            --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family-base);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text);
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 800px;
+            margin: var(--space-20);
+        }
+
+        .screen {
+            display: none;
+            background: var(--color-surface);
+            border-radius: var(--radius-xl);
+            padding: var(--space-32);
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-family: var(--font-family-heading);
+            font-size: var(--font-size-4xl);
+            color: var(--app-primary);
+            margin-bottom: var(--space-16);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            font-family: var(--font-family-heading);
+            font-size: var(--font-size-3xl);
+            color: var(--app-secondary);
+            margin-bottom: var(--space-24);
+        }
+
+        h3 {
+            font-family: var(--font-family-heading);
+            font-size: var(--font-size-2xl);
+            color: var(--color-text);
+            margin-bottom: var(--space-16);
+        }
+
+        .subtitle {
+            font-size: var(--font-size-lg);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-32);
+        }
+
+        .mode-buttons {
+            display: flex;
+            gap: var(--space-24);
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: var(--space-32);
+        }
+
+        .mode-button {
+            background: linear-gradient(135deg, var(--app-primary), var(--app-secondary));
+            color: white;
+            border: none;
+            border-radius: var(--radius-lg);
+            padding: var(--space-24) var(--space-32);
+            font-size: var(--font-size-xl);
+            font-family: var(--font-family-heading);
+            cursor: pointer;
+            transition: all var(--duration-normal) var(--ease-standard);
+            box-shadow: var(--shadow-md);
+            min-width: 200px;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-8);
+        }
+
+        .mode-button:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .mode-button:active {
+            transform: translateY(-2px);
+        }
+
+        .mode-icon {
+            font-size: var(--font-size-4xl);
+        }
+
+        .mode-description {
+            font-size: var(--font-size-sm);
+            opacity: 0.9;
+            font-family: var(--font-family-base);
+        }
+
+        .question-container {
+            background: var(--color-bg-1);
+            border-radius: var(--radius-lg);
+            padding: var(--space-24);
+            margin-bottom: var(--space-24);
+            border: 2px solid var(--color-border);
+        }
+
+        .question-text {
+            font-size: var(--font-size-xl);
+            line-height: var(--line-height-normal);
+            margin-bottom: var(--space-24);
+            color: var(--color-text);
+        }
+
+        .answer-input {
+            width: 100%;
+            max-width: 300px;
+            padding: var(--space-12) var(--space-16);
+            font-size: var(--font-size-lg);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-base);
+            margin-bottom: var(--space-16);
+            text-align: center;
+            background: var(--color-surface);
+        }
+
+        .answer-input:focus {
+            outline: none;
+            border-color: var(--app-primary);
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+        }
+
+        .button-group {
+            display: flex;
+            gap: var(--space-12);
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: var(--space-16) 0;
+        }
+
+        .btn {
+            padding: var(--space-12) var(--space-24);
+            border: none;
+            border-radius: var(--radius-base);
+            font-size: var(--font-size-md);
+            font-weight: var(--font-weight-medium);
+            cursor: pointer;
+            transition: all var(--duration-normal) var(--ease-standard);
+            min-height: 44px;
+            min-width: 120px;
+        }
+
+        .btn-primary {
+            background: var(--app-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-primary-hover);
+        }
+
+        .btn-primary:disabled {
+            background: var(--color-gray-400);
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .btn-secondary {
+            background: var(--color-secondary);
+            color: var(--color-text);
+            border: 1px solid var(--color-border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-secondary-hover);
+        }
+
+        .btn-hint {
+            background: var(--app-warning);
+            color: white;
+        }
+
+        .btn-hint:hover {
+            background: #E69A2E;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-24);
+            padding: var(--space-16);
+            background: var(--color-bg-2);
+            border-radius: var(--radius-base);
+            flex-wrap: wrap;
+            gap: var(--space-16);
+        }
+
+        .timer {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--app-primary);
+        }
+
+        .timer.warning {
+            color: var(--app-warning);
+        }
+
+        .timer.danger {
+            color: var(--app-error);
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .score {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-medium);
+        }
+
+        .question-number {
+            font-size: var(--font-size-lg);
+            color: var(--color-text-secondary);
+        }
+
+        .feedback {
+            margin: var(--space-16) 0;
+            padding: var(--space-16);
+            border-radius: var(--radius-base);
+            font-size: var(--font-size-md);
+            font-weight: var(--font-weight-medium);
+        }
+
+        .feedback.correct {
+            background: rgba(80, 200, 120, 0.1);
+            color: var(--app-success);
+            border: 2px solid var(--app-success);
+        }
+
+        .feedback.incorrect {
+            background: rgba(255, 107, 107, 0.1);
+            color: var(--app-error);
+            border: 2px solid var(--app-error);
+        }
+
+        .hint {
+            background: rgba(255, 179, 71, 0.1);
+            border: 2px solid var(--app-warning);
+            color: #B8860B;
+            padding: var(--space-16);
+            border-radius: var(--radius-base);
+            margin: var(--space-16) 0;
+            font-style: italic;
+        }
+
+        .explanation {
+            background: var(--color-bg-3);
+            border: 2px solid var(--color-border);
+            padding: var(--space-16);
+            border-radius: var(--radius-base);
+            margin: var(--space-16) 0;
+            text-align: left;
+        }
+
+        .explanation h4 {
+            color: var(--app-primary);
+            margin-bottom: var(--space-8);
+            font-family: var(--font-family-heading);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-16);
+            margin: var(--space-24) 0;
+        }
+
+        .stat-item {
+            background: var(--color-bg-1);
+            padding: var(--space-16);
+            border-radius: var(--radius-base);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--app-primary);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            margin-top: var(--space-4);
+        }
+
+        .celebration {
+            font-size: var(--font-size-4xl);
+            margin: var(--space-16) 0;
+        }
+
+        @media (max-width: 768px) {
+            .app-container {
+                margin: var(--space-12);
+            }
+            
+            .screen {
+                padding: var(--space-24);
+            }
+            
+            h1 {
+                font-size: var(--font-size-3xl);
+            }
+            
+            .mode-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .mode-button {
+                min-width: 250px;
+            }
+            
+            .progress-info {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Welcome Screen -->
+        <div class="screen active" id="welcome-screen">
+            <h1>🧮 Maths Adventure 🌟</h1>
+            <p class="subtitle">Choose your learning adventure and improve your maths skills!</p>
+            
+            <div class="mode-buttons">
+                <button class="mode-button" onclick="startMode('practice')">
+                    <div class="mode-icon">📚</div>
+                    <div>Practice Mode</div>
+                    <div class="mode-description">Practice at your own pace with no time pressure</div>
+                </button>
+                
+                <button class="mode-button" onclick="startMode('challenge')">
+                    <div class="mode-icon">⏰</div>
+                    <div>Challenge Mode</div>
+                    <div class="mode-description">Test yourself with 15 questions in 20 minutes</div>
+                </button>
+            </div>
+            
+            <button class="btn btn-secondary" onclick="showBestScores()">🏆 View Best Scores</button>
+        </div>
+
+        <!-- Question Screen -->
+        <div class="screen" id="question-screen">
+            <div class="progress-info">
+                <div class="question-number" id="question-counter">Question 1</div>
+                <div class="score" id="score-display">Score: 0/0 (0%)</div>
+                <div class="timer" id="timer-display"></div>
+            </div>
+            
+            <div class="question-container">
+                <div class="question-text" id="question-text">Loading question...</div>
+                
+                <input type="text" class="answer-input" id="answer-input" placeholder="Type your answer here..." onkeypress="handleKeyPress(event)">
+                
+                <div class="button-group">
+                    <button class="btn btn-hint" id="hint-btn" onclick="showHint()">💡 Hint</button>
+                    <button class="btn btn-primary" id="submit-btn" onclick="submitAnswer()" disabled>Submit Answer</button>
+                </div>
+                
+                <div id="hint-container"></div>
+                <div id="feedback-container"></div>
+                <div id="explanation-container"></div>
+            </div>
+            
+            <div class="button-group">
+                <button class="btn btn-secondary" onclick="confirmQuit()">🏠 Back to Menu</button>
+                <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()" style="display: none;">Next Question ➡️</button>
+                <button class="btn btn-primary" id="finish-btn" onclick="finishSession()" style="display: none;">Finish Session</button>
+            </div>
+            
+            <div style="margin-top: var(--space-16); font-size: var(--font-size-sm); color: var(--color-text-secondary);">
+                <span id="hints-used">Hints used: 0</span>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div class="screen" id="results-screen">
+            <div class="celebration" id="celebration-emoji">🎉</div>
+            <h2>Session Complete!</h2>
+            <div id="final-message"></div>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-value" id="final-score">0/0</span>
+                    <div class="stat-label">Questions Correct</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="final-percentage">0%</span>
+                    <div class="stat-label">Percentage</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="final-hints">0</span>
+                    <div class="stat-label">Hints Used</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="final-time">0:00</span>
+                    <div class="stat-label">Time Taken</div>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="startMode(currentMode)">🔄 Try Again</button>
+                <button class="btn btn-secondary" onclick="showWelcome()">🏠 Change Mode</button>
+                <button class="btn btn-secondary" onclick="showBestScores()">🏆 Best Scores</button>
+            </div>
+        </div>
+
+        <!-- Best Scores Screen -->
+        <div class="screen" id="scores-screen">
+            <h2>🏆 Best Scores</h2>
+            <div id="scores-container"></div>
+            <button class="btn btn-primary" onclick="showWelcome()">🏠 Back to Menu</button>
+        </div>
+    </div>
+
+    <script>
+        // Game state
+        let currentMode = '';
+        let questionBank = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let totalQuestions = 0;
+        let hintsUsed = 0;
+        let startTime = null;
+        let timerInterval = null;
+        let timeRemaining = 0;
+        let isAnswered = false;
+        let currentHintShown = false;
+
+        // Names for word problems
+        const names = [
+            'Nacho', 'Javi', 'Gonza', 'Ignacio', 'Javier', 'Gonzalo', 'Steven', 'Harry', 'Noah', 'Aden',
+            'Liam', 'Rafa', 'Sergei', 'Ayana', 'Ramon', 'Iñigo', 'Luis', 'Jaime', 'Thiago', 'Leo',
+            'Felipe', 'Enrique', 'Sofia', 'Flap', 'Ethan', 'Santi', 'William', 'Kaiser', 'Iñaki',
+            'Cristina', 'Loreto', 'Macarena', 'Ray'
+        ];
+
+        // Utility functions
+        function getRandomName() {
+            return names[Math.floor(Math.random() * names.length)];
+        }
+
+        function getRandomNames(count) {
+            const shuffled = [...names].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
+
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        // Question Bank Generator
+        function generateQuestionBank() {
+            const questions = [];
+
+            // Basic Arithmetic - 165 questions
+            
+            // 2-digit addition (25 questions)
+            for (let i = 0; i < 25; i++) {
+                const a = Math.floor(Math.random() * 90) + 10;
+                const b = Math.floor(Math.random() * 90) + 10;
+                questions.push({
+                    question: `${a} + ${b} = ?`,
+                    answer: a + b,
+                    hint: "Add the ones column first, then the tens column. Remember to carry if needed!",
+                    explanation: `Let's add step by step:\n1. Ones: ${a % 10} + ${b % 10} = ${(a % 10) + (b % 10)}\n2. Tens: ${Math.floor(a/10)} + ${Math.floor(b/10)} = ${Math.floor(a/10) + Math.floor(b/10)}\n3. Total: ${a + b}`,
+                    category: "Basic Arithmetic"
+                });
+            }
+
+            // 2-digit subtraction (25 questions)
+            for (let i = 0; i < 25; i++) {
+                const a = Math.floor(Math.random() * 90) + 10;
+                const b = Math.floor(Math.random() * a) + 1;
+                questions.push({
+                    question: `${a} - ${b} = ?`,
+                    answer: a - b,
+                    hint: "Subtract the ones column first. You might need to borrow from the tens!",
+                    explanation: `Let's subtract step by step:\n1. Ones: ${a % 10} - ${b % 10} = ${(a % 10) - (b % 10)}\n2. Tens: ${Math.floor(a/10)} - ${Math.floor(b/10)} = ${Math.floor(a/10) - Math.floor(b/10)}\n3. Total: ${a - b}`,
+                    category: "Basic Arithmetic"
+                });
+            }
+
+            // 3-digit addition (20 questions)
+            for (let i = 0; i < 20; i++) {
+                const a = Math.floor(Math.random() * 900) + 100;
+                const b = Math.floor(Math.random() * 900) + 100;
+                questions.push({
+                    question: `${a} + ${b} = ?`,
+                    answer: a + b,
+                    hint: "Add column by column: ones, tens, then hundreds. Carry when needed!",
+                    explanation: `Adding column by column:\n1. Ones: ${a % 10} + ${b % 10} = ${(a % 10) + (b % 10)}\n2. Tens: ${Math.floor(a/10) % 10} + ${Math.floor(b/10) % 10} = ${(Math.floor(a/10) % 10) + (Math.floor(b/10) % 10)}\n3. Hundreds: ${Math.floor(a/100)} + ${Math.floor(b/100)} = ${Math.floor(a/100) + Math.floor(b/100)}\n4. Total: ${a + b}`,
+                    category: "Basic Arithmetic"
+                });
+            }
+
+            // 3-digit subtraction (20 questions)
+            for (let i = 0; i < 20; i++) {
+                const a = Math.floor(Math.random() * 900) + 100;
+                const b = Math.floor(Math.random() * a) + 1;
+                questions.push({
+                    question: `${a} - ${b} = ?`,
+                    answer: a - b,
+                    hint: "Subtract column by column. Remember to borrow when the top digit is smaller!",
+                    explanation: `Subtracting column by column:\n1. Ones: ${a % 10} - ${b % 10} = ${(a % 10) - (b % 10)}\n2. Tens: ${Math.floor(a/10) % 10} - ${Math.floor(b/10) % 10} = ${(Math.floor(a/10) % 10) - (Math.floor(b/10) % 10)}\n3. Hundreds: ${Math.floor(a/100)} - ${Math.floor(b/100)} = ${Math.floor(a/100) - Math.floor(b/100)}\n4. Total: ${a - b}`,
+                    category: "Basic Arithmetic"
+                });
+            }
+
+            // Multiplication tables 2-12 (30 questions)
+            const tables = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+            for (let i = 0; i < 30; i++) {
+                const table = tables[Math.floor(Math.random() * tables.length)];
+                const multiplier = Math.floor(Math.random() * 12) + 1;
+                questions.push({
+                    question: `${table} × ${multiplier} = ?`,
+                    answer: table * multiplier,
+                    hint: `Think about the ${table} times table. You can count in ${table}s: ${table}, ${table * 2}, ${table * 3}...`,
+                    explanation: `${table} × ${multiplier} means ${table} groups of ${multiplier} (or ${multiplier} groups of ${table}).\nCounting: ` + Array.from({length: multiplier}, (_, i) => table * (i + 1)).join(' + ') + ` = ${table * multiplier}`,
+                    category: "Basic Arithmetic"
+                });
+            }
+
+            // Division facts (25 questions)
+            for (let i = 0; i < 25; i++) {
+                const divisor = Math.floor(Math.random() * 11) + 2;
+                const quotient = Math.floor(Math.random() * 12) + 1;
+                const dividend = divisor * quotient;
+                questions.push({
+                    question: `${dividend} ÷ ${divisor} = ?`,
+                    answer: quotient,
+                    hint: `Think: what number times ${divisor} equals ${dividend}?`,
+                    explanation: `${dividend} ÷ ${divisor} = ${quotient} because ${divisor} × ${quotient} = ${dividend}\nWe can check: ${divisor} × ${quotient} = ${dividend} ✓`,
+                    category: "Basic Arithmetic"
+                });
+            }
+
+            // Mixed operations (20 questions)
+            const operations = [
+                () => {
+                    const a = Math.floor(Math.random() * 10) + 2;
+                    const b = Math.floor(Math.random() * 10) + 2;
+                    const c = Math.floor(Math.random() * 20) + 5;
+                    return {
+                        question: `${a} × ${b} + ${c} = ?`,
+                        answer: a * b + c,
+                        hint: "Remember order of operations: multiply first, then add!",
+                        explanation: `Order of operations (BODMAS/PEMDAS):\n1. First multiply: ${a} × ${b} = ${a * b}\n2. Then add: ${a * b} + ${c} = ${a * b + c}`
+                    };
+                },
+                () => {
+                    const a = Math.floor(Math.random() * 50) + 50;
+                    const b = Math.floor(Math.random() * 10) + 2;
+                    const c = Math.floor(Math.random() * 10) + 2;
+                    return {
+                        question: `${a} - ${b} × ${c} = ?`,
+                        answer: a - b * c,
+                        hint: "Multiply first, then subtract!",
+                        explanation: `Order of operations:\n1. First multiply: ${b} × ${c} = ${b * c}\n2. Then subtract: ${a} - ${b * c} = ${a - b * c}`
+                    };
+                }
+            ];
+            
+            for (let i = 0; i < 20; i++) {
+                const op = operations[Math.floor(Math.random() * operations.length)]();
+                questions.push({
+                    ...op,
+                    category: "Basic Arithmetic"
+                });
+            }
+
+            // Advanced Arithmetic - 70 questions
+            
+            // 4-digit addition (15 questions)
+            for (let i = 0; i < 15; i++) {
+                const a = Math.floor(Math.random() * 9000) + 1000;
+                const b = Math.floor(Math.random() * 9000) + 1000;
+                questions.push({
+                    question: `${a.toLocaleString()} + ${b.toLocaleString()} = ?`,
+                    answer: a + b,
+                    hint: "Add each column carefully from right to left. Don't forget to carry!",
+                    explanation: `Adding ${a.toLocaleString()} + ${b.toLocaleString()}:\nWorking column by column from right to left:\nAnswer: ${(a + b).toLocaleString()}`,
+                    category: "Advanced Arithmetic"
+                });
+            }
+
+            // 4-digit subtraction (15 questions)
+            for (let i = 0; i < 15; i++) {
+                const a = Math.floor(Math.random() * 9000) + 1000;
+                const b = Math.floor(Math.random() * a) + 1;
+                questions.push({
+                    question: `${a.toLocaleString()} - ${b.toLocaleString()} = ?`,
+                    answer: a - b,
+                    hint: "Subtract each column from right to left. Borrow when needed!",
+                    explanation: `Subtracting ${a.toLocaleString()} - ${b.toLocaleString()}:\nWorking column by column from right to left:\nAnswer: ${(a - b).toLocaleString()}`,
+                    category: "Advanced Arithmetic"
+                });
+            }
+
+            // 3-digit × 1-digit multiplication (15 questions)
+            for (let i = 0; i < 15; i++) {
+                const a = Math.floor(Math.random() * 900) + 100;
+                const b = Math.floor(Math.random() * 9) + 2;
+                questions.push({
+                    question: `${a} × ${b} = ?`,
+                    answer: a * b,
+                    hint: "Multiply each digit by ${b}, starting from the right. Remember to carry!",
+                    explanation: `${a} × ${b}:\nMultiply each digit:\n${a % 10} × ${b} = ${(a % 10) * b}\n${Math.floor(a/10) % 10} × ${b} = ${(Math.floor(a/10) % 10) * b}\n${Math.floor(a/100)} × ${b} = ${Math.floor(a/100) * b}\nAnswer: ${a * b}`,
+                    category: "Advanced Arithmetic"
+                });
+            }
+
+            // Division with remainders (15 questions)
+            for (let i = 0; i < 15; i++) {
+                const divisor = Math.floor(Math.random() * 8) + 3;
+                const quotient = Math.floor(Math.random() * 20) + 5;
+                const remainder = Math.floor(Math.random() * (divisor - 1)) + 1;
+                const dividend = divisor * quotient + remainder;
+                questions.push({
+                    question: `${dividend} ÷ ${divisor} = ? remainder ?`,
+                    answer: `${quotient} remainder ${remainder}`,
+                    acceptableAnswers: [`${quotient} remainder ${remainder}`, `${quotient} r ${remainder}`, `${quotient} R ${remainder}`, `${quotient}r${remainder}`, `${quotient}R${remainder}`],
+                    hint: "Find how many times ${divisor} goes into ${dividend}, then find what's left over!",
+                    explanation: `${dividend} ÷ ${divisor}:\n${divisor} × ${quotient} = ${divisor * quotient}\n${dividend} - ${divisor * quotient} = ${remainder}\nSo ${dividend} ÷ ${divisor} = ${quotient} remainder ${remainder}`,
+                    category: "Advanced Arithmetic"
+                });
+            }
+
+            // Mental strategies (10 questions)
+            const mentalStrategies = [
+                () => {
+                    const base = Math.floor(Math.random() * 9) * 100 + 99; // 199, 299, etc.
+                    const add = Math.floor(Math.random() * 50) + 10;
+                    return {
+                        question: `${base} + ${add} = ?`,
+                        answer: base + add,
+                        hint: "Try adding 1 first to make a round hundred, then adjust!",
+                        explanation: `${base} + ${add}:\n${base} is 1 less than ${base + 1}\nSo: ${base + 1} + ${add} - 1 = ${base + 1 + add} - 1 = ${base + add}`
+                    };
+                },
+                () => {
+                    const from = 1000;
+                    const subtract = Math.floor(Math.random() * 400) + 100;
+                    return {
+                        question: `${from} - ${subtract} = ?`,
+                        answer: from - subtract,
+                        hint: "Count up from ${subtract} to 1000!",
+                        explanation: `1000 - ${subtract}:\nThink: ${subtract} + ? = 1000\nAnswer: ${from - subtract}`
+                    };
+                }
+            ];
+
+            for (let i = 0; i < 10; i++) {
+                const strategy = mentalStrategies[Math.floor(Math.random() * mentalStrategies.length)]();
+                questions.push({
+                    ...strategy,
+                    category: "Advanced Arithmetic"
+                });
+            }
+
+            // Word Problems - 80 questions
+            
+            // Money problems (20 questions)
+            for (let i = 0; i < 20; i++) {
+                const problemTypes = [
+                    () => {
+                        const name1 = getRandomName();
+                        const name2 = getRandomName();
+                        const amount1 = (Math.floor(Math.random() * 500) + 100) / 100;
+                        const amount2 = (Math.floor(Math.random() * 500) + 100) / 100;
+                        return {
+                            question: `${name1} has £${amount1.toFixed(2)}. ${name2} has £${amount2.toFixed(2)}. How much do they have together?`,
+                            answer: amount1 + amount2,
+                            acceptableAnswers: [`£${(amount1 + amount2).toFixed(2)}`, `${(amount1 + amount2).toFixed(2)}`, `${amount1 + amount2}`],
+                            hint: "Add both amounts together!",
+                            explanation: `${name1} has £${amount1.toFixed(2)} and ${name2} has £${amount2.toFixed(2)}\nTogether: £${amount1.toFixed(2)} + £${amount2.toFixed(2)} = £${(amount1 + amount2).toFixed(2)}`
+                        };
+                    },
+                    () => {
+                        const name = getRandomName();
+                        const price = (Math.floor(Math.random() * 300) + 50) / 100;
+                        const paid = Math.ceil(price * 2) / 2; // Round up to nearest 50p
+                        return {
+                            question: `${name} buys something for £${price.toFixed(2)} and pays with £${paid.toFixed(2)}. How much change does ${name} get?`,
+                            answer: paid - price,
+                            acceptableAnswers: [`£${(paid - price).toFixed(2)}`, `${(paid - price).toFixed(2)}`, `${paid - price}`],
+                            hint: "Subtract the price from the amount paid!",
+                            explanation: `Change = Amount paid - Price\nChange = £${paid.toFixed(2)} - £${price.toFixed(2)} = £${(paid - price).toFixed(2)}`
+                        };
+                    }
+                ];
+                
+                const problem = problemTypes[Math.floor(Math.random() * problemTypes.length)]();
+                questions.push({
+                    ...problem,
+                    category: "Word Problems"
+                });
+            }
+
+            // Time problems (15 questions)
+            for (let i = 0; i < 15; i++) {
+                const timeProblems = [
+                    () => {
+                        const name = getRandomName();
+                        const startHour = Math.floor(Math.random() * 6) + 2;
+                        const startMin = Math.floor(Math.random() * 60);
+                        const durationMin = Math.floor(Math.random() * 120) + 30;
+                        const startTime = `${startHour}:${startMin.toString().padStart(2, '0')}`;
+                        const endHour = Math.floor((startHour * 60 + startMin + durationMin) / 60);
+                        const endMin = (startMin + durationMin) % 60;
+                        const endTime = `${endHour}:${endMin.toString().padStart(2, '0')}`;
+                        
+                        return {
+                            question: `${name} starts homework at ${startTime} and finishes at ${endTime}. How long did it take in minutes?`,
+                            answer: durationMin,
+                            acceptableAnswers: [`${durationMin}`, `${durationMin} minutes`, `${durationMin} mins`, `${durationMin}mins`],
+                            hint: "Count the minutes from start time to end time!",
+                            explanation: `From ${startTime} to ${endTime}:\nTotal time = ${durationMin} minutes`
+                        };
+                    }
+                ];
+                
+                const problem = timeProblems[0]();
+                questions.push({
+                    ...problem,
+                    category: "Word Problems"
+                });
+            }
+
+            // Age problems (10 questions)
+            for (let i = 0; i < 10; i++) {
+                const name1 = getRandomName();
+                const name2 = getRandomName();
+                const age1 = Math.floor(Math.random() * 8) + 6;
+                const ageDiff = Math.floor(Math.random() * 5) + 2;
+                questions.push({
+                    question: `${name1} is ${age1} years old. ${name2} is ${ageDiff} years older than ${name1}. How old is ${name2}?`,
+                    answer: age1 + ageDiff,
+                    acceptableAnswers: [`${age1 + ageDiff}`, `${age1 + ageDiff} years old`, `${age1 + ageDiff} years`],
+                    hint: "Add the age difference to ${name1}'s age!",
+                    explanation: `${name1} is ${age1} years old\n${name2} is ${ageDiff} years older\n${name2}'s age = ${age1} + ${ageDiff} = ${age1 + ageDiff} years old`,
+                    category: "Word Problems"
+                });
+            }
+
+            // Collection problems (20 questions)
+            for (let i = 0; i < 20; i++) {
+                const collectionTypes = [
+                    () => {
+                        const name1 = getRandomName();
+                        const name2 = getRandomName();
+                        const amount1 = Math.floor(Math.random() * 30) + 10;
+                        const multiplier = Math.floor(Math.random() * 4) + 2;
+                        const items = ['stickers', 'marbles', 'cards', 'stamps', 'coins'][Math.floor(Math.random() * 5)];
+                        return {
+                            question: `${name1} has ${amount1} ${items}. ${name2} has ${multiplier} times as many. How many ${items} does ${name2} have?`,
+                            answer: amount1 * multiplier,
+                            hint: "Multiply ${name1}'s amount by ${multiplier}!",
+                            explanation: `${name1} has ${amount1} ${items}\n${name2} has ${multiplier} times as many\n${name2}'s amount = ${amount1} × ${multiplier} = ${amount1 * multiplier} ${items}`
+                        };
+                    }
+                ];
+                
+                const problem = collectionTypes[0]();
+                questions.push({
+                    ...problem,
+                    category: "Word Problems"
+                });
+            }
+
+            // Multi-step problems (15 questions)
+            for (let i = 0; i < 15; i++) {
+                const name = getRandomName();
+                const name2 = getRandomName();
+                const initial = Math.floor(Math.random() * 50) + 20;
+                const gained = Math.floor(Math.random() * 30) + 10;
+                const lost = Math.floor(Math.random() * 15) + 5;
+                const items = ['marbles', 'stickers', 'cards', 'toys'][Math.floor(Math.random() * 4)];
+                
+                questions.push({
+                    question: `${name} had ${initial} ${items}. ${name2} gave him ${gained} more. Then ${name} lost ${lost}. How many ${items} does ${name} have now?`,
+                    answer: initial + gained - lost,
+                    hint: "Follow the steps: start with ${initial}, add ${gained}, then subtract ${lost}!",
+                    explanation: `Step by step:\n1. ${name} started with: ${initial} ${items}\n2. ${name2} gave ${gained}: ${initial} + ${gained} = ${initial + gained}\n3. ${name} lost ${lost}: ${initial + gained} - ${lost} = ${initial + gained - lost}\nFinal answer: ${initial + gained - lost} ${items}`,
+                    category: "Word Problems"
+                });
+            }
+
+            // Geometry & Measurement - 43 questions
+            
+            // Area/Perimeter (15 questions)
+            for (let i = 0; i < 15; i++) {
+                const geometryProblems = [
+                    () => {
+                        const length = Math.floor(Math.random() * 10) + 3;
+                        const width = Math.floor(Math.random() * 8) + 2;
+                        return {
+                            question: `A rectangle is ${length} cm long and ${width} cm wide. What is its area?`,
+                            answer: length * width,
+                            acceptableAnswers: [`${length * width}`, `${length * width} cm²`, `${length * width} square cm`, `${length * width} sq cm`],
+                            hint: "Area of rectangle = length × width",
+                            explanation: `Area = length × width\nArea = ${length} × ${width} = ${length * width} cm²`
+                        };
+                    },
+                    () => {
+                        const length = Math.floor(Math.random() * 10) + 3;
+                        const width = Math.floor(Math.random() * 8) + 2;
+                        return {
+                            question: `A rectangle is ${length} cm long and ${width} cm wide. What is its perimeter?`,
+                            answer: 2 * (length + width),
+                            acceptableAnswers: [`${2 * (length + width)}`, `${2 * (length + width)} cm`],
+                            hint: "Perimeter = 2 × (length + width)",
+                            explanation: `Perimeter = 2 × (length + width)\nPerimeter = 2 × (${length} + ${width}) = 2 × ${length + width} = ${2 * (length + width)} cm`
+                        };
+                    }
+                ];
+                
+                const problem = geometryProblems[Math.floor(Math.random() * geometryProblems.length)]();
+                questions.push({
+                    ...problem,
+                    category: "Geometry & Measurement"
+                });
+            }
+
+            // Shape properties (10 questions)
+            const shapeQuestions = [
+                {question: "How many sides does a triangle have?", answer: 3, hint: "Count the sides of a triangle!", explanation: "A triangle has 3 sides by definition."},
+                {question: "How many sides does a rectangle have?", answer: 4, hint: "Count the sides of a rectangle!", explanation: "A rectangle has 4 sides."},
+                {question: "How many sides does a pentagon have?", answer: 5, hint: "The prefix 'penta' means five!", explanation: "A pentagon has 5 sides. 'Penta' means five."},
+                {question: "How many sides does a hexagon have?", answer: 6, hint: "The prefix 'hexa' means six!", explanation: "A hexagon has 6 sides. 'Hexa' means six."},
+                {question: "How many sides does an octagon have?", answer: 8, hint: "Think of an octopus - it has 8 arms!", explanation: "An octagon has 8 sides. Like an octopus with 8 arms!"},
+                {question: "How many corners does a square have?", answer: 4, hint: "Count the corners where the sides meet!", explanation: "A square has 4 corners (vertices) where the sides meet."},
+                {question: "How many lines of symmetry does a square have?", answer: 4, hint: "Think about folding a square in half different ways!", explanation: "A square has 4 lines of symmetry: 2 diagonal lines and 2 lines through the middle."},
+                {question: "What shape has no corners?", answer: "circle", acceptableAnswers: ["circle", "a circle"], hint: "Think of a shape that is completely round!", explanation: "A circle has no corners because it is perfectly round."},
+                {question: "How many sides does a square have?", answer: 4, hint: "All sides of a square are equal!", explanation: "A square has 4 equal sides."},
+                {question: "How many right angles does a rectangle have?", answer: 4, hint: "Right angles are 90 degrees - like the corner of a book!", explanation: "A rectangle has 4 right angles (90° each)."}
+            ];
+            
+            for (let i = 0; i < 10; i++) {
+                const shape = shapeQuestions[i];
+                questions.push({
+                    ...shape,
+                    category: "Geometry & Measurement"
+                });
+            }
+
+            // Conversions (10 questions)
+            for (let i = 0; i < 10; i++) {
+                const conversionProblems = [
+                    () => {
+                        const meters = Math.floor(Math.random() * 5) + 1;
+                        return {
+                            question: `How many centimeters are in ${meters} meter${meters > 1 ? 's' : ''}?`,
+                            answer: meters * 100,
+                            acceptableAnswers: [`${meters * 100}`, `${meters * 100} cm`, `${meters * 100} centimeters`],
+                            hint: "There are 100 centimeters in 1 meter!",
+                            explanation: `1 meter = 100 centimeters\n${meters} meter${meters > 1 ? 's' : ''} = ${meters} × 100 = ${meters * 100} centimeters`
+                        };
+                    },
+                    () => {
+                        const kg = Math.floor(Math.random() * 8) + 1;
+                        return {
+                            question: `How many grams are in ${kg} kilogram${kg > 1 ? 's' : ''}?`,
+                            answer: kg * 1000,
+                            acceptableAnswers: [`${kg * 1000}`, `${kg * 1000} g`, `${kg * 1000} grams`],
+                            hint: "There are 1000 grams in 1 kilogram!",
+                            explanation: `1 kilogram = 1000 grams\n${kg} kilogram${kg > 1 ? 's' : ''} = ${kg} × 1000 = ${kg * 1000} grams`
+                        };
+                    }
+                ];
+                
+                const problem = conversionProblems[Math.floor(Math.random() * conversionProblems.length)]();
+                questions.push({
+                    ...problem,
+                    category: "Geometry & Measurement"
+                });
+            }
+
+            // Angles (8 questions)
+            const angleQuestions = [
+                {question: "What type of angle is 90 degrees?", answer: "right", acceptableAnswers: ["right", "right angle", "a right angle"], hint: "This angle looks like the corner of a square!", explanation: "A 90-degree angle is called a right angle. It looks like the corner of a square or rectangle."},
+                {question: "What type of angle is less than 90 degrees?", answer: "acute", acceptableAnswers: ["acute", "acute angle", "an acute angle"], hint: "This angle is smaller than a right angle!", explanation: "An acute angle is less than 90 degrees. It's smaller than a right angle."},
+                {question: "What type of angle is more than 90 degrees?", answer: "obtuse", acceptableAnswers: ["obtuse", "obtuse angle", "an obtuse angle"], hint: "This angle is larger than a right angle!", explanation: "An obtuse angle is more than 90 degrees but less than 180 degrees."},
+                {question: "How many degrees are in a straight line?", answer: 180, acceptableAnswers: ["180", "180 degrees"], hint: "Think of a completely flat line!", explanation: "A straight line has 180 degrees. It's like half a circle."},
+                {question: "How many degrees are in a complete turn?", answer: 360, acceptableAnswers: ["360", "360 degrees"], hint: "Think of turning all the way around in a full circle!", explanation: "A complete turn (full circle) has 360 degrees."},
+                {question: "What type of angle is exactly 180 degrees?", answer: "straight", acceptableAnswers: ["straight", "straight angle", "a straight angle"], hint: "This angle forms a straight line!", explanation: "A 180-degree angle is called a straight angle because it forms a straight line."},
+                {question: "How many degrees are in a right angle?", answer: 90, acceptableAnswers: ["90", "90 degrees"], hint: "Think of the corner of a book or square!", explanation: "A right angle has exactly 90 degrees."},
+                {question: "What is half of a right angle in degrees?", answer: 45, acceptableAnswers: ["45", "45 degrees"], hint: "A right angle is 90 degrees, so half is...", explanation: "Half of a right angle is 90 ÷ 2 = 45 degrees."}
+            ];
+            
+            for (let i = 0; i < 8; i++) {
+                questions.push({
+                    ...angleQuestions[i],
+                    category: "Geometry & Measurement"
+                });
+            }
+
+            // Continue with remaining categories...
+            // Fractions & Patterns - 42 questions
+            
+            // Fraction basics (12 questions)
+            for (let i = 0; i < 12; i++) {
+                const fractionProblems = [
+                    () => {
+                        const whole = [8, 12, 16, 20, 24][Math.floor(Math.random() * 5)];
+                        return {
+                            question: `What is 1/2 of ${whole}?`,
+                            answer: whole / 2,
+                            hint: "Divide by 2 to find half!",
+                            explanation: `1/2 of ${whole} means ${whole} ÷ 2 = ${whole / 2}`
+                        };
+                    },
+                    () => {
+                        const whole = [12, 15, 18, 21][Math.floor(Math.random() * 4)];
+                        return {
+                            question: `What is 1/3 of ${whole}?`,
+                            answer: whole / 3,
+                            hint: "Divide by 3 to find one third!",
+                            explanation: `1/3 of ${whole} means ${whole} ÷ 3 = ${whole / 3}`
+                        };
+                    },
+                    () => {
+                        const whole = [16, 20, 24, 28][Math.floor(Math.random() * 4)];
+                        return {
+                            question: `What is 1/4 of ${whole}?`,
+                            answer: whole / 4,
+                            hint: "Divide by 4 to find one quarter!",
+                            explanation: `1/4 of ${whole} means ${whole} ÷ 4 = ${whole / 4}`
+                        };
+                    }
+                ];
+                
+                const problem = fractionProblems[Math.floor(Math.random() * fractionProblems.length)]();
+                questions.push({
+                    ...problem,
+                    category: "Fractions & Patterns"
+                });
+            }
+
+            // Equivalent fractions (10 questions)
+            for (let i = 0; i < 10; i++) {
+                const equivalentProblems = [
+                    () => {
+                        return {
+                            question: "2/4 = ?/8",
+                            answer: 4,
+                            hint: "What do you multiply 4 by to get 8? Do the same to the top!",
+                            explanation: "2/4 = ?/8\n4 × 2 = 8, so 2 × 2 = 4\nAnswer: 2/4 = 4/8"
+                        };
+                    },
+                    () => {
+                        return {
+                            question: "1/2 = ?/10",
+                            answer: 5,
+                            hint: "What do you multiply 2 by to get 10? Do the same to the top!",
+                            explanation: "1/2 = ?/10\n2 × 5 = 10, so 1 × 5 = 5\nAnswer: 1/2 = 5/10"
+                        };
+                    },
+                    () => {
+                        return {
+                            question: "3/6 = 1/?",
+                            answer: 2,
+                            hint: "What do you divide 3 by to get 1? Do the same to the bottom!",
+                            explanation: "3/6 = 1/?\n3 ÷ 3 = 1, so 6 ÷ 3 = 2\nAnswer: 3/6 = 1/2"
+                        };
+                    }
+                ];
+                
+                const problem = equivalentProblems[Math.floor(Math.random() * equivalentProblems.length)]();
+                questions.push({
+                    ...problem,
+                    category: "Fractions & Patterns"
+                });
+            }
+
+            // Sequences (12 questions)
+            for (let i = 0; i < 12; i++) {
+                const sequenceProblems = [
+                    () => {
+                        const start = Math.floor(Math.random() * 10) + 2;
+                        const step = Math.floor(Math.random() * 8) + 2;
+                        const seq = [start, start + step, start + 2*step];
+                        return {
+                            question: `Complete the sequence: ${seq.join(', ')}, ?, ?`,
+                            answer: `${start + 3*step}, ${start + 4*step}`,
+                            acceptableAnswers: [`${start + 3*step}, ${start + 4*step}`, `${start + 3*step} ${start + 4*step}`, `${start + 3*step} and ${start + 4*step}`],
+                            hint: `Look at the pattern - what number is being added each time?`,
+                            explanation: `The pattern adds ${step} each time:\n${seq[0]} + ${step} = ${seq[1]}\n${seq[1]} + ${step} = ${seq[2]}\nNext: ${seq[2]} + ${step} = ${start + 3*step}\nThen: ${start + 3*step} + ${step} = ${start + 4*step}`
+                        };
+                    }
+                ];
+                
+                const problem = sequenceProblems[0]();
+                questions.push({
+                    ...problem,
+                    category: "Fractions & Patterns"
+                });
+            }
+
+            // Patterns (8 questions)
+            for (let i = 0; i < 8; i++) {
+                const patternProblems = [
+                    () => {
+                        const start = 2;
+                        const sequence = [2, 4, 8, 16];
+                        return {
+                            question: "What comes next: 2, 4, 8, 16, ?",
+                            answer: 32,
+                            hint: "Each number is double the previous number!",
+                            explanation: "Each number is multiplied by 2:\n2 × 2 = 4\n4 × 2 = 8\n8 × 2 = 16\n16 × 2 = 32"
+                        };
+                    },
+                    () => {
+                        const sequence = [1, 4, 9, 16];
+                        return {
+                            question: "What comes next: 1, 4, 9, 16, ?",
+                            answer: 25,
+                            hint: "These are square numbers: 1×1, 2×2, 3×3, 4×4...",
+                            explanation: "These are square numbers:\n1² = 1\n2² = 4\n3² = 9\n4² = 16\n5² = 25"
+                        };
+                    }
+                ];
+                
+                const problem = patternProblems[Math.floor(Math.random() * patternProblems.length)]();
+                questions.push({
+                    ...problem,
+                    category: "Fractions & Patterns"
+                });
+            }
+
+            // Logic & Reasoning - 33 questions
+            
+            // Number puzzles (15 questions)
+            for (let i = 0; i < 15; i++) {
+                const puzzleProblems = [
+                    () => {
+                        const name = getRandomName();
+                        const answer = Math.floor(Math.random() * 15) + 5;
+                        const result = answer * 4;
+                        return {
+                            question: `${name} is thinking of a number. When multiplied by 4, it equals ${result}. What is the number?`,
+                            answer: answer,
+                            hint: "What number times 4 equals ${result}? Try dividing!",
+                            explanation: `Let the number be x\nx × 4 = ${result}\nx = ${result} ÷ 4 = ${answer}`
+                        };
+                    },
+                    () => {
+                        const name = getRandomName();
+                        const answer = Math.floor(Math.random() * 20) + 10;
+                        const result = answer + 15;
+                        return {
+                            question: `${name} thinks of a number and adds 15. The result is ${result}. What was the original number?`,
+                            answer: answer,
+                            hint: "If adding 15 gives ${result}, what was the original number?",
+                            explanation: `Let the number be x\nx + 15 = ${result}\nx = ${result} - 15 = ${answer}`
+                        };
+                    }
+                ];
+                
+                const problem = puzzleProblems[Math.floor(Math.random() * puzzleProblems.length)]();
+                questions.push({
+                    ...problem,
+                    category: "Logic & Reasoning"
+                });
+            }
+
+            // Comparisons (10 questions)
+            for (let i = 0; i < 10; i++) {
+                const comparisonProblems = [
+                    () => {
+                        return {
+                            question: "Which is greater: 3/4 or 2/3?",
+                            answer: "3/4",
+                            acceptableAnswers: ["3/4", "three quarters", "3 quarters"],
+                            hint: "Convert to decimals: 3/4 = 0.75 and 2/3 = 0.67",
+                            explanation: "3/4 = 0.75 and 2/3 ≈ 0.67\nSince 0.75 > 0.67, we have 3/4 > 2/3"
+                        };
+                    },
+                    () => {
+                        const a = Math.floor(Math.random() * 400) + 100;
+                        const b = Math.floor(Math.random() * 400) + 100;
+                        const larger = Math.max(a, b);
+                        return {
+                            question: `Which is larger: ${a} or ${b}?`,
+                            answer: larger,
+                            hint: "Compare the numbers digit by digit!",
+                            explanation: `Comparing ${a} and ${b}:\n${larger} is larger than ${Math.min(a, b)}`
+                        };
+                    }
+                ];
+                
+                const problem = comparisonProblems[Math.floor(Math.random() * comparisonProblems.length)]();
+                questions.push({
+                    ...problem,
+                    category: "Logic & Reasoning"
+                });
+            }
+
+            // Ordering (8 questions)
+            for (let i = 0; i < 8; i++) {
+                const numbers = [];
+                for (let j = 0; j < 4; j++) {
+                    numbers.push(Math.floor(Math.random() * 500) + 100);
+                }
+                const sorted = [...numbers].sort((a, b) => a - b);
+                
+                questions.push({
+                    question: `Order from smallest to largest: ${numbers.join(', ')}`,
+                    answer: sorted.join(', '),
+                    acceptableAnswers: [sorted.join(', '), sorted.join(' ')],
+                    hint: "Start with the smallest number and work your way up!",
+                    explanation: `Arranging in order:\n${sorted.join(' < ')}`,
+                    category: "Logic & Reasoning"
+                });
+            }
+
+            return shuffleArray(questions);
+        }
+
+        function normalizeAnswer(answer) {
+            if (typeof answer !== 'string') {
+                answer = String(answer);
+            }
+            return answer.toLowerCase().trim().replace(/[£$%°,]/g, '');
+        }
+
+        function checkAnswer(userAnswer, correctAnswer, acceptableAnswers = []) {
+            const normalizedUser = normalizeAnswer(userAnswer);
+            const normalizedCorrect = normalizeAnswer(correctAnswer);
+            
+            if (normalizedUser === normalizedCorrect) {
+                return true;
+            }
+            
+            // Check acceptable answers
+            for (const acceptable of acceptableAnswers) {
+                if (normalizedUser === normalizeAnswer(acceptable)) {
+                    return true;
+                }
+            }
+            
+            return false;
+        }
+
+        // Game functions
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            document.getElementById(screenId).classList.add('active');
+        }
+
+        function showWelcome() {
+            showScreen('welcome-screen');
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+        }
+
+        function startMode(mode) {
+            currentMode = mode;
+            questionBank = generateQuestionBank();
+            
+            if (mode === 'challenge') {
+                questionBank = shuffleArray(questionBank).slice(0, 15);
+                timeRemaining = 20 * 60; // 20 minutes in seconds
+                startTimer();
+            }
+            
+            currentQuestionIndex = 0;
+            score = 0;
+            totalQuestions = 0;
+            hintsUsed = 0;
+            startTime = Date.now();
+            
+            showQuestion();
+            showScreen('question-screen');
+        }
+
+        function startTimer() {
+            const timerDisplay = document.getElementById('timer-display');
+            
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+                timerDisplay.textContent = `⏰ ${minutes}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeRemaining <= 300) { // 5 minutes
+                    timerDisplay.className = 'timer warning';
+                } else if (timeRemaining <= 120) { // 2 minutes
+                    timerDisplay.className = 'timer danger';
+                }
+                
+                if (timeRemaining <= 0) {
+                    finishSession();
+                }
+            }, 1000);
+        }
+
+        function showQuestion() {
+            if (currentQuestionIndex >= questionBank.length) {
+                finishSession();
+                return;
+            }
+            
+            const question = questionBank[currentQuestionIndex];
+            
+            document.getElementById('question-text').textContent = question.question;
+            document.getElementById('answer-input').value = '';
+            document.getElementById('answer-input').focus();
+            
+            // Update progress
+            const questionCounter = document.getElementById('question-counter');
+            if (currentMode === 'challenge') {
+                questionCounter.textContent = `Question ${currentQuestionIndex + 1} of 15`;
+            } else {
+                questionCounter.textContent = `Question ${currentQuestionIndex + 1}`;
+            }
+            
+            // Update score
+            const percentage = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
+            document.getElementById('score-display').textContent = `Score: ${score}/${totalQuestions} (${percentage}%)`;
+            
+            // Reset UI
+            document.getElementById('submit-btn').disabled = true;
+            document.getElementById('hint-btn').style.display = 'inline-block';
+            document.getElementById('next-btn').style.display = 'none';
+            document.getElementById('finish-btn').style.display = currentMode === 'practice' ? 'inline-block' : 'none';
+            document.getElementById('hint-container').innerHTML = '';
+            document.getElementById('feedback-container').innerHTML = '';
+            document.getElementById('explanation-container').innerHTML = '';
+            
+            isAnswered = false;
+            currentHintShown = false;
+            
+            // Update hints counter
+            document.getElementById('hints-used').textContent = `Hints used: ${hintsUsed}`;
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                const submitBtn = document.getElementById('submit-btn');
+                if (!submitBtn.disabled) {
+                    submitAnswer();
+                }
+            }
+        }
+
+        // Enable submit button when answer is entered
+        document.addEventListener('DOMContentLoaded', function() {
+            const answerInput = document.getElementById('answer-input');
+            if (answerInput) {
+                answerInput.addEventListener('input', function() {
+                    const submitBtn = document.getElementById('submit-btn');
+                    submitBtn.disabled = this.value.trim() === '';
+                });
+            }
+        });
+
+        function showHint() {
+            if (currentHintShown) return;
+            
+            const question = questionBank[currentQuestionIndex];
+            const hintContainer = document.getElementById('hint-container');
+            
+            hintContainer.innerHTML = `
+                <div class="hint">
+                    <strong>💡 Hint:</strong> ${question.hint}
+                </div>
+            `;
+            
+            hintsUsed++;
+            currentHintShown = true;
+            document.getElementById('hint-btn').style.display = 'none';
+            document.getElementById('hints-used').textContent = `Hints used: ${hintsUsed}`;
+        }
+
+        function submitAnswer() {
+            if (isAnswered) return;
+            
+            const userAnswer = document.getElementById('answer-input').value.trim();
+            const question = questionBank[currentQuestionIndex];
+            const isCorrect = checkAnswer(userAnswer, question.answer, question.acceptableAnswers || []);
+            
+            totalQuestions++;
+            if (isCorrect) {
+                score++;
+            }
+            
+            // Show feedback
+            const feedbackContainer = document.getElementById('feedback-container');
+            const encouragement = isCorrect ? 
+                ['Excellent! 🌟', 'Well done! 🎉', 'Correct! 👏', 'Brilliant! ✨', 'Perfect! 🎯'][Math.floor(Math.random() * 5)] :
+                ['Not quite right 😊', 'Good try! 💪', 'Keep trying! 🌟', 'Almost there! 👍'][Math.floor(Math.random() * 4)];
+            
+            feedbackContainer.innerHTML = `
+                <div class="feedback ${isCorrect ? 'correct' : 'incorrect'}">
+                    <strong>${isCorrect ? '✓' : '✗'} ${encouragement}</strong>
+                    ${!isCorrect ? `<br>The correct answer is: <strong>${question.answer}</strong>` : ''}
+                </div>
+            `;
+            
+            // Show explanation
+            const explanationContainer = document.getElementById('explanation-container');
+            explanationContainer.innerHTML = `
+                <div class="explanation">
+                    <h4>📖 Explanation:</h4>
+                    <p>${question.explanation.replace(/\n/g, '<br>')}</p>
+                </div>
+            `;
+            
+            // Update UI
+            document.getElementById('submit-btn').style.display = 'none';
+            document.getElementById('next-btn').style.display = 'inline-block';
+            document.getElementById('hint-btn').style.display = 'none';
+            document.getElementById('answer-input').disabled = true;
+            
+            // Update score display
+            const percentage = Math.round((score / totalQuestions) * 100);
+            document.getElementById('score-display').textContent = `Score: ${score}/${totalQuestions} (${percentage}%)`;
+            
+            isAnswered = true;
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            document.getElementById('answer-input').disabled = false;
+            
+            if (currentMode === 'challenge' && currentQuestionIndex >= 15) {
+                finishSession();
+            } else {
+                showQuestion();
+            }
+        }
+
+        function finishSession() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+            
+            const endTime = Date.now();
+            const timeTaken = Math.floor((endTime - startTime) / 1000);
+            const minutes = Math.floor(timeTaken / 60);
+            const seconds = timeTaken % 60;
+            
+            // Calculate final stats
+            const percentage = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
+            
+            // Update results screen
+            document.getElementById('final-score').textContent = `${score}/${totalQuestions}`;
+            document.getElementById('final-percentage').textContent = `${percentage}%`;
+            document.getElementById('final-hints').textContent = hintsUsed;
+            document.getElementById('final-time').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Set celebration and message based on performance
+            let celebration = '🎉';
+            let message = '';
+            
+            if (percentage >= 90) {
+                celebration = '🏆🌟🎉';
+                message = 'Outstanding! You\'re a maths superstar!';
+            } else if (percentage >= 80) {
+                celebration = '🌟🎉';
+                message = 'Excellent work! You\'re doing brilliantly!';
+            } else if (percentage >= 70) {
+                celebration = '🎉👏';
+                message = 'Great job! Keep up the good work!';
+            } else if (percentage >= 60) {
+                celebration = '👍💪';
+                message = 'Good effort! You\'re improving!';
+            } else {
+                celebration = '💪🌟';
+                message = 'Keep practicing! You\'re learning!';
+            }
+            
+            document.getElementById('celebration-emoji').textContent = celebration;
+            document.getElementById('final-message').innerHTML = `<p style="font-size: var(--font-size-lg); color: var(--color-text); margin: var(--space-16) 0;">${message}</p>`;
+            
+            // Save best score
+            saveBestScore(currentMode, score, totalQuestions, percentage, timeTaken, hintsUsed);
+            
+            showScreen('results-screen');
+        }
+
+        function confirmQuit() {
+            if (confirm('Are you sure you want to go back to the menu? Your progress will be lost.')) {
+                showWelcome();
+            }
+        }
+
+        // In-memory best scores storage
+        let bestScores = {
+            practice: [],
+            challenge: []
+        };
+
+        function saveBestScore(mode, score, total, percentage, time, hints) {
+            if (!bestScores[mode]) {
+                bestScores[mode] = [];
+            }
+            
+            bestScores[mode].push({
+                score,
+                total,
+                percentage,
+                time,
+                hints,
+                date: new Date().toLocaleDateString()
+            });
+            
+            // Keep only the best 5 scores
+            bestScores[mode].sort((a, b) => b.percentage - a.percentage);
+            bestScores[mode] = bestScores[mode].slice(0, 5);
+        }
+
+        function showBestScores() {
+            const container = document.getElementById('scores-container');
+            let html = '';
+            
+            ['practice', 'challenge'].forEach(mode => {
+                html += `<h3 style="color: var(--app-primary); margin: var(--space-24) 0 var(--space-16) 0; text-transform: capitalize;">${mode} Mode Best Scores</h3>`;
+                
+                if (bestScores[mode] && bestScores[mode].length > 0) {
+                    html += '<div class="stats">';
+                    bestScores[mode].forEach((score, index) => {
+                        const minutes = Math.floor(score.time / 60);
+                        const seconds = score.time % 60;
+                        html += `
+                            <div class="stat-item">
+                                <span class="stat-value">${score.percentage}%</span>
+                                <div class="stat-label">
+                                    ${score.score}/${score.total} correct<br>
+                                    ${minutes}:${seconds.toString().padStart(2, '0')} time<br>
+                                    ${score.hints} hints<br>
+                                    <small>${score.date}</small>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    html += '</div>';
+                } else {
+                    html += '<p style="color: var(--color-text-secondary); font-style: italic;">No scores yet! Play some games to see your best scores here.</p>';
+                }
+            });
+            
+            container.innerHTML = html;
+            showScreen('scores-screen');
+        }
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            showWelcome();
+        });
+    </script>
+</body>
+</html>
