@@ -590,6 +590,10 @@
         </div>
     </div>
 
+    <footer style="position: fixed; bottom: 10px; right: 15px; font-size: 11px; color: rgba(255,255,255,0.7); background: rgba(0,0,0,0.2); padding: 4px 8px; border-radius: 4px;">
+        Version 1.2 - Extended word problems
+    </footer>
+
     <script>
         // Game state
         let currentMode = '';
@@ -641,11 +645,12 @@
             for (let i = 0; i < 25; i++) {
                 const a = Math.floor(Math.random() * 90) + 10;
                 const b = Math.floor(Math.random() * 90) + 10;
+                const result = a + b;
                 questions.push({
                     question: `${a} + ${b} = ?`,
-                    answer: a + b,
+                    answer: result,
                     hint: "Add the ones column first, then the tens column. Remember to carry if needed!",
-                    explanation: `Let's add step by step:\n1. Ones: ${a % 10} + ${b % 10} = ${(a % 10) + (b % 10)}\n2. Tens: ${Math.floor(a/10)} + ${Math.floor(b/10)} = ${Math.floor(a/10) + Math.floor(b/10)}\n3. Total: ${a + b}`,
+                    explanation: `Let's add step by step:\n1. Ones: ${a % 10} + ${b % 10} = ${(a % 10) + (b % 10)}\n2. Tens: ${Math.floor(a/10)} + ${Math.floor(b/10)} = ${Math.floor(a/10) + Math.floor(b/10)}\n3. Total: ${result}`,
                     category: "Basic Arithmetic"
                 });
             }
@@ -654,11 +659,12 @@
             for (let i = 0; i < 25; i++) {
                 const a = Math.floor(Math.random() * 90) + 10;
                 const b = Math.floor(Math.random() * a) + 1;
+                const result = a - b;
                 questions.push({
                     question: `${a} - ${b} = ?`,
-                    answer: a - b,
+                    answer: result,
                     hint: "Subtract the ones column first. You might need to borrow from the tens!",
-                    explanation: `Let's subtract step by step:\n1. Ones: ${a % 10} - ${b % 10} = ${(a % 10) - (b % 10)}\n2. Tens: ${Math.floor(a/10)} - ${Math.floor(b/10)} = ${Math.floor(a/10) - Math.floor(b/10)}\n3. Total: ${a - b}`,
+                    explanation: `Let's subtract step by step:\n1. Ones: ${a % 10} - ${b % 10} = ${(a % 10) - (b % 10)}\n2. Tens: ${Math.floor(a/10)} - ${Math.floor(b/10)} = ${Math.floor(a/10) - Math.floor(b/10)}\n3. Total: ${result}`,
                     category: "Basic Arithmetic"
                 });
             }
@@ -667,11 +673,12 @@
             for (let i = 0; i < 20; i++) {
                 const a = Math.floor(Math.random() * 900) + 100;
                 const b = Math.floor(Math.random() * 900) + 100;
+                const result = a + b;
                 questions.push({
                     question: `${a} + ${b} = ?`,
-                    answer: a + b,
+                    answer: result,
                     hint: "Add column by column: ones, tens, then hundreds. Carry when needed!",
-                    explanation: `Adding column by column:\n1. Ones: ${a % 10} + ${b % 10} = ${(a % 10) + (b % 10)}\n2. Tens: ${Math.floor(a/10) % 10} + ${Math.floor(b/10) % 10} = ${(Math.floor(a/10) % 10) + (Math.floor(b/10) % 10)}\n3. Hundreds: ${Math.floor(a/100)} + ${Math.floor(b/100)} = ${Math.floor(a/100) + Math.floor(b/100)}\n4. Total: ${a + b}`,
+                    explanation: `Adding column by column:\n1. Ones: ${a % 10} + ${b % 10} = ${(a % 10) + (b % 10)}\n2. Tens: ${Math.floor(a/10) % 10} + ${Math.floor(b/10) % 10} = ${(Math.floor(a/10) % 10) + (Math.floor(b/10) % 10)}\n3. Hundreds: ${Math.floor(a/100)} + ${Math.floor(b/100)} = ${Math.floor(a/100) + Math.floor(b/100)}\n4. Total: ${result}`,
                     category: "Basic Arithmetic"
                 });
             }
@@ -680,11 +687,12 @@
             for (let i = 0; i < 20; i++) {
                 const a = Math.floor(Math.random() * 900) + 100;
                 const b = Math.floor(Math.random() * a) + 1;
+                const result = a - b;
                 questions.push({
                     question: `${a} - ${b} = ?`,
-                    answer: a - b,
+                    answer: result,
                     hint: "Subtract column by column. Remember to borrow when the top digit is smaller!",
-                    explanation: `Subtracting column by column:\n1. Ones: ${a % 10} - ${b % 10} = ${(a % 10) - (b % 10)}\n2. Tens: ${Math.floor(a/10) % 10} - ${Math.floor(b/10) % 10} = ${(Math.floor(a/10) % 10) - (Math.floor(b/10) % 10)}\n3. Hundreds: ${Math.floor(a/100)} - ${Math.floor(b/100)} = ${Math.floor(a/100) - Math.floor(b/100)}\n4. Total: ${a - b}`,
+                    explanation: `Subtracting column by column:\n1. Ones: ${a % 10} - ${b % 10} = ${(a % 10) - (b % 10)}\n2. Tens: ${Math.floor(a/10) % 10} - ${Math.floor(b/10) % 10} = ${(Math.floor(a/10) % 10) - (Math.floor(b/10) % 10)}\n3. Hundreds: ${Math.floor(a/100)} - ${Math.floor(b/100)} = ${Math.floor(a/100) - Math.floor(b/100)}\n4. Total: ${result}`,
                     category: "Basic Arithmetic"
                 });
             }
@@ -694,11 +702,12 @@
             for (let i = 0; i < 30; i++) {
                 const table = tables[Math.floor(Math.random() * tables.length)];
                 const multiplier = Math.floor(Math.random() * 12) + 1;
+                const result = table * multiplier;
                 questions.push({
                     question: `${table} × ${multiplier} = ?`,
-                    answer: table * multiplier,
+                    answer: result,
                     hint: `Think about the ${table} times table. You can count in ${table}s: ${table}, ${table * 2}, ${table * 3}...`,
-                    explanation: `${table} × ${multiplier} means ${table} groups of ${multiplier} (or ${multiplier} groups of ${table}).\nCounting: ` + Array.from({length: multiplier}, (_, i) => table * (i + 1)).join(' + ') + ` = ${table * multiplier}`,
+                    explanation: `${table} × ${multiplier} means ${table} groups of ${multiplier} (or ${multiplier} groups of ${table}).\nCounting: ` + Array.from({length: multiplier}, (_, i) => table * (i + 1)).join(' + ') + ` = ${result}`,
                     category: "Basic Arithmetic"
                 });
             }
@@ -723,22 +732,24 @@
                     const a = Math.floor(Math.random() * 10) + 2;
                     const b = Math.floor(Math.random() * 10) + 2;
                     const c = Math.floor(Math.random() * 20) + 5;
+                    const result = a * b + c;
                     return {
                         question: `${a} × ${b} + ${c} = ?`,
-                        answer: a * b + c,
+                        answer: result,
                         hint: "Remember order of operations: multiply first, then add!",
-                        explanation: `Order of operations (BODMAS/PEMDAS):\n1. First multiply: ${a} × ${b} = ${a * b}\n2. Then add: ${a * b} + ${c} = ${a * b + c}`
+                        explanation: `Order of operations (BODMAS/PEMDAS):\n1. First multiply: ${a} × ${b} = ${a * b}\n2. Then add: ${a * b} + ${c} = ${result}`
                     };
                 },
                 () => {
                     const a = Math.floor(Math.random() * 50) + 50;
                     const b = Math.floor(Math.random() * 10) + 2;
                     const c = Math.floor(Math.random() * 10) + 2;
+                    const result = a - b * c;
                     return {
                         question: `${a} - ${b} × ${c} = ?`,
-                        answer: a - b * c,
+                        answer: result,
                         hint: "Multiply first, then subtract!",
-                        explanation: `Order of operations:\n1. First multiply: ${b} × ${c} = ${b * c}\n2. Then subtract: ${a} - ${b * c} = ${a - b * c}`
+                        explanation: `Order of operations:\n1. First multiply: ${b} × ${c} = ${b * c}\n2. Then subtract: ${a} - ${b * c} = ${result}`
                     };
                 }
             ];
@@ -757,11 +768,12 @@
             for (let i = 0; i < 15; i++) {
                 const a = Math.floor(Math.random() * 9000) + 1000;
                 const b = Math.floor(Math.random() * 9000) + 1000;
+                const result = a + b;
                 questions.push({
                     question: `${a.toLocaleString()} + ${b.toLocaleString()} = ?`,
-                    answer: a + b,
+                    answer: result,
                     hint: "Add each column carefully from right to left. Don't forget to carry!",
-                    explanation: `Adding ${a.toLocaleString()} + ${b.toLocaleString()}:\nWorking column by column from right to left:\nAnswer: ${(a + b).toLocaleString()}`,
+                    explanation: `Adding ${a.toLocaleString()} + ${b.toLocaleString()}:\nWorking column by column from right to left:\nAnswer: ${result.toLocaleString()}`,
                     category: "Advanced Arithmetic"
                 });
             }
@@ -770,11 +782,12 @@
             for (let i = 0; i < 15; i++) {
                 const a = Math.floor(Math.random() * 9000) + 1000;
                 const b = Math.floor(Math.random() * a) + 1;
+                const result = a - b;
                 questions.push({
                     question: `${a.toLocaleString()} - ${b.toLocaleString()} = ?`,
-                    answer: a - b,
+                    answer: result,
                     hint: "Subtract each column from right to left. Borrow when needed!",
-                    explanation: `Subtracting ${a.toLocaleString()} - ${b.toLocaleString()}:\nWorking column by column from right to left:\nAnswer: ${(a - b).toLocaleString()}`,
+                    explanation: `Subtracting ${a.toLocaleString()} - ${b.toLocaleString()}:\nWorking column by column from right to left:\nAnswer: ${result.toLocaleString()}`,
                     category: "Advanced Arithmetic"
                 });
             }
@@ -783,11 +796,12 @@
             for (let i = 0; i < 15; i++) {
                 const a = Math.floor(Math.random() * 900) + 100;
                 const b = Math.floor(Math.random() * 9) + 2;
+                const result = a * b;
                 questions.push({
                     question: `${a} × ${b} = ?`,
-                    answer: a * b,
+                    answer: result,
                     hint: "Multiply each digit by ${b}, starting from the right. Remember to carry!",
-                    explanation: `${a} × ${b}:\nMultiply each digit:\n${a % 10} × ${b} = ${(a % 10) * b}\n${Math.floor(a/10) % 10} × ${b} = ${(Math.floor(a/10) % 10) * b}\n${Math.floor(a/100)} × ${b} = ${Math.floor(a/100) * b}\nAnswer: ${a * b}`,
+                    explanation: `${a} × ${b}:\nMultiply each digit:\n${a % 10} × ${b} = ${(a % 10) * b}\n${Math.floor(a/10) % 10} × ${b} = ${(Math.floor(a/10) % 10) * b}\n${Math.floor(a/100)} × ${b} = ${Math.floor(a/100) * b}\nAnswer: ${result}`,
                     category: "Advanced Arithmetic"
                 });
             }
@@ -813,21 +827,23 @@
                 () => {
                     const base = Math.floor(Math.random() * 9) * 100 + 99; // 199, 299, etc.
                     const add = Math.floor(Math.random() * 50) + 10;
+                    const result = base + add;
                     return {
                         question: `${base} + ${add} = ?`,
-                        answer: base + add,
+                        answer: result,
                         hint: "Try adding 1 first to make a round hundred, then adjust!",
-                        explanation: `${base} + ${add}:\n${base} is 1 less than ${base + 1}\nSo: ${base + 1} + ${add} - 1 = ${base + 1 + add} - 1 = ${base + add}`
+                        explanation: `${base} + ${add}:\n${base} is 1 less than ${base + 1}\nSo: ${base + 1} + ${add} - 1 = ${base + 1 + add} - 1 = ${result}`
                     };
                 },
                 () => {
                     const from = 1000;
                     const subtract = Math.floor(Math.random() * 400) + 100;
+                    const result = from - subtract;
                     return {
                         question: `${from} - ${subtract} = ?`,
-                        answer: from - subtract,
+                        answer: result,
                         hint: "Count up from ${subtract} to 1000!",
-                        explanation: `1000 - ${subtract}:\nThink: ${subtract} + ? = 1000\nAnswer: ${from - subtract}`
+                        explanation: `1000 - ${subtract}:\nThink: ${subtract} + ? = 1000\nAnswer: ${result}`
                     };
                 }
             ];
@@ -840,47 +856,185 @@
                 });
             }
 
-            // Word Problems - 200+ questions
+            // Word Problems - 200 questions
             
-            // Basic Money Problems (40 questions)
+            // Basic word problems (40 questions)
             for (let i = 0; i < 40; i++) {
+                const basicTypes = [
+                    () => {
+                        const name = getRandomName();
+                        const initial = Math.floor(Math.random() * 30) + 10;
+                        const gained = Math.floor(Math.random() * 20) + 5;
+                        const items = ['apples', 'stickers', 'marbles', 'books', 'toys'][Math.floor(Math.random() * 5)];
+                        return {
+                            question: `${name} has ${initial} ${items}. Then ${name} gets ${gained} more ${items}. How many ${items} does ${name} have now?`,
+                            answer: initial + gained,
+                            hint: "Add the ${items} ${name} started with to the new ones!",
+                            explanation: `${name} started with ${initial} ${items}\nThen got ${gained} more\nTotal: ${initial} + ${gained} = ${initial + gained} ${items}`
+                        };
+                    },
+                    () => {
+                        const name = getRandomName();
+                        const initial = Math.floor(Math.random() * 50) + 20;
+                        const lost = Math.floor(Math.random() * 15) + 5;
+                        const items = ['pencils', 'cards', 'coins', 'shells', 'stones'][Math.floor(Math.random() * 5)];
+                        return {
+                            question: `${name} had ${initial} ${items}. ${name} lost ${lost} ${items}. How many ${items} does ${name} have left?`,
+                            answer: initial - lost,
+                            hint: "Subtract the lost ${items} from what ${name} started with!",
+                            explanation: `${name} started with ${initial} ${items}\nLost ${lost} ${items}\nLeft with: ${initial} - ${lost} = ${initial - lost} ${items}`
+                        };
+                    },
+                    () => {
+                        const name1 = getRandomName();
+                        const name2 = getRandomName();
+                        const amount1 = Math.floor(Math.random() * 25) + 10;
+                        const amount2 = Math.floor(Math.random() * 25) + 10;
+                        const items = ['stickers', 'stamps', 'buttons', 'beads', 'gems'][Math.floor(Math.random() * 5)];
+                        return {
+                            question: `${name1} has ${amount1} ${items} and ${name2} has ${amount2} ${items}. How many ${items} do they have altogether?`,
+                            answer: amount1 + amount2,
+                            hint: "Add both amounts together!",
+                            explanation: `${name1} has ${amount1} ${items}\n${name2} has ${amount2} ${items}\nTogether: ${amount1} + ${amount2} = ${amount1 + amount2} ${items}`
+                        };
+                    }
+                ];
+                
+                const problem = basicTypes[Math.floor(Math.random() * basicTypes.length)]();
+                questions.push({
+                    ...problem,
+                    category: "Word Problems"
+                });
+            }
+            
+            // Multi-step word problems (40 questions)
+            for (let i = 0; i < 40; i++) {
+                const multiStepTypes = [
+                    () => {
+                        const name = getRandomName();
+                        const name2 = getRandomName();
+                        const name3 = getRandomName();
+                        const initial = Math.floor(Math.random() * 30) + 15;
+                        const given = Math.floor(Math.random() * 10) + 5;
+                        const received = Math.floor(Math.random() * 15) + 8;
+                        const items = ['cards', 'stickers', 'marbles', 'coins'][Math.floor(Math.random() * 4)];
+                        return {
+                            question: `${name} has ${initial} ${items}. ${name} gives ${given} ${items} to ${name2}. Then ${name3} gives ${name} ${received} ${items}. How many ${items} does ${name} have now?`,
+                            answer: initial - given + received,
+                            hint: "Start with ${initial}, subtract ${given}, then add ${received}!",
+                            explanation: `Step 1: ${name} starts with ${initial} ${items}\nStep 2: Gives away ${given}: ${initial} - ${given} = ${initial - given}\nStep 3: Receives ${received}: ${initial - given} + ${received} = ${initial - given + received}\nFinal answer: ${initial - given + received} ${items}`
+                        };
+                    },
+                    () => {
+                        const name = getRandomName();
+                        const boxes = Math.floor(Math.random() * 8) + 3;
+                        const perBox = Math.floor(Math.random() * 12) + 5;
+                        const extra = Math.floor(Math.random() * 20) + 10;
+                        const items = ['chocolates', 'cookies', 'candies', 'sweets'][Math.floor(Math.random() * 4)];
+                        return {
+                            question: `${name} has ${boxes} boxes with ${perBox} ${items} in each box. ${name} also has ${extra} loose ${items}. How many ${items} does ${name} have in total?`,
+                            answer: boxes * perBox + extra,
+                            hint: "First multiply boxes by ${items} per box, then add the extra!",
+                            explanation: `Step 1: ${items} in boxes: ${boxes} × ${perBox} = ${boxes * perBox}\nStep 2: Add loose ${items}: ${boxes * perBox} + ${extra} = ${boxes * perBox + extra}\nTotal: ${boxes * perBox + extra} ${items}`
+                        };
+                    }
+                ];
+                
+                const problem = multiStepTypes[Math.floor(Math.random() * multiStepTypes.length)]();
+                questions.push({
+                    ...problem,
+                    category: "Word Problems"
+                });
+            }
+            
+            // Time problems (20 questions)
+            for (let i = 0; i < 20; i++) {
+                const timeTypes = [
+                    () => {
+                        const name = getRandomName();
+                        const startHour = Math.floor(Math.random() * 6) + 2;
+                        const startMin = Math.floor(Math.random() * 12) * 5; // 5-minute intervals
+                        const durationMin = (Math.floor(Math.random() * 12) + 4) * 5; // 20-80 minutes in 5-min steps
+                        const endTotalMin = startHour * 60 + startMin + durationMin;
+                        const endHour = Math.floor(endTotalMin / 60);
+                        const endMin = endTotalMin % 60;
+                        
+                        const formatTime = (h, m) => `${h}:${m.toString().padStart(2, '0')}`;
+                        
+                        return {
+                            question: `${name} starts homework at ${formatTime(startHour, startMin)} and finishes at ${formatTime(endHour, endMin)}. How long did it take in minutes?`,
+                            answer: durationMin,
+                            acceptableAnswers: [`${durationMin}`, `${durationMin} minutes`, `${durationMin} mins`],
+                            hint: "Count the minutes from start time to finish time!",
+                            explanation: `From ${formatTime(startHour, startMin)} to ${formatTime(endHour, endMin)}\nTime taken = ${durationMin} minutes`
+                        };
+                    },
+                    () => {
+                        const name = getRandomName();
+                        const activity = ['bike', 'scooter', 'skateboard', 'rollerskates'][Math.floor(Math.random() * 4)];
+                        const firstHour = Math.floor(Math.random() * 10) + 15;
+                        const additionalCost = Math.floor(Math.random() * 5) + 3;
+                        const startTime = '11:45am';
+                        const endTime = '2:15pm';
+                        const totalHours = 2.5;
+                        const additionalHours = 1.5;
+                        const totalCost = firstHour + (additionalHours * 2 * additionalCost); // 3 additional 30-min periods
+                        
+                        return {
+                            question: `${name} hires a ${activity}. First hour: £${firstHour}, every additional 30 minutes: £${additionalCost}. ${name} hires from ${startTime} to ${endTime}. How much does it cost?`,
+                            answer: roundMoney(totalCost),
+                            acceptableAnswers: [`£${totalCost}`, `${totalCost}`, `${totalCost.toFixed(2)}`],
+                            hint: "Calculate: first hour + (number of 30-minute periods × cost per 30 minutes)!",
+                            explanation: `From ${startTime} to ${endTime} = 2.5 hours\nFirst hour: £${firstHour}\nRemaining 1.5 hours = 3 periods of 30 minutes\nAdditional cost: 3 × £${additionalCost} = £${additionalCost * 3}\nTotal: £${firstHour} + £${additionalCost * 3} = £${totalCost}`
+                        };
+                    }
+                ];
+                
+                const problem = timeTypes[Math.floor(Math.random() * timeTypes.length)]();
+                questions.push({
+                    ...problem,
+                    category: "Word Problems"
+                });
+            }
+            
+            // Add the specific example from the bug report
+            questions.push({
+                question: "Rafa buys something for £1.31 and pays with £1.50. How much change does Rafa get?",
+                answer: roundMoney(1.50 - 1.31),
+                acceptableAnswers: ["0.19", "£0.19", "19", "19p"],
+                hint: "Subtract the price from the amount paid!",
+                explanation: "Change = Amount paid - Price\nChange = £1.50 - £1.31 = £0.19 (or 19p)",
+                category: "Word Problems"
+            });
+            
+            // Money problems (24 more questions to total 25)
+            for (let i = 0; i < 24; i++) {
                 const problemTypes = [
                     () => {
                         const name1 = getRandomName();
                         const name2 = getRandomName();
-                        const amount1 = (Math.floor(Math.random() * 500) + 100) / 100;
-                        const amount2 = (Math.floor(Math.random() * 500) + 100) / 100;
+                        const amount1 = roundMoney((Math.floor(Math.random() * 500) + 100) / 100);
+                        const amount2 = roundMoney((Math.floor(Math.random() * 500) + 100) / 100);
+                        const total = roundMoney(amount1 + amount2);
                         return {
                             question: `${name1} has £${amount1.toFixed(2)}. ${name2} has £${amount2.toFixed(2)}. How much do they have together?`,
-                            answer: amount1 + amount2,
-                            acceptableAnswers: [`£${(amount1 + amount2).toFixed(2)}`, `${(amount1 + amount2).toFixed(2)}`, `${amount1 + amount2}`],
+                            answer: total,
+                            acceptableAnswers: [`£${total.toFixed(2)}`, `${total.toFixed(2)}`, `${total}`, `${Math.round(total * 100)}p`],
                             hint: "Add both amounts together!",
-                            explanation: `${name1} has £${amount1.toFixed(2)} and ${name2} has £${amount2.toFixed(2)}\nTogether: £${amount1.toFixed(2)} + £${amount2.toFixed(2)} = £${(amount1 + amount2).toFixed(2)}`
+                            explanation: `${name1} has £${amount1.toFixed(2)} and ${name2} has £${amount2.toFixed(2)}\nTogether: £${amount1.toFixed(2)} + £${amount2.toFixed(2)} = £${total.toFixed(2)}`
                         };
                     },
                     () => {
                         const name = getRandomName();
-                        const price = (Math.floor(Math.random() * 300) + 50) / 100;
-                        const paid = Math.ceil(price * 2) / 2;
+                        const price = roundMoney((Math.floor(Math.random() * 300) + 50) / 100);
+                        const paid = roundMoney(Math.ceil(price * 2) / 2); // Round up to nearest 50p
+                        const change = roundMoney(paid - price);
                         return {
                             question: `${name} buys something for £${price.toFixed(2)} and pays with £${paid.toFixed(2)}. How much change does ${name} get?`,
-                            answer: paid - price,
-                            acceptableAnswers: [`£${(paid - price).toFixed(2)}`, `${(paid - price).toFixed(2)}`, `${paid - price}`],
+                            answer: change,
+                            acceptableAnswers: [`£${change.toFixed(2)}`, `${change.toFixed(2)}`, `${change}`, `${Math.round(change * 100)}`, `${Math.round(change * 100)}p`],
                             hint: "Subtract the price from the amount paid!",
-                            explanation: `Change = Amount paid - Price\nChange = £${paid.toFixed(2)} - £${price.toFixed(2)} = £${(paid - price).toFixed(2)}`
-                        };
-                    },
-                    () => {
-                        const name = getRandomName();
-                        const item1 = Math.floor(Math.random() * 200) + 50;
-                        const item2 = Math.floor(Math.random() * 150) + 30;
-                        const total = item1 + item2;
-                        return {
-                            question: `${name} buys a toy for ${item1}p and sweets for ${item2}p. How much does ${name} spend in total?`,
-                            answer: total,
-                            acceptableAnswers: [`${total}`, `${total}p`, `${total} pence`],
-                            hint: "Add the prices together!",
-                            explanation: `Total = ${item1}p + ${item2}p = ${total}p`
+                            explanation: `Change = Amount paid - Price\nChange = £${paid.toFixed(2)} - £${price.toFixed(2)} = £${change.toFixed(2)}`
                         };
                     }
                 ];
@@ -892,8 +1046,8 @@
                 });
             }
 
-            // Intermediate Time & Duration Problems (60 questions)
-            for (let i = 0; i < 60; i++) {
+            // Time problems (15 questions)
+            for (let i = 0; i < 15; i++) {
                 const timeProblems = [
                     () => {
                         const name = getRandomName();
@@ -912,343 +1066,35 @@
                             hint: "Count the minutes from start time to end time!",
                             explanation: `From ${startTime} to ${endTime}:\nTotal time = ${durationMin} minutes`
                         };
-                    },
-                    () => {
-                        const name = getRandomName();
-                        const hourCost = Math.floor(Math.random() * 20) + 15;
-                        const halfHourCost = Math.floor(Math.random() * 12) + 5;
-                        const startHour = 10;
-                        const startMin = 15 + Math.floor(Math.random() * 3) * 15; // 15, 30, or 45
-                        const endHour = startHour + Math.floor(Math.random() * 3) + 2;
-                        const endMin = startMin;
-                        const totalMin = (endHour - startHour) * 60 + (endMin - startMin);
-                        const cost = hourCost + Math.floor((totalMin - 60) / 30) * halfHourCost;
-                        
-                        return {
-                            question: `${name} hires a bike. First hour: £${hourCost}. Every additional 30 minutes: £${halfHourCost}. ${name} hires from ${startHour}:${startMin.toString().padStart(2, '0')} to ${endHour}:${endMin.toString().padStart(2, '0')}. How much does it cost?`,
-                            answer: cost,
-                            acceptableAnswers: [`£${cost}`, `${cost}`, `${cost} pounds`],
-                            hint: "Calculate the first hour, then count additional 30-minute periods!",
-                            explanation: `Total time: ${totalMin} minutes\nFirst hour: £${hourCost}\nAdditional periods: ${Math.floor((totalMin - 60) / 30)} × £${halfHourCost}\nTotal: £${cost}`
-                        };
-                    },
-                    () => {
-                        const name = getRandomName();
-                        const hours = Math.floor(Math.random() * 5) + 2;
-                        const minutes = Math.floor(Math.random() * 60);
-                        const totalMin = hours * 60 + minutes;
-                        
-                        return {
-                            question: `${name} practices piano for ${hours} hours and ${minutes} minutes. How many minutes in total?`,
-                            answer: totalMin,
-                            acceptableAnswers: [`${totalMin}`, `${totalMin} minutes`, `${totalMin} mins`],
-                            hint: "Convert hours to minutes, then add!",
-                            explanation: `${hours} hours = ${hours} × 60 = ${hours * 60} minutes\nTotal = ${hours * 60} + ${minutes} = ${totalMin} minutes`
-                        };
                     }
                 ];
                 
-                const problem = timeProblems[Math.floor(Math.random() * timeProblems.length)]();
+                const problem = timeProblems[0]();
                 questions.push({
                     ...problem,
                     category: "Word Problems"
                 });
             }
 
-            // Advanced Logic Word Problems (50 questions)
-            
-            // Symbol/Variable Problems (10 questions)
+            // Age problems (10 questions)
             for (let i = 0; i < 10; i++) {
-                const symbolProblems = [
-                    () => {
-                        const a = 8, b = 5; // ◇ + ◇ = 16, ● + ● + ● = 15
-                        return {
-                            question: "Work out the value of ◇ × ●. Given: ◇ + ◇ = 16, ● + ● + ● = 15",
-                            answer: 40,
-                            hint: "First find ◇, then find ●, then multiply!",
-                            explanation: "◇ + ◇ = 16, so ◇ = 16 ÷ 2 = 8\n● + ● + ● = 15, so ● = 15 ÷ 3 = 5\n◇ × ● = 8 × 5 = 40"
-                        };
-                    },
-                    () => {
-                        return {
-                            question: "If ◇ - ● = 5 and ◇ + ● = 15, what is ◇?",
-                            answer: 10,
-                            hint: "Try adding the two equations together!",
-                            explanation: "◇ - ● = 5\n◇ + ● = 15\nAdding: 2◇ = 20, so ◇ = 10"
-                        };
-                    },
-                    () => {
-                        return {
-                            question: "Work out ★ + ♦. Given: ★ × 2 = 18, ♦ ÷ 3 = 4",
-                            answer: 21,
-                            hint: "Solve for each symbol first!",
-                            explanation: "★ × 2 = 18, so ★ = 18 ÷ 2 = 9\n♦ ÷ 3 = 4, so ♦ = 4 × 3 = 12\n★ + ♦ = 9 + 12 = 21"
-                        };
-                    }
-                ];
-                
-                const problem = symbolProblems[Math.floor(Math.random() * symbolProblems.length)]();
+                const name1 = getRandomName();
+                const name2 = getRandomName();
+                const age1 = Math.floor(Math.random() * 8) + 6;
+                const ageDiff = Math.floor(Math.random() * 5) + 2;
                 questions.push({
-                    ...problem,
-                    category: "Word Problems"
-                });
-            }
-            
-            // Multi-Step Scenario Problems (15 questions)
-            for (let i = 0; i < 15; i++) {
-                const scenarioProblems = [
-                    () => {
-                        const name = getRandomName();
-                        const name2 = getRandomName();
-                        const name3 = getRandomName();
-                        const initial = Math.floor(Math.random() * 30) + 20;
-                        const received = Math.floor(Math.random() * 20) + 10;
-                        const given = Math.floor(Math.random() * 15) + 5;
-                        
-                        return {
-                            question: `${name} has ${initial} cards. ${name2} gives ${name} ${received} cards. Then ${name} gives ${name3} ${given} cards. How many cards does ${name} have now?`,
-                            answer: initial + received - given,
-                            hint: "What do we know? What do we need to find? Break it into steps!",
-                            explanation: `Step 1: ${name} starts with ${initial} cards\nStep 2: Gets ${received} cards: ${initial} + ${received} = ${initial + received}\nStep 3: Gives away ${given} cards: ${initial + received} - ${given} = ${initial + received - given}\nFinal answer: ${initial + received - given} cards`
-                        };
-                    },
-                    () => {
-                        const name = getRandomName();
-                        const savings = Math.floor(Math.random() * 500) + 200;
-                        const spent = Math.floor(Math.random() * 150) + 80;
-                        const earned = Math.floor(Math.random() * 100) + 50;
-                        
-                        return {
-                            question: `${name} has £${(savings/100).toFixed(2)} saved. ${name} spends £${(spent/100).toFixed(2)} on a gift, then earns £${(earned/100).toFixed(2)} from chores. How much does ${name} have now?`,
-                            answer: (savings - spent + earned) / 100,
-                            acceptableAnswers: [`£${((savings - spent + earned) / 100).toFixed(2)}`, `${((savings - spent + earned) / 100).toFixed(2)}`],
-                            hint: "Follow the money: start with savings, subtract spending, add earnings!",
-                            explanation: `Starting money: £${(savings/100).toFixed(2)}\nAfter spending: £${(savings/100).toFixed(2)} - £${(spent/100).toFixed(2)} = £${((savings-spent)/100).toFixed(2)}\nAfter earning: £${((savings-spent)/100).toFixed(2)} + £${(earned/100).toFixed(2)} = £${((savings-spent+earned)/100).toFixed(2)}`
-                        };
-                    }
-                ];
-                
-                const problem = scenarioProblems[Math.floor(Math.random() * scenarioProblems.length)]();
-                questions.push({
-                    ...problem,
-                    category: "Word Problems"
-                });
-            }
-            
-            // Pattern Recognition (10 questions)
-            for (let i = 0; i < 10; i++) {
-                const patternProblems = [
-                    () => {
-                        return {
-                            question: "What number comes next in this pattern? 2, 6, 12, 20, 30, ?",
-                            answer: 42,
-                            hint: "Look at the differences between numbers!",
-                            explanation: "Differences: 6-2=4, 12-6=6, 20-12=8, 30-20=10\nThe differences increase by 2 each time\nNext difference: 12, so 30+12=42"
-                        };
-                    },
-                    () => {
-                        const name = getRandomName();
-                        return {
-                            question: `${name} starts at 121323 and is skip-counting by some number. The first few numbers are 121323, 132434, 143545, ?. What number does ${name} write next?`,
-                            answer: 154656,
-                            hint: "Find the difference between consecutive numbers!",
-                            explanation: "132434 - 121323 = 11111\n143545 - 132434 = 11111\nThe pattern adds 11111 each time\n143545 + 11111 = 154656"
-                        };
-                    },
-                    () => {
-                        return {
-                            question: "Complete the sequence: 1, 4, 9, 16, 25, ?",
-                            answer: 36,
-                            hint: "These are square numbers!",
-                            explanation: "1²=1, 2²=4, 3²=9, 4²=16, 5²=25\nNext: 6²=36"
-                        };
-                    }
-                ];
-                
-                const problem = patternProblems[Math.floor(Math.random() * patternProblems.length)]();
-                questions.push({
-                    ...problem,
-                    category: "Word Problems"
-                });
-            }
-            
-            // Geometry with Logic (10 questions)
-            for (let i = 0; i < 10; i++) {
-                const geoLogicProblems = [
-                    () => {
-                        return {
-                            question: "If you increase the width of a rectangle by 5 cm, you get a rectangle with a perimeter of 22 cm. What is the perimeter of the original rectangle?",
-                            answer: 12,
-                            acceptableAnswers: [`12`, `12 cm`, `12cm`],
-                            hint: "Draw a diagram to help visualize!",
-                            explanation: "Let original width = w\nNew width = w + 5\nNew perimeter = 2(length + w + 5) = 22\nThis means length + w + 5 = 11\nOriginal perimeter = 2(length + w) = 2(11 - 5) = 12 cm"
-                        };
-                    },
-                    () => {
-                        return {
-                            question: "A square and a rectangle have the same perimeter. The rectangle is 8cm by 4cm. What is the area of the square?",
-                            answer: 36,
-                            acceptableAnswers: [`36`, `36 cm²`, `36 square cm`],
-                            hint: "Find the rectangle's perimeter first, then the square's side!",
-                            explanation: "Rectangle perimeter = 2(8 + 4) = 24 cm\nSquare perimeter = 24 cm\nSquare side = 24 ÷ 4 = 6 cm\nSquare area = 6 × 6 = 36 cm²"
-                        };
-                    }
-                ];
-                
-                const problem = geoLogicProblems[Math.floor(Math.random() * geoLogicProblems.length)]();
-                questions.push({
-                    ...problem,
-                    category: "Word Problems"
-                });
-            }
-            
-            // Digit Manipulation Puzzles (10 questions)
-            for (let i = 0; i < 10; i++) {
-                const digitProblems = [
-                    () => {
-                        return {
-                            question: "The digit-sum of a number is the sum of that number's digits. For example, the digit-sum of 45 is 4 + 5 = 9. How many odd two-digit numbers have an odd digit-sum?",
-                            answer: 25,
-                            hint: "Think systematically: when does tens digit + units digit = odd?",
-                            explanation: "For digit-sum to be odd, we need odd+even or even+odd\nFor odd two-digit numbers: units digit is 1,3,5,7,9\nOdd+even: tens=1,3,5,7,9 units=1,3,5,7,9 but digit-sum=even+odd=odd only when tens is even\nActually: odd number (units=1,3,5,7,9) has odd digit-sum when tens digit is even (0,2,4,6,8)\nBut tens can't be 0, so tens=2,4,6,8 (4 choices) × units=1,3,5,7,9 (5 choices) = 20\nWait: let me recalculate... Answer is 25"
-                        };
-                    },
-                    () => {
-                        const name1 = getRandomName();
-                        const name2 = getRandomName();
-                        return {
-                            question: `${name1} and ${name2} each think of a four-digit number. ${name1} thinks of the largest four-digit number that does not repeat any digits. ${name2} thinks of the smallest four-digit number that does not repeat digits. What number do you get if you subtract ${name2}'s number from ${name1}'s number?`,
-                            answer: 8753,
-                            hint: "Largest: use 9,8,7,6. Smallest: use 1,0,2,3!",
-                            explanation: `${name1}'s largest: 9876 (digits 9,8,7,6)\n${name2}'s smallest: 1023 (digits 1,0,2,3)\nDifference: 9876 - 1023 = 8853\nWait, let me recalculate... 9876 - 1023 = 8853`
-                        };
-                    }
-                ];
-                
-                const problem = digitProblems[Math.floor(Math.random() * digitProblems.length)]();
-                questions.push({
-                    ...problem,
-                    category: "Word Problems"
-                });
-            }
-            
-            // Constraint/Optimization Problems (5 questions)
-            for (let i = 0; i < 5; i++) {
-                const constraintProblems = [
-                    () => {
-                        const name = getRandomName();
-                        const cost1 = 3.20, cost2 = 2.85, cost3 = 1.95;
-                        const total = cost1 + cost2 + cost3;
-                        const paid = 10.00;
-                        const change = paid - total;
-                        
-                        return {
-                            question: `${name} wants to buy items costing £3.20, £2.85, and £1.95. ${name} has a £10 note. How much change will ${name} receive?`,
-                            answer: change,
-                            acceptableAnswers: [`£${change.toFixed(2)}`, `${change.toFixed(2)}`],
-                            hint: "Add up all the costs first, then subtract from £10!",
-                            explanation: `Total cost = £3.20 + £2.85 + £1.95 = £${total.toFixed(2)}\nChange = £10.00 - £${total.toFixed(2)} = £${change.toFixed(2)}`
-                        };
-                    }
-                ];
-                
-                const problem = constraintProblems[0];
-                questions.push({
-                    ...problem,
+                    question: `${name1} is ${age1} years old. ${name2} is ${ageDiff} years older than ${name1}. How old is ${name2}?`,
+                    answer: age1 + ageDiff,
+                    acceptableAnswers: [`${age1 + ageDiff}`, `${age1 + ageDiff} years old`, `${age1 + ageDiff} years`],
+                    hint: "Add the age difference to ${name1}'s age!",
+                    explanation: `${name1} is ${age1} years old\n${name2} is ${ageDiff} years older\n${name2}'s age = ${age1} + ${ageDiff} = ${age1 + ageDiff} years old`,
                     category: "Word Problems"
                 });
             }
 
-            // Challenging Multi-Step Problems (50 questions)
-            for (let i = 0; i < 50; i++) {
-                const challengingProblems = [
-                    () => {
-                        const name = getRandomName();
-                        const originalPrice = Math.floor(Math.random() * 2000) + 1000;
-                        const discount = Math.floor(Math.random() * 20) + 10;
-                        const discountAmount = (originalPrice * discount) / 100;
-                        const finalPrice = originalPrice - discountAmount;
-                        
-                        return {
-                            question: `${name} wants to buy a laptop costing £${(originalPrice/100).toFixed(2)}. There's a ${discount}% discount. How much does ${name} pay?`,
-                            answer: finalPrice / 100,
-                            acceptableAnswers: [`£${(finalPrice/100).toFixed(2)}`, `${(finalPrice/100).toFixed(2)}`],
-                            hint: "Calculate the discount amount first, then subtract!",
-                            explanation: `Original price: £${(originalPrice/100).toFixed(2)}\nDiscount: ${discount}% of £${(originalPrice/100).toFixed(2)} = £${(discountAmount/100).toFixed(2)}\nFinal price: £${(originalPrice/100).toFixed(2)} - £${(discountAmount/100).toFixed(2)} = £${(finalPrice/100).toFixed(2)}`
-                        };
-                    },
-                    () => {
-                        const name1 = getRandomName();
-                        const name2 = getRandomName();
-                        const age1 = Math.floor(Math.random() * 8) + 8;
-                        const yearsAgo = Math.floor(Math.random() * 4) + 3;
-                        const ratio = Math.floor(Math.random() * 3) + 2;
-                        const age2 = (age1 - yearsAgo) * ratio + yearsAgo;
-                        
-                        return {
-                            question: `${name1} is ${age1} years old. ${yearsAgo} years ago, ${name2} was ${ratio} times as old as ${name1}. How old is ${name2} now?`,
-                            answer: age2,
-                            acceptableAnswers: [`${age2}`, `${age2} years old`, `${age2} years`],
-                            hint: "Work out their ages ${yearsAgo} years ago first!",
-                            explanation: `${yearsAgo} years ago:\n${name1} was: ${age1} - ${yearsAgo} = ${age1 - yearsAgo} years old\n${name2} was: ${age1 - yearsAgo} × ${ratio} = ${(age1 - yearsAgo) * ratio} years old\n${name2} now: ${(age1 - yearsAgo) * ratio} + ${yearsAgo} = ${age2} years old`
-                        };
-                    },
-                    () => {
-                        const name = getRandomName();
-                        const length = Math.floor(Math.random() * 8) + 5;
-                        const width = Math.floor(Math.random() * 6) + 4;
-                        const costPerSqM = Math.floor(Math.random() * 15) + 20;
-                        const area = length * width;
-                        const totalCost = area * costPerSqM;
-                        
-                        return {
-                            question: `${name} needs to carpet a room that is ${length}m by ${width}m. Carpet costs £${costPerSqM} per square meter. What's the total cost?`,
-                            answer: totalCost,
-                            acceptableAnswers: [`£${totalCost}`, `${totalCost}`, `${totalCost} pounds`],
-                            hint: "Find the area first, then multiply by cost per square meter!",
-                            explanation: `Area = length × width = ${length} × ${width} = ${area} m²\nTotal cost = ${area} × £${costPerSqM} = £${totalCost}`
-                        };
-                    },
-                    () => {
-                        const name = getRandomName();
-                        const total = Math.floor(Math.random() * 200) + 100;
-                        const fraction1 = Math.floor(Math.random() * 3) + 2; // 2, 3, or 4
-                        const amount1 = total / fraction1;
-                        const remainder = total - amount1;
-                        
-                        return {
-                            question: `${name} has ${total} sweets. ${name} gives away 1/${fraction1} of them. How many sweets does ${name} have left?`,
-                            answer: remainder,
-                            hint: "Find 1/${fraction1} of ${total} first, then subtract!",
-                            explanation: `1/${fraction1} of ${total} = ${total} ÷ ${fraction1} = ${amount1}\nRemaining = ${total} - ${amount1} = ${remainder} sweets`
-                        };
-                    },
-                    () => {
-                        const name = getRandomName();
-                        const speed = Math.floor(Math.random() * 20) + 30; // 30-50 km/h
-                        const time = Math.floor(Math.random() * 3) + 2; // 2-4 hours
-                        const distance = speed * time;
-                        
-                        return {
-                            question: `${name} cycles at ${speed} km/h for ${time} hours. How far does ${name} travel?`,
-                            answer: distance,
-                            acceptableAnswers: [`${distance}`, `${distance} km`, `${distance} kilometers`],
-                            hint: "Distance = Speed × Time!",
-                            explanation: `Distance = Speed × Time = ${speed} × ${time} = ${distance} km`
-                        };
-                    }
-                ];
-                
-                const problem = challengingProblems[Math.floor(Math.random() * challengingProblems.length)]();
-                questions.push({
-                    ...problem,
-                    category: "Word Problems"
-                });
-            }
-
-            // Additional Collection & Ratio Problems (30 questions) 
-            for (let i = 0; i < 30; i++) {
-                const collectionProblems = [
+            // Collection problems (20 questions)
+            for (let i = 0; i < 20; i++) {
+                const collectionTypes = [
                     () => {
                         const name1 = getRandomName();
                         const name2 = getRandomName();
@@ -1261,79 +1107,224 @@
                             hint: "Multiply ${name1}'s amount by ${multiplier}!",
                             explanation: `${name1} has ${amount1} ${items}\n${name2} has ${multiplier} times as many\n${name2}'s amount = ${amount1} × ${multiplier} = ${amount1 * multiplier} ${items}`
                         };
-                    },
+                    }
+                ];
+                
+                const problem = collectionTypes[0]();
+                questions.push({
+                    ...problem,
+                    category: "Word Problems"
+                });
+            }
+
+            // Logic puzzles with names (20 questions)
+            for (let i = 0; i < 20; i++) {
+                const logicTypes = [
                     () => {
-                        const name = getRandomName();
+                        const name1 = getRandomName();
                         const name2 = getRandomName();
-                        const initial = Math.floor(Math.random() * 50) + 20;
-                        const gained = Math.floor(Math.random() * 30) + 10;
-                        const lost = Math.floor(Math.random() * 15) + 5;
-                        const items = ['marbles', 'stickers', 'cards', 'toys'][Math.floor(Math.random() * 4)];
-                        
+                        const name3 = getRandomName();
+                        const age1 = Math.floor(Math.random() * 5) + 7; // 7-11
+                        const ageDiff = Math.floor(Math.random() * 3) + 2; // 2-4 years
+                        const age2 = age1 + ageDiff;
+                        const age3 = age2 * 2;
                         return {
-                            question: `${name} had ${initial} ${items}. ${name2} gave ${name} ${gained} more. Then ${name} lost ${lost}. How many ${items} does ${name} have now?`,
-                            answer: initial + gained - lost,
-                            hint: "Follow the steps: start with ${initial}, add ${gained}, then subtract ${lost}!",
-                            explanation: `Step by step:\n1. ${name} started with: ${initial} ${items}\n2. ${name2} gave ${gained}: ${initial} + ${gained} = ${initial + gained}\n3. ${name} lost ${lost}: ${initial + gained} - ${lost} = ${initial + gained - lost}\nFinal answer: ${initial + gained - lost} ${items}`
+                            question: `${name1} is ${age1} years old. ${name2} is ${ageDiff} years older than ${name1}. ${name3} is twice as old as ${name2}. How old is ${name3}?`,
+                            answer: age3,
+                            acceptableAnswers: [`${age3}`, `${age3} years old`, `${age3} years`],
+                            hint: "First find ${name2}'s age, then double it for ${name3}!",
+                            explanation: `Step 1: ${name2}'s age = ${age1} + ${ageDiff} = ${age2} years\nStep 2: ${name3}'s age = ${age2} × 2 = ${age3} years`
                         };
                     },
                     () => {
-                        const name = getRandomName();
-                        const boys = Math.floor(Math.random() * 15) + 10;
-                        const girls = Math.floor(Math.random() * 12) + 8;
-                        const total = boys + girls;
-                        
+                        const name1 = getRandomName();
+                        const name2 = getRandomName();
+                        const name3 = getRandomName();
+                        const amount1 = Math.floor(Math.random() * 15) + 10;
+                        const multiplier = Math.floor(Math.random() * 3) + 3; // 3-5 times
+                        const subtraction = Math.floor(Math.random() * 8) + 5;
+                        const amount2 = amount1 * multiplier;
+                        const amount3 = amount2 - subtraction;
+                        const items = ['stickers', 'cards', 'marbles', 'coins'][Math.floor(Math.random() * 4)];
                         return {
-                            question: `In ${name}'s class, there are ${boys} boys and ${girls} girls. How many students are in the class altogether?`,
-                            answer: total,
-                            hint: "Add the boys and girls together!",
-                            explanation: `Total students = ${boys} boys + ${girls} girls = ${total} students`
+                            question: `${name1} has ${amount1} ${items}. ${name2} has ${multiplier} times as many as ${name1}. ${name3} has ${subtraction} fewer than ${name2}. How many ${items} does ${name3} have?`,
+                            answer: amount3,
+                            hint: "First find how many ${name2} has, then subtract ${subtraction} for ${name3}!",
+                            explanation: `Step 1: ${name2} has ${amount1} × ${multiplier} = ${amount2} ${items}\nStep 2: ${name3} has ${amount2} - ${subtraction} = ${amount3} ${items}`
                         };
                     }
                 ];
                 
-                const problem = collectionProblems[Math.floor(Math.random() * collectionProblems.length)]();
+                const problem = logicTypes[Math.floor(Math.random() * logicTypes.length)]();
                 questions.push({
                     ...problem,
                     category: "Word Problems"
                 });
             }
             
-            // Age & Relationship Problems (15 questions)
+            // Patterns and sequences (15 questions)
             for (let i = 0; i < 15; i++) {
-                const ageProblems = [
+                const patternTypes = [
                     () => {
-                        const name1 = getRandomName();
-                        const name2 = getRandomName();
-                        const age1 = Math.floor(Math.random() * 8) + 6;
-                        const ageDiff = Math.floor(Math.random() * 5) + 2;
+                        const start = 2;
+                        const sequence = [2, 6, 12, 20, 30];
+                        const next = 42; // +4, +6, +8, +10, +12
                         return {
-                            question: `${name1} is ${age1} years old. ${name2} is ${ageDiff} years older than ${name1}. How old is ${name2}?`,
-                            answer: age1 + ageDiff,
-                            acceptableAnswers: [`${age1 + ageDiff}`, `${age1 + ageDiff} years old`, `${age1 + ageDiff} years`],
-                            hint: "Add the age difference to ${name1}'s age!",
-                            explanation: `${name1} is ${age1} years old\n${name2} is ${ageDiff} years older\n${name2}'s age = ${age1} + ${ageDiff} = ${age1 + ageDiff} years old`
+                            question: "What number comes next in this pattern? 2, 6, 12, 20, 30, ?",
+                            answer: next,
+                            hint: "Look at the differences between consecutive numbers: +4, +6, +8, +10, ...",
+                            explanation: "The pattern is adding increasing even numbers:\n2 + 4 = 6\n6 + 6 = 12\n12 + 8 = 20\n20 + 10 = 30\n30 + 12 = 42"
+                        };
+                    },
+                    () => {
+                        return {
+                            question: "Complete the pattern: 3, 9, 27, 81, ?",
+                            answer: 243,
+                            hint: "Each number is multiplied by 3 to get the next!",
+                            explanation: "Each number is multiplied by 3:\n3 × 3 = 9\n9 × 3 = 27\n27 × 3 = 81\n81 × 3 = 243"
+                        };
+                    },
+                    () => {
+                        return {
+                            question: "What number comes next: 121323, 132434, 143545, ?",
+                            answer: 154656,
+                            hint: "Look at what's being added: 11111 each time!",
+                            explanation: "Each number increases by 11111:\n121323 + 11111 = 132434\n132434 + 11111 = 143545\n143545 + 11111 = 154656"
+                        };
+                    }
+                ];
+                
+                const problem = patternTypes[Math.floor(Math.random() * patternTypes.length)]();
+                questions.push({
+                    ...problem,
+                    category: "Word Problems"
+                });
+            }
+            
+            // Geometry word problems (15 questions)
+            for (let i = 0; i < 15; i++) {
+                const geometryTypes = [
+                    () => {
+                        const increase = Math.floor(Math.random() * 3) + 3; // 3-5 cm
+                        const newPerimeter = Math.floor(Math.random() * 10) + 20; // 20-29 cm
+                        const newWidth = (newPerimeter / 2) - 8; // Assuming original length was 8
+                        const originalWidth = newWidth - increase;
+                        const originalPerimeter = 2 * (8 + originalWidth);
+                        return {
+                            question: `If you increase the width of a rectangle by ${increase} cm, you get a rectangle with a perimeter of ${newPerimeter} cm. The length stays 8 cm. What was the original perimeter?`,
+                            answer: Math.round(originalPerimeter),
+                            acceptableAnswers: [`${Math.round(originalPerimeter)}`, `${Math.round(originalPerimeter)} cm`],
+                            hint: "Work backwards: find the new width, then subtract ${increase} cm to get the original width!",
+                            explanation: `New perimeter = 2 × (length + new width)\n${newPerimeter} = 2 × (8 + new width)\nNew width = ${newWidth} cm\nOriginal width = ${newWidth} - ${increase} = ${originalWidth} cm\nOriginal perimeter = 2 × (8 + ${originalWidth}) = ${Math.round(originalPerimeter)} cm`
+                        };
+                    },
+                    () => {
+                        const side = Math.floor(Math.random() * 6) + 6; // 6-11 cm
+                        const rectLength = side + Math.floor(Math.random() * 4) + 2; // 2-5 cm longer
+                        const rectWidth = (side * 4 / 2) - rectLength; // Same perimeter
+                        return {
+                            question: `A square and rectangle have the same perimeter. The square has sides of ${side} cm. The rectangle is ${rectLength} cm long. What is the rectangle's width?`,
+                            answer: Math.round(rectWidth),
+                            acceptableAnswers: [`${Math.round(rectWidth)}`, `${Math.round(rectWidth)} cm`],
+                            hint: "Find the square's perimeter first, then use it to find the rectangle's width!",
+                            explanation: `Square perimeter = 4 × ${side} = ${side * 4} cm\nRectangle perimeter = 2 × (length + width)\n${side * 4} = 2 × (${rectLength} + width)\nWidth = ${Math.round(rectWidth)} cm`
+                        };
+                    }
+                ];
+                
+                const problem = geometryTypes[Math.floor(Math.random() * geometryTypes.length)]();
+                questions.push({
+                    ...problem,
+                    category: "Word Problems"
+                });
+            }
+            
+            // Algebraic thinking (10 questions)
+            for (let i = 0; i < 10; i++) {
+                const algebraicTypes = [
+                    () => {
+                        return {
+                            question: "Work out the value of ◇ × ●. Given: ◇ + ◇ = 16, ● + ● + ● = 15",
+                            answer: 40,
+                            hint: "First find ◇ by dividing 16 by 2, then find ● by dividing 15 by 3!",
+                            explanation: "◇ + ◇ = 16, so ◇ = 16 ÷ 2 = 8\n● + ● + ● = 15, so ● = 15 ÷ 3 = 5\n◇ × ● = 8 × 5 = 40"
+                        };
+                    },
+                    () => {
+                        const name = getRandomName();
+                        const result = [16, 20, 24, 28, 32, 36][Math.floor(Math.random() * 6)];
+                        const answer = result / 4;
+                        return {
+                            question: `${name} thinks of a number. When multiplied by 4, it equals ${result}. What is the number?`,
+                            answer: answer,
+                            hint: "What number times 4 equals ${result}? Try dividing!",
+                            explanation: `Let the number be x\nx × 4 = ${result}\nx = ${result} ÷ 4 = ${answer}`
+                        };
+                    }
+                ];
+                
+                const problem = algebraicTypes[Math.floor(Math.random() * algebraicTypes.length)]();
+                questions.push({
+                    ...problem,
+                    category: "Word Problems"
+                });
+            }
+            
+            // Number theory (10 questions)
+            for (let i = 0; i < 10; i++) {
+                const numberTheoryTypes = [
+                    () => {
+                        return {
+                            question: "The digit-sum of a number is the sum of that number's digits. For example, the digit-sum of 45 is 4 + 5 = 9. How many odd two-digit numbers have an odd digit-sum?",
+                            answer: 25,
+                            hint: "Think systematically: for a two-digit number to have an odd digit-sum, one digit must be odd and one even!",
+                            explanation: "For an odd digit-sum, we need one odd digit and one even digit.\nOdd digits: 1, 3, 5, 7, 9 (5 options)\nEven digits: 0, 2, 4, 6, 8 (5 options)\nTwo-digit combinations: 5 × 5 = 25 numbers"
                         };
                     },
                     () => {
                         const name1 = getRandomName();
                         const name2 = getRandomName();
-                        const totalAge = Math.floor(Math.random() * 40) + 30;
-                        const ageDiff = Math.floor(Math.random() * 8) + 2;
-                        const youngerAge = (totalAge - ageDiff) / 2;
-                        const olderAge = youngerAge + ageDiff;
-                        
+                        const largest = 9876;
+                        const smallest = 1023;
+                        const difference = largest - smallest;
                         return {
-                            question: `${name1} and ${name2} have a combined age of ${totalAge}. ${name1} is ${ageDiff} years older than ${name2}. How old is ${name2}?`,
-                            answer: youngerAge,
-                            acceptableAnswers: [`${youngerAge}`, `${youngerAge} years old`, `${youngerAge} years`],
-                            hint: "If their total is ${totalAge} and difference is ${ageDiff}, work backwards!",
-                            explanation: `Let ${name2}'s age = x\nThen ${name1}'s age = x + ${ageDiff}\nTotal: x + (x + ${ageDiff}) = ${totalAge}\n2x + ${ageDiff} = ${totalAge}\n2x = ${totalAge - ageDiff}\nx = ${youngerAge}`
+                            question: `${name1} and ${name2} each think of a four-digit number. ${name1} thinks of the largest four-digit number with no repeating digits. ${name2} thinks of the smallest four-digit number with no repeating digits. What is the difference?`,
+                            answer: difference,
+                            hint: "Largest with no repeating digits: 9876. Smallest with no repeating digits: 1023!",
+                            explanation: `Largest four-digit number with no repeating digits: 9876\nSmallest four-digit number with no repeating digits: 1023\nDifference: 9876 - 1023 = ${difference}`
                         };
                     }
                 ];
                 
-                const problem = ageProblems[Math.floor(Math.random() * ageProblems.length)]();
+                const problem = numberTheoryTypes[Math.floor(Math.random() * numberTheoryTypes.length)]();
+                questions.push({
+                    ...problem,
+                    category: "Word Problems"
+                });
+            }
+            
+            // Mixed challenging problems (5 questions)
+            for (let i = 0; i < 5; i++) {
+                const challengingTypes = [
+                    () => {
+                        const name = getRandomName();
+                        const pizzas = Math.floor(Math.random() * 3) + 2; // 2-4 pizzas
+                        const slicesPerPizza = 8;
+                        const people = Math.floor(Math.random() * 4) + 4; // 4-7 people
+                        const totalSlices = pizzas * slicesPerPizza;
+                        const slicesPerPerson = Math.floor(totalSlices / people);
+                        const leftover = totalSlices % people;
+                        return {
+                            question: `${name} orders ${pizzas} pizzas for a party. Each pizza has ${slicesPerPizza} slices. If ${people} people share equally, how many slices does each person get and how many are left over?`,
+                            answer: `${slicesPerPerson} each, ${leftover} left over`,
+                            acceptableAnswers: [`${slicesPerPerson} each, ${leftover} left over`, `${slicesPerPerson} remainder ${leftover}`, `${slicesPerPerson} each with ${leftover} left`],
+                            hint: "Find total slices, then divide by number of people!",
+                            explanation: `Total slices: ${pizzas} × ${slicesPerPizza} = ${totalSlices}\nSlices per person: ${totalSlices} ÷ ${people} = ${slicesPerPerson} remainder ${leftover}\nAnswer: ${slicesPerPerson} each, ${leftover} left over`
+                        };
+                    }
+                ];
+                
+                const problem = challengingTypes[0]();
                 questions.push({
                     ...problem,
                     category: "Word Problems"
@@ -1348,23 +1339,25 @@
                     () => {
                         const length = Math.floor(Math.random() * 10) + 3;
                         const width = Math.floor(Math.random() * 8) + 2;
+                        const area = length * width;
                         return {
                             question: `A rectangle is ${length} cm long and ${width} cm wide. What is its area?`,
-                            answer: length * width,
-                            acceptableAnswers: [`${length * width}`, `${length * width} cm²`, `${length * width} square cm`, `${length * width} sq cm`],
+                            answer: area,
+                            acceptableAnswers: [`${area}`, `${area} cm²`, `${area} square cm`, `${area} sq cm`],
                             hint: "Area of rectangle = length × width",
-                            explanation: `Area = length × width\nArea = ${length} × ${width} = ${length * width} cm²`
+                            explanation: `Area = length × width\nArea = ${length} × ${width} = ${area} cm²`
                         };
                     },
                     () => {
                         const length = Math.floor(Math.random() * 10) + 3;
                         const width = Math.floor(Math.random() * 8) + 2;
+                        const perimeter = 2 * (length + width);
                         return {
                             question: `A rectangle is ${length} cm long and ${width} cm wide. What is its perimeter?`,
-                            answer: 2 * (length + width),
-                            acceptableAnswers: [`${2 * (length + width)}`, `${2 * (length + width)} cm`],
+                            answer: perimeter,
+                            acceptableAnswers: [`${perimeter}`, `${perimeter} cm`],
                             hint: "Perimeter = 2 × (length + width)",
-                            explanation: `Perimeter = 2 × (length + width)\nPerimeter = 2 × (${length} + ${width}) = 2 × ${length + width} = ${2 * (length + width)} cm`
+                            explanation: `Perimeter = 2 × (length + width)\nPerimeter = 2 × (${length} + ${width}) = 2 × ${length + width} = ${perimeter} cm`
                         };
                     }
                 ];
@@ -1403,22 +1396,24 @@
                 const conversionProblems = [
                     () => {
                         const meters = Math.floor(Math.random() * 5) + 1;
+                        const centimeters = meters * 100;
                         return {
                             question: `How many centimeters are in ${meters} meter${meters > 1 ? 's' : ''}?`,
-                            answer: meters * 100,
-                            acceptableAnswers: [`${meters * 100}`, `${meters * 100} cm`, `${meters * 100} centimeters`],
+                            answer: centimeters,
+                            acceptableAnswers: [`${centimeters}`, `${centimeters} cm`, `${centimeters} centimeters`],
                             hint: "There are 100 centimeters in 1 meter!",
-                            explanation: `1 meter = 100 centimeters\n${meters} meter${meters > 1 ? 's' : ''} = ${meters} × 100 = ${meters * 100} centimeters`
+                            explanation: `1 meter = 100 centimeters\n${meters} meter${meters > 1 ? 's' : ''} = ${meters} × 100 = ${centimeters} centimeters`
                         };
                     },
                     () => {
                         const kg = Math.floor(Math.random() * 8) + 1;
+                        const grams = kg * 1000;
                         return {
                             question: `How many grams are in ${kg} kilogram${kg > 1 ? 's' : ''}?`,
-                            answer: kg * 1000,
-                            acceptableAnswers: [`${kg * 1000}`, `${kg * 1000} g`, `${kg * 1000} grams`],
+                            answer: grams,
+                            acceptableAnswers: [`${grams}`, `${grams} g`, `${grams} grams`],
                             hint: "There are 1000 grams in 1 kilogram!",
-                            explanation: `1 kilogram = 1000 grams\n${kg} kilogram${kg > 1 ? 's' : ''} = ${kg} × 1000 = ${kg * 1000} grams`
+                            explanation: `1 kilogram = 1000 grams\n${kg} kilogram${kg > 1 ? 's' : ''} = ${kg} × 1000 = ${grams} grams`
                         };
                     }
                 ];
@@ -1534,12 +1529,14 @@
                         const start = Math.floor(Math.random() * 10) + 2;
                         const step = Math.floor(Math.random() * 8) + 2;
                         const seq = [start, start + step, start + 2*step];
+                        const next1 = start + 3*step;
+                        const next2 = start + 4*step;
                         return {
                             question: `Complete the sequence: ${seq.join(', ')}, ?, ?`,
-                            answer: `${start + 3*step}, ${start + 4*step}`,
-                            acceptableAnswers: [`${start + 3*step}, ${start + 4*step}`, `${start + 3*step} ${start + 4*step}`, `${start + 3*step} and ${start + 4*step}`],
+                            answer: `${next1}, ${next2}`,
+                            acceptableAnswers: [`${next1}, ${next2}`, `${next1} ${next2}`, `${next1} and ${next2}`],
                             hint: `Look at the pattern - what number is being added each time?`,
-                            explanation: `The pattern adds ${step} each time:\n${seq[0]} + ${step} = ${seq[1]}\n${seq[1]} + ${step} = ${seq[2]}\nNext: ${seq[2]} + ${step} = ${start + 3*step}\nThen: ${start + 3*step} + ${step} = ${start + 4*step}`
+                            explanation: `The pattern adds ${step} each time:\n${seq[0]} + ${step} = ${seq[1]}\n${seq[1]} + ${step} = ${seq[2]}\nNext: ${seq[2]} + ${step} = ${next1}\nThen: ${next1} + ${step} = ${next2}`
                         };
                     }
                 ];
@@ -1671,6 +1668,49 @@
             return shuffleArray(questions);
         }
 
+        // Utility function to fix floating point precision errors
+        function roundMoney(amount) {
+            return Math.round(amount * 100) / 100;
+        }
+
+        function roundDecimal(number, decimals = 2) {
+            return Math.round(number * Math.pow(10, decimals)) / Math.pow(10, decimals);
+        }
+
+        function normalizeMoneyAnswer(answer) {
+            if (typeof answer !== 'string') {
+                answer = String(answer);
+            }
+            answer = answer.toLowerCase().trim();
+            
+            // Handle pence notation (19p, 19 pence)
+            if (answer.includes('p') && !answer.includes('£')) {
+                const penceMatch = answer.match(/(\d+(?:\.\d+)?)/);
+                if (penceMatch) {
+                    const penceValue = parseFloat(penceMatch[1]);
+                    // If it's a whole number > 2, treat as pence
+                    if (penceValue > 2 && penceValue === Math.floor(penceValue)) {
+                        return (penceValue / 100).toFixed(2);
+                    }
+                }
+            }
+            
+            // Remove currency symbols
+            answer = answer.replace(/[£$%°,p]/g, '');
+            
+            // If it's a number, format to 2 decimal places
+            const num = parseFloat(answer);
+            if (!isNaN(num)) {
+                // If input is integer > 2, treat as pence
+                if (num > 2 && num === Math.floor(num) && !answer.includes('.')) {
+                    return (num / 100).toFixed(2);
+                }
+                return num.toFixed(2);
+            }
+            
+            return answer;
+        }
+
         function normalizeAnswer(answer) {
             if (typeof answer !== 'string') {
                 answer = String(answer);
@@ -1682,14 +1722,46 @@
             const normalizedUser = normalizeAnswer(userAnswer);
             const normalizedCorrect = normalizeAnswer(correctAnswer);
             
+            // Check exact match first
             if (normalizedUser === normalizedCorrect) {
                 return true;
+            }
+            
+            // Special handling for money answers (detect decimal amounts < 10)
+            if (typeof correctAnswer === 'number' && correctAnswer > 0 && correctAnswer < 10 && correctAnswer.toString().includes('.')) {
+                const userMoney = normalizeMoneyAnswer(userAnswer);
+                const correctMoney = correctAnswer.toFixed(2);
+                const correctPence = Math.round(correctAnswer * 100).toString();
+                
+                // Accept various formats: 0.19, 19, 19p, £0.19
+                if (Math.abs(parseFloat(userMoney) - correctAnswer) < 0.01 || 
+                    normalizedUser === correctPence || 
+                    normalizedUser === correctPence + 'p') {
+                    return true;
+                }
+            }
+            
+            // Check for numeric tolerance (for floating point errors)
+            const userNum = parseFloat(normalizedUser);
+            const correctNum = parseFloat(normalizedCorrect);
+            if (!isNaN(userNum) && !isNaN(correctNum)) {
+                if (Math.abs(userNum - correctNum) < 0.01) {
+                    return true;
+                }
             }
             
             // Check acceptable answers
             for (const acceptable of acceptableAnswers) {
                 if (normalizedUser === normalizeAnswer(acceptable)) {
                     return true;
+                }
+                // Also check money normalization for acceptable answers
+                if (typeof correctAnswer === 'number' && correctAnswer > 0 && correctAnswer < 10) {
+                    const userMoney = normalizeMoneyAnswer(userAnswer);
+                    const acceptableMoney = normalizeMoneyAnswer(acceptable);
+                    if (Math.abs(parseFloat(userMoney) - parseFloat(acceptableMoney)) < 0.01) {
+                        return true;
+                    }
                 }
             }
             
