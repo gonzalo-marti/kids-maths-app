@@ -1165,7 +1165,7 @@
             
             <div class="button-group">
                 <button class="btn btn-primary" id="createNewUserBtn">➕ Create New User</button>
-                <button class="btn btn-secondary" onclick="requestParentAccess()">👨‍👩‍👧‍👦 Parent View</button>
+                <button class="btn btn-secondary" id="parentViewBtn">👨‍👩‍👧‍👦 Parent View</button>
             </div>
         </div>
 
@@ -1246,7 +1246,7 @@
             </div>
             
             <div class="button-group" style="margin-top: var(--space-16);">
-                <button class="btn btn-secondary" onclick="requestParentAccess()" style="font-size: var(--font-size-sm); padding: var(--space-6) var(--space-12);">👨‍👩‍👧‍👦 Parent View</button>
+                <button class="btn btn-secondary" id="parentViewBtn2" style="font-size: var(--font-size-sm); padding: var(--space-6) var(--space-12);">👨‍👩‍👧‍👦 Parent View</button>
             </div>
         </div>
 
@@ -1470,29 +1470,20 @@
         </div>
     </div>
 
-    <!-- TESTING PANEL -->
-    <div id="testing-panel" style="position: fixed; top: 50px; right: 10px; background: var(--color-surface); border: 2px solid var(--color-primary); border-radius: var(--radius-base); padding: var(--space-12); font-size: var(--font-size-sm); box-shadow: var(--shadow-lg); z-index: 999998; max-width: 250px;">
-        <div style="font-weight: var(--font-weight-bold); color: var(--color-primary); margin-bottom: var(--space-8);">🧪 TESTING MODE</div>
-        <button onclick="testCreateUserFlow()" style="width: 100%; margin-bottom: var(--space-4); padding: var(--space-4); background: var(--app-success); color: white; border: none; border-radius: var(--radius-sm); cursor: pointer;">Test Create User</button>
-        <button onclick="testModalVisibility()" style="width: 100%; margin-bottom: var(--space-4); padding: var(--space-4); background: var(--app-warning); color: white; border: none; border-radius: var(--radius-sm); cursor: pointer;">Test Modal</button>
-        <button onclick="hideTesting()" style="width: 100%; padding: var(--space-4); background: var(--color-error); color: white; border: none; border-radius: var(--radius-sm); cursor: pointer;">Hide Testing</button>
-    </div>
+
 
     <footer style="position: fixed; bottom: 10px; right: 15px; font-size: 11px; color: rgba(255,255,255,0.7); background: rgba(0,0,0,0.2); padding: 4px 8px; border-radius: 4px;">
-        Version 1.5 - CRITICAL FIX: User creation now working properly
+        Version 1.5 - Clean implementation
     </footer>
 
-    <!-- DEBUG BUTTON FOR TESTING -->
-    <button onclick="console.log('Button test'); alert('Button works!');" style="position: fixed; top: 10px; right: 10px; z-index: 999999; background: red; color: white; padding: 8px; border: none; border-radius: 4px;">
-        Test Button
-    </button>
+
 
     <script>
         // ============================================
         // INITIALIZE APP - CRITICAL USER CREATION FIX
         // ============================================
         console.log('🚀 Maths Adventure App starting...');
-        console.log('Version: 1.5 - User creation bug fix');
+        console.log('Version: 1.5 - Clean implementation');
         
         // Game state
         let currentMode = '';
@@ -1792,6 +1783,18 @@
         let parentAccessGranted = false;
         let keyPressCount = 0;
         let keyPressTimer = null;
+        
+        // Parent Access Functions (DEFINED EARLY)
+        function requestParentAccess() {
+            const now = Date.now();
+            if (parentLockoutTime > now) {
+                const remaining = Math.ceil((parentLockoutTime - now) / 1000);
+                alert(`Too many failed attempts. Please wait ${remaining} seconds before trying again.`);
+                return;
+            }
+            
+            showPasswordModal();
+        }
 
         // Default avatars for easy selection (16 total)
         const defaultAvatars = ['🚀', '⚽', '🎨', '🌟', '🎮', '🦄', '🌈', '🎯', '⭐', '🔥', '💫', '🎪', '🎭', '🎬', '🎤', '🏀'];
@@ -1832,9 +1835,7 @@
         }
 
         function loadUserData() {
-            // In-memory storage - data persists only during session
-            // Note: All data is stored in JavaScript variables and will be lost when page refreshes
-            // This is due to sandboxed environment restrictions
+            // In-memory storage only due to sandboxed environment
             if (Object.keys(allUsers).length === 0) {
                 // Initialize with some demo users for demonstration
                 initializeDemoUsers();
@@ -1842,8 +1843,7 @@
         }
 
         function saveUserData() {
-            // In-memory storage - no actual persistence
-            // Data is maintained in JavaScript variables during the session
+            // In-memory storage only - data will be lost on page refresh
             console.log('User data saved to memory (session only)');
         }
         
@@ -3108,78 +3108,52 @@
         }
 
         function showCreateUserModal() {
-            console.log('🎯 CREATE USER BUTTON CLICKED!');
-            console.log('📍 Function showCreateUserModal() called');
+            console.log('🎯 Opening create user modal...');
             
             const modal = document.getElementById('createUserModal');
-            console.log('🔍 Modal element found:', modal);
-            console.log('🔍 Modal current display:', modal ? modal.style.display : 'MODAL NOT FOUND!');
-            
             if (!modal) {
-                console.error('❌ CRITICAL ERROR: Modal element not found!');
                 alert('Error: Modal not found! Please refresh the page.');
                 return;
             }
             
-            console.log('✅ Modal element exists, proceeding...');
-            
-            // Reset form completely
+            // Reset form
             const usernameInput = document.getElementById('newUsername');
-            console.log('🔍 Username input found:', usernameInput);
             if (usernameInput) {
                 usernameInput.value = '';
-                console.log('✅ Username input cleared');
             }
             
             // Reset selected avatar
             selectedAvatarInModal = defaultAvatars[0];
-            console.log('✅ Avatar reset to:', selectedAvatarInModal);
             
             // Hide error message
             const errorDiv = document.getElementById('username-error');
             if (errorDiv) {
                 errorDiv.style.display = 'none';
-                console.log('✅ Error message hidden');
             }
             
             // Reset avatar selection UI
-            const avatarOptions = document.querySelectorAll('.avatar-option');
-            console.log('🔍 Found avatar options:', avatarOptions.length);
-            avatarOptions.forEach(option => {
+            document.querySelectorAll('.avatar-option').forEach(option => {
                 option.classList.remove('selected');
             });
             
             const firstAvatar = document.querySelector('.avatar-option[data-emoji="🚀"]');
             if (firstAvatar) {
                 firstAvatar.classList.add('selected');
-                console.log('✅ First avatar selected');
             }
             
-            // SHOW MODAL WITH HIGH PRIORITY
-            console.log('📱 Showing modal...');
+            // Show modal
             modal.style.display = 'flex';
-            modal.style.position = 'fixed';
-            modal.style.top = '0';
-            modal.style.left = '0';
-            modal.style.width = '100%';
-            modal.style.height = '100%';
             modal.style.zIndex = '999999';
-            modal.style.background = 'rgba(0, 0, 0, 0.7)';
             modal.classList.add('visible');
             
-            console.log('📱 Modal display after setting:', modal.style.display);
-            console.log('📱 Modal z-index after setting:', modal.style.zIndex);
-            
-            // Focus on username input with delay
+            // Focus on username input
             setTimeout(() => {
                 if (usernameInput) {
                     usernameInput.focus();
-                    console.log('✅ Username input focused');
                 }
-            }, 200);
+            }, 100);
             
-            console.log('🎉 Modal should now be visible!');
-            console.log('🔍 Final modal state - display:', modal.style.display, 'visibility:', getComputedStyle(modal).visibility);
+            console.log('✅ Modal opened successfully!');
         }
         
         function closeCreateUserModal() {
@@ -3277,28 +3251,16 @@
         }
         
         function renderAvatarSelection() {
-            console.log('🎆 Setting up avatar selection...');
-            
             const container = document.querySelector('.avatar-selection');
-            console.log('🔍 Avatar container found:', !!container);
-            
             if (!container) {
-                console.error('❌ Avatar container not found!');
+                console.error('Avatar container not found!');
                 return;
             }
             
-            // Avatar selection is already in HTML, just add event listeners
-            const avatars = ['🚀', '⚽', '🎨', '🌟', '🎮', '🦄', '🌈', '🎯', '⭐', '🔥', '💫', '🎪', '🎭', '🎬', '🎤', '🏀'];
-            
             const avatarOptions = container.querySelectorAll('.avatar-option');
-            console.log('🔍 Found avatar options:', avatarOptions.length);
             
-            avatarOptions.forEach((div, index) => {
-                console.log(`🎆 Setting up avatar ${index + 1}:`, div.dataset.emoji);
-                
+            avatarOptions.forEach((div) => {
                 div.addEventListener('click', function() {
-                    console.log('🔘 Avatar clicked:', this.dataset.emoji);
-                    
                     // Remove selected from all
                     document.querySelectorAll('.avatar-option').forEach(el => {
                         el.classList.remove('selected');
@@ -3307,8 +3269,6 @@
                     // Add selected to clicked
                     this.classList.add('selected');
                     selectedAvatarInModal = this.dataset.emoji;
-                    
-                    console.log('✅ Avatar selected:', selectedAvatarInModal);
                 });
             });
             
@@ -3317,10 +3277,7 @@
             if (firstAvatar) {
                 firstAvatar.classList.add('selected');
                 selectedAvatarInModal = firstAvatar.dataset.emoji;
-                console.log('✅ Default avatar selected:', selectedAvatarInModal);
             }
-            
-            console.log('✅ Avatar selection setup complete!');
         }
 
         // Dashboard Functions
@@ -4729,17 +4686,7 @@
             return table;
         }
         
-        // Parent Access Functions
-        function requestParentAccess() {
-            const now = Date.now();
-            if (parentLockoutTime > now) {
-                const remaining = Math.ceil((parentLockoutTime - now) / 1000);
-                alert(`Too many failed attempts. Please wait ${remaining} seconds before trying again.`);
-                return;
-            }
-            
-            showPasswordModal();
-        }
+        // Parent Access Functions (ALREADY DEFINED ABOVE)
         
         function showPasswordModal() {
             const modal = document.createElement('div');
@@ -4881,97 +4828,37 @@
         
         // Event Listeners
         document.addEventListener('DOMContentLoaded', function() {
-            // ============================================
-            // CRITICAL FIX: CREATE NEW USER BUTTON
-            // ============================================
-            console.log('🔧 Setting up Create New User button...');
-            
+            // Set up Create New User button
             const createNewUserBtn = document.getElementById('createNewUserBtn');
-            console.log('🔍 Create New User button element:', createNewUserBtn);
-            
-            if (!createNewUserBtn) {
-                console.error('❌ CRITICAL ERROR: Create New User button not found!');
-                alert('CRITICAL ERROR: Button not found! Please refresh the page.');
-                return;
+            if (createNewUserBtn) {
+                createNewUserBtn.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    showCreateUserModal();
+                });
+                console.log('✅ Create User button set up successfully');
+            } else {
+                console.error('❌ Create User button not found!');
             }
             
-            console.log('✅ Create New User button found, adding event listener...');
-            
-            // Remove any existing listeners first
-            createNewUserBtn.replaceWith(createNewUserBtn.cloneNode(true));
-            const freshBtn = document.getElementById('createNewUserBtn');
-            
-            freshBtn.addEventListener('click', function(event) {
-                console.log('🎯 CREATE NEW USER BUTTON CLICKED!');
-                console.log('📍 Event triggered:', event);
-                console.log('📍 Button element:', this);
-                
-                // Prevent any default behavior
-                event.preventDefault();
-                event.stopPropagation();
-                
-                console.log('📞 Calling showCreateUserModal()...');
-                showCreateUserModal();
-            });
-            
-            // Also add a direct onclick as backup
-            freshBtn.onclick = function(event) {
-                console.log('🎯 BACKUP ONCLICK TRIGGERED!');
-                event.preventDefault();
-                showCreateUserModal();
-            };
-            
-            console.log('✅ Event listeners added successfully!');
-            console.log('🔍 Button onclick:', freshBtn.onclick);
-            console.log('🔍 Button addEventListener count: Event listener added');
-            
-            // TEST THE BUTTON IMMEDIATELY
-            console.log('🧪 Testing button accessibility...');
-            console.log('🔍 Button disabled?', freshBtn.disabled);
-            console.log('🔍 Button display:', getComputedStyle(freshBtn).display);
-            console.log('🔍 Button visibility:', getComputedStyle(freshBtn).visibility);
-            console.log('🔍 Button pointer-events:', getComputedStyle(freshBtn).pointerEvents);
-            
-            // ============================================
-            // CONFIRM CREATE USER BUTTON
-            // ============================================
-            console.log('🔧 Setting up Confirm Create User button...');
-            
+            // Set up Confirm Create User button
             const confirmCreateUserBtn = document.getElementById('confirmCreateUser');
-            console.log('🔍 Confirm button found:', confirmCreateUserBtn);
-            
             if (confirmCreateUserBtn) {
                 confirmCreateUserBtn.addEventListener('click', function() {
-                    console.log('✅ Confirm Create User clicked!');
-                    
                     const username = document.getElementById('newUsername').value.trim();
-                    const errorDiv = document.getElementById('username-error');
                     
-                    console.log('🔍 Username entered:', username);
-                    
-                    // Validation
+                    // Simple validation
                     if (!username) {
-                        console.log('❌ Validation failed: No username');
-                        errorDiv.textContent = 'Please enter a username';
-                        errorDiv.style.display = 'block';
                         alert('Please enter a username!');
                         return;
                     }
                     
                     if (username.length < 2) {
-                        console.log('❌ Validation failed: Username too short');
-                        errorDiv.textContent = 'Username must be at least 2 characters';
-                        errorDiv.style.display = 'block';
                         alert('Username must be at least 2 characters!');
                         return;
                     }
                     
                     // Check for duplicates
-                    const users = allUsers;
-                    if (users[username]) {
-                        console.log('❌ Validation failed: Username exists');
-                        errorDiv.textContent = 'Username already exists. Please choose a different name.';
-                        errorDiv.style.display = 'block';
+                    if (allUsers[username]) {
                         alert('Username already exists! Please choose a different name.');
                         return;
                     }
@@ -4980,84 +4867,58 @@
                     const selectedAvatarElement = document.querySelector('.avatar-option.selected');
                     const avatar = selectedAvatarElement ? selectedAvatarElement.dataset.emoji : '🚀';
                     
-                    console.log('✅ Validation passed! Creating user:', username, avatar);
-                    
                     // Create user
                     const newUser = createNewUser(username, avatar);
-                    console.log('✅ User created:', newUser);
                     
                     // Close modal
                     closeCreateUserModal();
-                    console.log('✅ Modal closed');
                     
                     // Refresh user list
                     populateUserList();
-                    console.log('✅ User list refreshed');
                     
                     // Show welcome screen
                     showWelcome();
-                    console.log('✅ Welcome screen shown');
                     
                     // Show success message
                     alert(`User "${username}" created successfully! 🎉`);
-                    console.log('🎉 USER CREATION COMPLETE!');
                 });
+                console.log('✅ Confirm Create User button set up');
             }
             
-            // ============================================
-            // CANCEL CREATE USER BUTTON
-            // ============================================
-            console.log('🔧 Setting up Cancel button...');
-            
+            // Set up Cancel Create User button
             const cancelCreateUserBtn = document.getElementById('cancelCreateUser');
-            console.log('🔍 Cancel button found:', cancelCreateUserBtn);
-            
             if (cancelCreateUserBtn) {
-                cancelCreateUserBtn.addEventListener('click', function() {
-                    console.log('🚫 Cancel button clicked');
-                    closeCreateUserModal();
-                });
+                cancelCreateUserBtn.addEventListener('click', closeCreateUserModal);
+                console.log('✅ Cancel button set up');
             }
             
-            // ============================================
-            // MODAL CLICK OUTSIDE TO CLOSE
-            // ============================================
+            // Modal click outside to close
             const modal = document.getElementById('createUserModal');
             if (modal) {
                 modal.addEventListener('click', function(e) {
                     if (e.target === this) {
-                        console.log('🚫 Clicked outside modal, closing...');
                         closeCreateUserModal();
                     }
                 });
             }
             
-            // ============================================
-            // ENTER KEY IN USERNAME INPUT
-            // ============================================
+            // Enter key in username input
             const usernameInput = document.getElementById('newUsername');
             if (usernameInput) {
                 usernameInput.addEventListener('keypress', function(e) {
                     if (e.key === 'Enter') {
-                        console.log('⏎ Enter pressed in username input');
                         document.getElementById('confirmCreateUser').click();
                     }
                 });
             }
             
-            // Username input validation
+            // Clear error on input
             const newUsernameInput = document.getElementById('newUsername');
             if (newUsernameInput) {
                 newUsernameInput.addEventListener('input', function() {
                     const errorDiv = document.getElementById('username-error');
-                    if (errorDiv.style.display !== 'none') {
+                    if (errorDiv) {
                         errorDiv.style.display = 'none';
-                    }
-                });
-                
-                newUsernameInput.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') {
-                        document.getElementById('confirmCreateUser').click();
                     }
                 });
             }
@@ -5109,66 +4970,21 @@
                 console.log('🎉 VERIFICATION COMPLETE - All systems ready!');
                 console.log('📝 Instructions: Click "Create New User" button to test');
                 
-                // Auto-test the flow after page load
-                console.log('🤖 Running automatic test in 2 seconds...');
-                setTimeout(() => {
-                    testCreateUserFlow();
-                }, 2000);
+                console.log('🎉 User creation system ready!');
             }, 1000);
             
-            // ============================================
-            // TESTING FUNCTIONS
-            // ============================================
-            window.testCreateUserFlow = function() {
-                console.log('🧪 TESTING CREATE USER FLOW...');
-                
-                const btn = document.getElementById('createNewUserBtn');
-                if (!btn) {
-                    console.error('❌ FAIL: Button not found!');
-                    return;
-                }
-                
-                console.log('✅ PASS: Button exists');
-                
-                // Simulate click
-                console.log('🔘 Simulating button click...');
-                btn.click();
-                
-                // Check if modal appeared
-                setTimeout(() => {
-                    const modal = document.getElementById('createUserModal');
-                    const isVisible = modal && (modal.style.display === 'flex' || modal.classList.contains('visible'));
-                    
-                    if (isVisible) {
-                        console.log('✅ PASS: Modal is visible!');
-                        alert('✅ SUCCESS: Create User Modal is working! You can now create users.');
-                    } else {
-                        console.error('❌ FAIL: Modal not visible after click!');
-                        alert('❌ FAIL: Modal not showing. Please check the console for errors.');
-                    }
-                }, 500);
-            };
+
             
-            window.testModalVisibility = function() {
-                const modal = document.getElementById('createUserModal');
-                if (!modal) {
-                    alert('Modal element not found!');
-                    return;
-                }
-                
-                console.log('Modal current state:', {
-                    display: modal.style.display,
-                    visibility: getComputedStyle(modal).visibility,
-                    zIndex: modal.style.zIndex,
-                    classes: modal.className
-                });
-                
-                alert('Modal state logged to console. Check developer tools.');
-            };
+            // Parent View buttons
+            const parentViewBtn1 = document.getElementById('parentViewBtn');
+            if (parentViewBtn1) {
+                parentViewBtn1.addEventListener('click', requestParentAccess);
+            }
             
-            window.hideTesting = function() {
-                document.getElementById('testing-panel').style.display = 'none';
-            };
+            const parentViewBtn2 = document.getElementById('parentViewBtn2');
+            if (parentViewBtn2) {
+                parentViewBtn2.addEventListener('click', requestParentAccess);
+            }
             
             // Keyboard shortcut for parent access (triple P)
             document.addEventListener('keydown', function(e) {
