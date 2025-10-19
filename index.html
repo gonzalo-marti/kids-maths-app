@@ -1473,7 +1473,7 @@
 
 
     <footer style="position: fixed; bottom: 10px; right: 15px; font-size: 11px; color: rgba(255,255,255,0.7); background: rgba(0,0,0,0.2); padding: 4px 8px; border-radius: 4px;">
-        Version 2.0 - Cloud Sync Edition ☁️ | Powered by Firebase | Real-time sync across all devices
+        Version 2.0 - Cloud Sync Edition ☁️ | Powered by Firebase | Real Madrid best team in the world
     </footer>
 
 
@@ -3047,21 +3047,61 @@
             return answer;
         }
 
-        // CRITICAL FIX: Flexible answer validation system
-        function normalizeAnswer(answer) {
-            // Convert to string and lowercase
-            let normalized = String(answer).toLowerCase().trim();
+        // CRITICAL FIX: Enhanced remainder answer validation system
+        function validateRemainderAnswer(userAnswer, correctAnswer) {
+            // Normalize both answers
+            const userNorm = String(userAnswer).toLowerCase().trim();
+            const correctNorm = String(correctAnswer).toLowerCase().trim();
             
-            // Remove all spaces
-            normalized = normalized.replace(/\s+/g, '');
+            // Extract numbers from both answers
+            const userNumbers = extractNumbers(userAnswer);
+            const correctNumbers = extractNumbers(correctAnswer);
             
-            // Remove common formatting characters that don't change meaning
-            normalized = normalized.replace(/[,]/g, ''); // Remove commas
+            // If both have 2 numbers, compare them
+            if (userNumbers.length === 2 && correctNumbers.length === 2) {
+                return userNumbers[0] === correctNumbers[0] && 
+                       userNumbers[1] === correctNumbers[1];
+            }
             
-            // For currency, normalize to just the number
-            normalized = normalized.replace(/£/g, '').replace(/p$/g, '');
+            // Patterns for remainder answers: "10 remainder 1", "10 r 1", "10r1", "10 R 1", "10, 1", "10 1"
+            const patterns = [
+                /(\d+)\s*remainder\s*(\d+)/i,
+                /(\d+)\s*r\s*(\d+)/i,
+                /(\d+)\s*,\s*(\d+)/,  // NEW: comma-separated
+                /(\d+)\s+(\d+)/       // NEW: space-separated (two or more spaces)
+            ];
             
-            return normalized;
+            let userQuotient, userRemainder;
+            let correctQuotient, correctRemainder;
+            
+            // Try to match user answer with any pattern
+            for (const pattern of patterns) {
+                const userMatch = userNorm.match(pattern);
+                if (userMatch) {
+                    userQuotient = parseInt(userMatch[1]);
+                    userRemainder = parseInt(userMatch[2]);
+                    break;
+                }
+            }
+            
+            // Try to match correct answer with any pattern
+            for (const pattern of patterns) {
+                const correctMatch = correctNorm.match(pattern);
+                if (correctMatch) {
+                    correctQuotient = parseInt(correctMatch[1]);
+                    correctRemainder = parseInt(correctMatch[2]);
+                    break;
+                }
+            }
+            
+            // Compare the numbers
+            if (userQuotient !== undefined && correctQuotient !== undefined) {
+                return userQuotient === correctQuotient && 
+                       userRemainder === correctRemainder;
+            }
+            
+            // Fallback to string comparison
+            return userNorm === correctNorm;
         }
         
         function extractNumbers(text) {
@@ -3070,64 +3110,91 @@
             return matches ? matches.map(n => parseInt(n)) : [];
         }
         
-        function compareAnswers(userAnswer, correctAnswer) {
-            const normalizedUser = normalizeAnswer(userAnswer);
-            const normalizedCorrect = normalizeAnswer(correctAnswer);
+        function compareAnswers(userAnswer, correctAnswer, questionType) {
+            // Normalize inputs
+            const userNorm = String(userAnswer).toLowerCase().trim();
+            const correctNorm = String(correctAnswer).toLowerCase().trim();
             
-            // Direct string comparison after normalization
-            if (normalizedUser === normalizedCorrect) {
-                return true;
+            // 1. REMAINDER QUESTIONS (NEW ENHANCED)
+            if (correctNorm.includes('remainder') || correctNorm.includes(' r ') || 
+                questionType === 'remainder' || userNorm.includes(',') && userNorm.match(/\d+\s*,\s*\d+/)) {
+                return validateRemainderAnswer(userAnswer, correctAnswer);
             }
             
-            // For numeric answers, also try numeric comparison
-            const userNum = parseFloat(normalizedUser);
-            const correctNum = parseFloat(normalizedCorrect);
+            // 2. ORDERING/LIST QUESTIONS
+            if (userNorm.includes(',') || correctNorm.includes(',')) {
+                const userNumbers = extractNumbers(userAnswer);
+                const correctNumbers = extractNumbers(correctAnswer);
+                
+                if (userNumbers.length === correctNumbers.length && userNumbers.length > 1) {
+                    return userNumbers.every((num, idx) => num === correctNumbers[idx]);
+                }
+            }
             
-            if (!isNaN(userNum) && !isNaN(correctNum)) {
-                // For money/decimals, compare with small tolerance
+            // 3. MONEY QUESTIONS
+            if (correctNorm.includes('£') || correctNorm.includes('p') || 
+                userNorm.includes('£') || userNorm.includes('p')) {
+                // Convert to pence and compare
+                const userPence = convertToPence(userAnswer);
+                const correctPence = convertToPence(correctAnswer);
+                return Math.abs(userPence - correctPence) < 0.5;
+            }
+            
+            // 4. MEASUREMENT QUESTIONS
+            if (correctNorm.match(/\d+\s*(cm|m|km|mm|g|kg|l|ml)/)) {
+                const userNum = parseFloat(userAnswer);
+                const correctNum = parseFloat(correctAnswer);
                 return Math.abs(userNum - correctNum) < 0.01;
             }
             
-            // For list answers (multiple numbers), extract and compare arrays
-            const userNumbers = extractNumbers(userAnswer);
-            const correctNumbers = extractNumbers(correctAnswer);
+            // 5. GENERAL NUMERIC
+            const userNum = parseFloat(userNorm.replace(/[^0-9.-]/g, ''));
+            const correctNum = parseFloat(correctNorm.replace(/[^0-9.-]/g, ''));
             
-            if (userNumbers.length > 1 && correctNumbers.length > 1) {
-                if (userNumbers.length !== correctNumbers.length) return false;
-                
-                for (let i = 0; i < userNumbers.length; i++) {
-                    if (userNumbers[i] !== correctNumbers[i]) return false;
-                }
-                return true;
+            if (!isNaN(userNum) && !isNaN(correctNum)) {
+                return Math.abs(userNum - correctNum) < 0.01;
             }
             
-            return false;
+            // 6. STRING COMPARISON (after normalization)
+            return userNorm.replace(/\s+/g, '') === correctNorm.replace(/\s+/g, '');
+        }
+        
+        function convertToPence(amount) {
+            const str = String(amount).toLowerCase().trim();
+            // Remove currency symbols
+            const cleaned = str.replace(/[£$]/g, '');
+            
+            // If it ends with 'p', it's already in pence
+            if (cleaned.endsWith('p')) {
+                return parseFloat(cleaned.replace('p', ''));
+            }
+            
+            // Otherwise, convert pounds to pence
+            const num = parseFloat(cleaned);
+            return isNaN(num) ? 0 : num * 100;
         }
 
         function checkAnswer(userAnswer, correctAnswer, acceptableAnswers = []) {
-            // Use flexible comparison system
-            if (compareAnswers(userAnswer, correctAnswer)) {
+            // Enhanced flexible comparison system with remainder support
+            if (compareAnswers(userAnswer, correctAnswer, 'general')) {
                 return true;
             }
             
             // Check acceptable answers with flexible comparison
             for (const acceptable of acceptableAnswers) {
-                if (compareAnswers(userAnswer, acceptable)) {
+                if (compareAnswers(userAnswer, acceptable, 'general')) {
                     return true;
                 }
             }
             
-            // Special handling for remainder answers
+            // Special handling for remainder answers - ENHANCED
             const userText = String(userAnswer).toLowerCase();
             const correctText = String(correctAnswer).toLowerCase();
             
-            // Handle "remainder" vs "r" formats
-            if (userText.includes('remainder') || userText.includes('r') || correctText.includes('remainder') || correctText.includes('r')) {
-                const userRemainder = extractRemainder(userAnswer);
-                const correctRemainder = extractRemainder(correctAnswer);
-                if (userRemainder !== null && correctRemainder !== null && userRemainder === correctRemainder) {
-                    return true;
-                }
+            // Handle remainder formats with new validation
+            if (userText.includes('remainder') || userText.includes('r') || correctText.includes('remainder') || 
+                correctText.includes('r') || (userText.includes(',') && userText.match(/\d+\s*,\s*\d+/))) {
+                return validateRemainderAnswer(userAnswer, correctAnswer);
             }
             
             // Enhanced money handling
