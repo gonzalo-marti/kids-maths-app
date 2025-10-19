@@ -1848,41 +1848,9 @@
         }
         
         function initializeDemoUsers() {
-            // Create some demo users for demonstration purposes
-            const demoUsers = ['Gonza', 'Nacho', 'Javi'];
-            const demoAvatars = ['🚀', '🌟', '🎯'];
-            
-            demoUsers.forEach((name, index) => {
-                if (!allUsers[name]) {
-                    const user = createUserProfile(name, demoAvatars[index]);
-                    // Add some demo progress
-                    user.totalQuestionsAttempted = Math.floor(Math.random() * 50) + 10;
-                    user.totalCorrect = Math.floor(user.totalQuestionsAttempted * (0.7 + Math.random() * 0.25));
-                    user.totalIncorrect = user.totalQuestionsAttempted - user.totalCorrect;
-                    user.hintsUsed = Math.floor(Math.random() * 10);
-                    
-                    // Add demo points
-                    user.points = {
-                        total: Math.floor(Math.random() * 2000) + 500,
-                        thisWeek: Math.floor(Math.random() * 500) + 100,
-                        lastWeek: Math.floor(Math.random() * 400) + 50
-                    };
-                    
-                    user.achievements = ['firstSteps'];
-                    if (user.totalQuestionsAttempted >= 100) {
-                        user.achievements.push('centuryClub');
-                    }
-                    
-                    // Add some streak days
-                    const today = new Date();
-                    for (let i = 0; i < Math.floor(Math.random() * 5) + 1; i++) {
-                        const day = new Date(today.getTime() - i * 24 * 60 * 60 * 1000);
-                        user.streakDays.push(day.toDateString());
-                    }
-                    
-                    allUsers[name] = user;
-                }
-            });
+            // CRITICAL FIX: Start with zero users - no hardcoded profiles
+            console.log('🎯 Starting with clean slate - no hardcoded users');
+            // Demo users removed as per requirements
         }
 
         function createUserProfile(username, avatar) {
@@ -3620,9 +3588,19 @@
             
             const question = questionBank[currentQuestionIndex];
             
-            document.getElementById('question-text').textContent = question.question;
-            document.getElementById('answer-input').value = '';
-            document.getElementById('answer-input').focus();
+            // CRITICAL FIX: Always responsive answer input
+            const questionTextEl = document.getElementById('question-text');
+            if (questionTextEl) {
+                questionTextEl.textContent = question.question;
+            }
+            
+            const answerInput = document.getElementById('answer-input');
+            if (answerInput) {
+                answerInput.disabled = false; // Always enabled
+                answerInput.readOnly = false; // Never readonly
+                answerInput.value = ''; // Clear previous answer
+                answerInput.focus(); // Auto-focus for immediate typing
+            }
             
             // Update progress
             const questionCounter = document.getElementById('question-counter');
@@ -3762,7 +3740,8 @@
             document.getElementById('submit-btn').style.display = 'none';
             document.getElementById('next-btn').style.display = 'inline-block';
             document.getElementById('hint-btn').style.display = 'none';
-            document.getElementById('answer-input').disabled = true;
+            // CRITICAL FIX: Never disable answer input
+            // document.getElementById('answer-input').disabled = true; // REMOVED
             
             // Update score display
             const percentage = Math.round((score / totalQuestions) * 100);
@@ -3773,7 +3752,14 @@
 
         function nextQuestion() {
             currentQuestionIndex++;
-            document.getElementById('answer-input').disabled = false;
+            
+            // CRITICAL FIX: Always ensure answer input is enabled and responsive
+            const answerInput = document.getElementById('answer-input');
+            if (answerInput) {
+                answerInput.disabled = false;
+                answerInput.readOnly = false;
+                answerInput.focus();
+            }
             
             if (currentMode === 'challenge' && currentQuestionIndex >= 15) {
                 finishSession();
@@ -4687,18 +4673,20 @@
         // Parent Access Functions (ALREADY DEFINED ABOVE)
         
         function showPasswordModal() {
+            console.log('🔒 Opening parent password modal...');
             const modal = document.createElement('div');
+            modal.id = 'parent-password-modal';
             modal.style.cssText = `
                 position: fixed;
                 top: 0;
                 left: 0;
                 right: 0;
                 bottom: 0;
-                background: rgba(0, 0, 0, 0.7);
+                background: rgba(0, 0, 0, 0.8);
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                z-index: 1000;
+                z-index: 999999;
             `;
             
             modal.innerHTML = `
@@ -4751,23 +4739,29 @@
             const password = input.value;
             const errorDiv = document.getElementById('password-error');
             
+            console.log('🔓 Validating parent password...');
+            
             if (password === PARENT_PASSWORD) {
+                console.log('✅ Correct password entered!');
                 parentAccessGranted = true;
                 parentFailedAttempts = 0;
                 closePasswordModal();
                 showParentDashboard();
             } else {
+                console.log('❌ Incorrect password entered:', password);
                 parentFailedAttempts++;
-                errorDiv.textContent = `Incorrect password. Attempts: ${parentFailedAttempts}/3`;
+                errorDiv.textContent = `Incorrect password. Try again. (${parentFailedAttempts}/3 attempts)`;
+                errorDiv.style.display = 'block';
                 input.value = '';
                 input.focus();
                 
                 if (parentFailedAttempts >= 3) {
                     parentLockoutTime = Date.now() + 30000; // 30 seconds lockout
-                    errorDiv.textContent = 'Too many attempts. Locked for 30 seconds.';
+                    errorDiv.textContent = 'Too many failed attempts. Please wait 30 seconds.';
                     setTimeout(() => {
                         closePasswordModal();
-                    }, 2000);
+                        parentFailedAttempts = 0;
+                    }, 3000);
                 }
             }
         }
