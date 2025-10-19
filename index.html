@@ -710,6 +710,80 @@
             margin-bottom: var(--space-32);
         }
         
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal.visible {
+            display: flex !important;
+        }
+        
+        .modal-content {
+            background: var(--color-surface);
+            padding: var(--space-32);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            max-width: 500px;
+            width: 90%;
+            z-index: 10001;
+            position: relative;
+        }
+        
+        .avatar-selection {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-8);
+            margin-bottom: var(--space-16);
+        }
+        
+        .avatar-option {
+            background: var(--color-secondary);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-base);
+            padding: var(--space-12);
+            font-size: var(--font-size-2xl);
+            cursor: pointer;
+            transition: all var(--duration-normal) var(--ease-standard);
+            text-align: center;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .avatar-option:hover {
+            transform: scale(1.1);
+            border-color: var(--app-primary);
+            background: var(--color-secondary-hover);
+        }
+        
+        .avatar-option.selected {
+            background: var(--app-primary);
+            color: white;
+            border-color: var(--app-primary);
+            transform: scale(1.1);
+        }
+        
+        .error-message {
+            color: var(--color-error);
+            font-size: var(--font-size-sm);
+            margin-top: var(--space-4);
+            padding: var(--space-8);
+            background: rgba(var(--color-error-rgb), 0.1);
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(var(--color-error-rgb), 0.3);
+        }
+        
         .time-table {
             width: 100%;
             border-collapse: collapse;
@@ -1084,36 +1158,45 @@
             </div>
             
             <div class="button-group">
-                <button class="btn btn-primary" onclick="showCreateUser()">➕ Create New User</button>
+                <button class="btn btn-primary" id="createNewUserBtn">➕ Create New User</button>
                 <button class="btn btn-secondary" onclick="requestParentAccess()">👨‍👩‍👧‍👦 Parent View</button>
             </div>
         </div>
 
         <!-- Create User Modal -->
-        <div class="screen" id="create-user-screen">
-            <h2>Create New User</h2>
-            <div class="form-group">
-                <label class="form-label" for="username-input">Username:</label>
-                <input type="text" class="form-control" id="username-input" placeholder="Enter your name" maxlength="20">
-            </div>
-            <div class="form-group">
-                <label class="form-label">Choose your avatar:</label>
-                <div class="avatar-grid">
-                    <button class="avatar-btn" data-avatar="🚀">🚀</button>
-                    <button class="avatar-btn" data-avatar="🌟">🌟</button>
-                    <button class="avatar-btn" data-avatar="🎯">🎯</button>
-                    <button class="avatar-btn" data-avatar="🏆">🏆</button>
-                    <button class="avatar-btn" data-avatar="🎨">🎨</button>
-                    <button class="avatar-btn" data-avatar="🔬">🔬</button>
-                    <button class="avatar-btn" data-avatar="📚">📚</button>
-                    <button class="avatar-btn" data-avatar="⭐">⭐</button>
-                    <button class="avatar-btn" data-avatar="🌈">🌈</button>
-                    <button class="avatar-btn" data-avatar="🎪">🎪</button>
+        <div id="createUserModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <h2>Create New User</h2>
+                <div class="form-group">
+                    <label class="form-label" for="newUsername">Username:</label>
+                    <input type="text" class="form-control" id="newUsername" placeholder="Enter your name" maxlength="20">
+                    <div id="username-error" class="error-message" style="display: none;"></div>
                 </div>
-            </div>
-            <div class="button-group">
-                <button class="btn btn-primary" id="save-user-btn" onclick="saveNewUser()" disabled>Create User</button>
-                <button class="btn btn-secondary" onclick="showUserScreen()">Cancel</button>
+                <div class="form-group">
+                    <label class="form-label">Choose your avatar:</label>
+                    <div class="avatar-selection">
+                        <div class="avatar-option" data-emoji="🚀">🚀</div>
+                        <div class="avatar-option" data-emoji="⚽">⚽</div>
+                        <div class="avatar-option" data-emoji="🎨">🎨</div>
+                        <div class="avatar-option" data-emoji="🌟">🌟</div>
+                        <div class="avatar-option" data-emoji="🎮">🎮</div>
+                        <div class="avatar-option" data-emoji="🦄">🦄</div>
+                        <div class="avatar-option" data-emoji="🌈">🌈</div>
+                        <div class="avatar-option" data-emoji="🎯">🎯</div>
+                        <div class="avatar-option" data-emoji="⭐">⭐</div>
+                        <div class="avatar-option" data-emoji="🔥">🔥</div>
+                        <div class="avatar-option" data-emoji="💫">💫</div>
+                        <div class="avatar-option" data-emoji="🎪">🎪</div>
+                        <div class="avatar-option" data-emoji="🎭">🎭</div>
+                        <div class="avatar-option" data-emoji="🎬">🎬</div>
+                        <div class="avatar-option" data-emoji="🎤">🎤</div>
+                        <div class="avatar-option" data-emoji="🏀">🏀</div>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-primary" id="confirmCreateUser">Create</button>
+                    <button class="btn btn-secondary" id="cancelCreateUser">Cancel</button>
+                </div>
             </div>
         </div>
 
@@ -1382,7 +1465,7 @@
     </div>
 
     <footer style="position: fixed; bottom: 10px; right: 15px; font-size: 11px; color: rgba(255,255,255,0.7); background: rgba(0,0,0,0.2); padding: 4px 8px; border-radius: 4px;">
-        Version 1.5 - Leaderboards &amp; friendly competition
+        Version 1.5 - Bug fix: Create New User functionality
     </footer>
 
     <script>
@@ -1686,7 +1769,10 @@
         let keyPressTimer = null;
 
         // Default avatars for easy selection
-        const defaultAvatars = ['🚀', '🌟', '🎯', '🏆', '🎨', '🔬', '📚', '⭐', '🌈', '🎪'];
+        const defaultAvatars = ['🚀', '⚽', '🎨', '🌟', '🎮', '🦄', '🌈', '🎯', '⭐', '🔥', '💫', '🎪', '🎭', '🎬', '🎤', '🏀'];
+        
+        // Modal management
+        let selectedAvatarInModal = '🚀';
         
         // Predefined names for quick user creation
         const suggestedNames = [
@@ -1715,12 +1801,7 @@
         // User Data Management Functions
         function initializeUserSystem() {
             loadUserData();
-            if (Object.keys(allUsers).length === 0) {
-                // First time - show create user directly
-                showCreateUser();
-            } else {
-                showUserScreen();
-            }
+            showUserScreen();
         }
 
         function loadUserData() {
@@ -2999,12 +3080,52 @@
             showScreen('user-screen');
         }
 
-        function showCreateUser() {
-            document.getElementById('username-input').value = '';
-            selectedAvatar = defaultAvatars[0];
-            updateAvatarSelection();
-            updateSaveButton();
-            showScreen('create-user-screen');
+        function showCreateUserModal() {
+            console.log('Create New User button clicked');
+            const modal = document.getElementById('createUserModal');
+            console.log('Modal element:', modal);
+            
+            if (modal) {
+                // Reset form
+                document.getElementById('newUsername').value = '';
+                selectedAvatarInModal = defaultAvatars[0];
+                
+                // Hide error message
+                const errorDiv = document.getElementById('username-error');
+                errorDiv.style.display = 'none';
+                
+                // Reset avatar selection
+                document.querySelectorAll('.avatar-option').forEach(option => {
+                    option.classList.remove('selected');
+                });
+                document.querySelector('.avatar-option[data-emoji="🚀"]').classList.add('selected');
+                
+                // Show modal
+                modal.style.display = 'flex';
+                modal.classList.add('visible');
+                
+                // Focus on username input
+                setTimeout(() => {
+                    document.getElementById('newUsername').focus();
+                }, 100);
+                
+                console.log('Modal shown');
+            } else {
+                console.error('Modal element not found!');
+            }
+        }
+        
+        function closeCreateUserModal() {
+            const modal = document.getElementById('createUserModal');
+            if (modal) {
+                modal.style.display = 'none';
+                modal.classList.remove('visible');
+                document.getElementById('newUsername').value = '';
+                
+                // Hide error message
+                const errorDiv = document.getElementById('username-error');
+                errorDiv.style.display = 'none';
+            }
         }
 
         function populateUserList() {
@@ -3052,29 +3173,34 @@
             }
         }
 
-        function updateAvatarSelection() {
-            document.querySelectorAll('.avatar-btn').forEach(btn => {
-                btn.classList.remove('selected');
-                if (btn.dataset.avatar === selectedAvatar) {
-                    btn.classList.add('selected');
-                }
+
+
+        function createNewUser(username, avatar) {
+            currentUser = createUserProfile(username, avatar);
+            allUsers[username] = currentUser;
+            saveUserData();
+            console.log('User created successfully:', username);
+            return currentUser;
+        }
+        
+        function renderAvatarSelection() {
+            const container = document.querySelector('.avatar-selection');
+            if (!container) return;
+            
+            // Avatar selection is already in HTML, just add event listeners
+            const avatars = ['🚀', '⚽', '🎨', '🌟', '🎮', '🦄', '🌈', '🎯', '⭐', '🔥', '💫', '🎪', '🎭', '🎬', '🎤', '🏀'];
+            
+            container.querySelectorAll('.avatar-option').forEach((div, index) => {
+                div.addEventListener('click', function() {
+                    document.querySelectorAll('.avatar-option').forEach(el => el.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedAvatarInModal = this.dataset.emoji;
+                });
             });
-        }
-
-        function updateSaveButton() {
-            const username = document.getElementById('username-input').value.trim();
-            const saveBtn = document.getElementById('save-user-btn');
-            const isValid = username.length > 0 && !allUsers[username];
-            saveBtn.disabled = !isValid;
-        }
-
-        function saveNewUser() {
-            const username = document.getElementById('username-input').value.trim();
-            if (username && !allUsers[username]) {
-                currentUser = createUserProfile(username, selectedAvatar);
-                allUsers[username] = currentUser;
-                saveUserData();
-                showWelcome();
+            
+            // Select first avatar by default
+            if (container.querySelector('.avatar-option')) {
+                container.querySelector('.avatar-option').classList.add('selected');
             }
         }
 
@@ -4636,24 +4762,82 @@
         
         // Event Listeners
         document.addEventListener('DOMContentLoaded', function() {
-            // Avatar selection
-            document.querySelectorAll('.avatar-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    selectedAvatar = this.dataset.avatar;
-                    updateAvatarSelection();
+            // Create New User button event listener
+            const createNewUserBtn = document.getElementById('createNewUserBtn');
+            if (createNewUserBtn) {
+                createNewUserBtn.addEventListener('click', function() {
+                    console.log('Create New User button clicked');
+                    showCreateUserModal();
                 });
-            });
+            }
             
-            // Username input
-            const usernameInput = document.getElementById('username-input');
-            if (usernameInput) {
-                usernameInput.addEventListener('input', updateSaveButton);
-                usernameInput.addEventListener('keypress', function(e) {
+            // Confirm Create User button
+            const confirmCreateUserBtn = document.getElementById('confirmCreateUser');
+            if (confirmCreateUserBtn) {
+                confirmCreateUserBtn.addEventListener('click', function() {
+                    const username = document.getElementById('newUsername').value.trim();
+                    const errorDiv = document.getElementById('username-error');
+                    
+                    // Validation
+                    if (!username) {
+                        errorDiv.textContent = 'Please enter a username';
+                        errorDiv.style.display = 'block';
+                        return;
+                    }
+                    
+                    // Check for duplicates
+                    const users = allUsers;
+                    if (users[username]) {
+                        errorDiv.textContent = 'Username already exists. Please choose a different name.';
+                        errorDiv.style.display = 'block';
+                        return;
+                    }
+                    
+                    // Get selected avatar
+                    const selectedAvatarElement = document.querySelector('.avatar-option.selected');
+                    const avatar = selectedAvatarElement ? selectedAvatarElement.dataset.emoji : '👤';
+                    
+                    // Create user
+                    createNewUser(username, avatar);
+                    
+                    // Close modal
+                    closeCreateUserModal();
+                    
+                    // Show welcome screen
+                    showWelcome();
+                    
+                    // Show success message
+                    showPointsEarned(0, 'User created successfully! Welcome to Maths Adventure! 🎉');
+                });
+            }
+            
+            // Cancel Create User button
+            const cancelCreateUserBtn = document.getElementById('cancelCreateUser');
+            if (cancelCreateUserBtn) {
+                cancelCreateUserBtn.addEventListener('click', function() {
+                    closeCreateUserModal();
+                });
+            }
+            
+            // Username input validation
+            const newUsernameInput = document.getElementById('newUsername');
+            if (newUsernameInput) {
+                newUsernameInput.addEventListener('input', function() {
+                    const errorDiv = document.getElementById('username-error');
+                    if (errorDiv.style.display !== 'none') {
+                        errorDiv.style.display = 'none';
+                    }
+                });
+                
+                newUsernameInput.addEventListener('keypress', function(e) {
                     if (e.key === 'Enter') {
-                        saveNewUser();
+                        document.getElementById('confirmCreateUser').click();
                     }
                 });
             }
+            
+            // Initialize avatar selection
+            renderAvatarSelection();
             
             // Initialize user system
             initializeUserSystem();
@@ -4678,6 +4862,14 @@
                         keyPressCount = 0;
                         requestParentAccess();
                     }
+                }
+            });
+            
+            // Close modal when clicking outside
+            document.addEventListener('click', function(e) {
+                const modal = document.getElementById('createUserModal');
+                if (e.target === modal) {
+                    closeCreateUserModal();
                 }
             });
         });
