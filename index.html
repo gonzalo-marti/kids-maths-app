@@ -114,6 +114,7 @@
             --space-24: 24px;
             --space-32: 32px;
             --space-48: 48px;
+            --space-64: 64px;
 
             /* Border Radius */
             --radius-sm: 6px;
@@ -459,7 +460,566 @@
             margin: var(--space-16) 0;
         }
 
+        /* User Selection & Dashboard Styles */
+        .user-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-16);
+            margin-bottom: var(--space-32);
+        }
+
+        .user-card {
+            background: var(--color-bg-1);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-24);
+            cursor: pointer;
+            transition: all var(--duration-normal) var(--ease-standard);
+            text-align: center;
+        }
+
+        .user-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--app-primary);
+        }
+
+        .user-card.selected {
+            border-color: var(--app-primary);
+            background: var(--color-bg-3);
+        }
+
+        .user-card-avatar {
+            font-size: var(--font-size-4xl);
+            margin-bottom: var(--space-12);
+        }
+
+        .user-card-name {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-text);
+            margin-bottom: var(--space-8);
+        }
+
+        .user-card-stats {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            line-height: 1.4;
+        }
+
+        .avatar-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: var(--space-8);
+            margin-bottom: var(--space-16);
+        }
+
+        .avatar-btn {
+            background: var(--color-secondary);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-base);
+            padding: var(--space-12);
+            font-size: var(--font-size-2xl);
+            cursor: pointer;
+            transition: all var(--duration-normal) var(--ease-standard);
+        }
+
+        .avatar-btn:hover {
+            transform: scale(1.1);
+            border-color: var(--app-primary);
+        }
+
+        .avatar-btn.selected {
+            background: var(--app-primary);
+            border-color: var(--app-primary);
+            transform: scale(1.1);
+        }
+
+        .current-user-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-16);
+            background: var(--color-bg-1);
+            border-radius: var(--radius-lg);
+            padding: var(--space-16);
+            margin-bottom: var(--space-32);
+        }
+
+        .user-avatar {
+            font-size: var(--font-size-3xl);
+        }
+
+        .user-name {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-text);
+        }
+
+        .dashboard-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-20);
+            margin-bottom: var(--space-32);
+            padding: var(--space-24);
+            background: var(--color-bg-1);
+            border-radius: var(--radius-lg);
+        }
+
+        .dashboard-section {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-24);
+            margin-bottom: var(--space-24);
+        }
+
+        .dashboard-section h3 {
+            color: var(--app-primary);
+            margin-bottom: var(--space-16);
+            font-family: var(--font-family-heading);
+        }
+
+        .category-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-12);
+        }
+
+        .category-item {
+            background: var(--color-bg-2);
+            border-radius: var(--radius-base);
+            padding: var(--space-12);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .category-name {
+            font-weight: var(--font-weight-medium);
+            color: var(--color-text);
+        }
+
+        .category-score {
+            font-weight: var(--font-weight-bold);
+        }
+
+        .category-score.excellent { color: var(--app-success); }
+        .category-score.good { color: var(--app-warning); }
+        .category-score.needs-work { color: var(--app-error); }
+
+        .session-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .session-item {
+            background: var(--color-bg-3);
+            border-radius: var(--radius-base);
+            padding: var(--space-12);
+            margin-bottom: var(--space-8);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .session-info {
+            color: var(--color-text);
+        }
+
+        .session-stats {
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-sm);
+        }
+
+        .mistake-review {
+            text-align: center;
+        }
+
+        .mistake-stats {
+            display: flex;
+            justify-content: center;
+            margin-bottom: var(--space-16);
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: var(--space-12);
+        }
+
+        .achievement-item {
+            background: var(--color-bg-4);
+            border-radius: var(--radius-lg);
+            padding: var(--space-16);
+            text-align: center;
+            transition: all var(--duration-normal) var(--ease-standard);
+        }
+
+        .achievement-item.unlocked {
+            background: var(--color-bg-3);
+            border: 2px solid var(--app-success);
+            box-shadow: 0 0 10px rgba(80, 200, 120, 0.3);
+        }
+
+        .achievement-icon {
+            font-size: var(--font-size-3xl);
+            margin-bottom: var(--space-8);
+        }
+
+        .achievement-name {
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-text);
+            margin-bottom: var(--space-4);
+        }
+
+        .achievement-desc {
+            font-size: var(--font-size-xs);
+            color: var(--color-text-secondary);
+        }
+
+        .mistakes-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .mistake-item {
+            background: var(--color-bg-4);
+            border-radius: var(--radius-base);
+            padding: var(--space-16);
+            margin-bottom: var(--space-12);
+            border-left: 4px solid var(--app-error);
+        }
+
+        .mistake-question {
+            font-weight: var(--font-weight-bold);
+            color: var(--color-text);
+            margin-bottom: var(--space-8);
+        }
+
+        .mistake-details {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+        }
+
+        .parent-user-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-20);
+            margin-bottom: var(--space-32);
+        }
+        
+        .time-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: var(--space-24);
+        }
+        
+        .time-table th,
+        .time-table td {
+            padding: var(--space-12);
+            border: 1px solid var(--color-border);
+            text-align: left;
+        }
+        
+        .time-table th {
+            background: var(--color-bg-1);
+            font-weight: var(--font-weight-bold);
+            text-align: center;
+        }
+        
+        .time-table tbody tr:nth-child(even) {
+            background: var(--color-bg-2);
+        }
+        
+        .password-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .parent-user-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-20);
+        }
+        
+        /* Leaderboard Styles */
+        .leaderboard-tabs {
+            display: flex;
+            gap: var(--space-4);
+            margin-bottom: var(--space-24);
+            overflow-x: auto;
+            padding: var(--space-4);
+            background: var(--color-bg-1);
+            border-radius: var(--radius-lg);
+        }
+        
+        .tab-btn {
+            padding: var(--space-8) var(--space-12);
+            border: 2px solid transparent;
+            background: var(--color-secondary);
+            color: var(--color-text);
+            border-radius: var(--radius-base);
+            cursor: pointer;
+            transition: all var(--duration-normal) var(--ease-standard);
+            font-size: var(--font-size-sm);
+            white-space: nowrap;
+            min-width: 80px;
+        }
+        
+        .tab-btn:hover {
+            background: var(--color-secondary-hover);
+        }
+        
+        .tab-btn.active {
+            background: var(--app-primary);
+            color: white;
+            border-color: var(--app-primary);
+        }
+        
+        .leaderboard-table {
+            width: 100%;
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--space-16);
+        }
+        
+        .leaderboard-header {
+            background: var(--color-bg-1);
+            padding: var(--space-12);
+            display: grid;
+            grid-template-columns: 60px 1fr auto auto;
+            gap: var(--space-12);
+            align-items: center;
+            font-weight: var(--font-weight-bold);
+            border-bottom: 2px solid var(--color-border);
+        }
+        
+        .leaderboard-row {
+            padding: var(--space-12);
+            display: grid;
+            grid-template-columns: 60px 1fr auto auto;
+            gap: var(--space-12);
+            align-items: center;
+            border-bottom: 1px solid var(--color-card-border);
+            transition: background var(--duration-normal) var(--ease-standard);
+        }
+        
+        .leaderboard-row:hover {
+            background: var(--color-bg-2);
+        }
+        
+        .leaderboard-row.current-user {
+            background: var(--color-bg-3);
+            border: 2px solid var(--app-primary);
+            border-radius: var(--radius-base);
+            margin: var(--space-4) 0;
+        }
+        
+        .rank-display {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            text-align: center;
+        }
+        
+        .rank-1 { color: #FFD700; }
+        .rank-2 { color: #C0C0C0; }
+        .rank-3 { color: #CD7F32; }
+        .rank-other { color: var(--color-text-secondary); }
+        
+        .player-info {
+            display: flex;
+            align-items: center;
+            gap: var(--space-8);
+        }
+        
+        .player-avatar {
+            font-size: var(--font-size-xl);
+        }
+        
+        .player-name {
+            font-weight: var(--font-weight-medium);
+            color: var(--color-text);
+        }
+        
+        .player-stats {
+            text-align: right;
+            font-weight: var(--font-weight-bold);
+            color: var(--app-primary);
+        }
+        
+        .progress-indicator {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+        }
+        
+        .rank-change {
+            font-size: var(--font-size-sm);
+            padding: var(--space-2) var(--space-4);
+            border-radius: var(--radius-sm);
+        }
+        
+        .rank-up {
+            background: rgba(80, 200, 120, 0.1);
+            color: var(--app-success);
+        }
+        
+        .rank-down {
+            background: rgba(255, 107, 107, 0.1);
+            color: var(--app-error);
+        }
+        
+        .rank-same {
+            background: var(--color-secondary);
+            color: var(--color-text-secondary);
+        }
+        
+        .rank-new {
+            background: var(--color-bg-1);
+            color: var(--app-primary);
+        }
+        
+        .next-rank-info {
+            background: var(--color-bg-3);
+            border-radius: var(--radius-base);
+            padding: var(--space-16);
+            margin: var(--space-16) 0;
+            text-align: center;
+        }
+        
+        .motivational-message {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-medium);
+            color: var(--app-primary);
+            text-align: center;
+            margin: var(--space-16) 0;
+            padding: var(--space-12);
+            background: var(--color-bg-1);
+            border-radius: var(--radius-base);
+        }
+        
+        .points-earned {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--app-success);
+            color: white;
+            padding: var(--space-8) var(--space-16);
+            border-radius: var(--radius-full);
+            font-weight: var(--font-weight-bold);
+            font-size: var(--font-size-lg);
+            animation: pointsEarned 2s ease-out forwards;
+            z-index: 1000;
+            pointer-events: none;
+        }
+        
+        @keyframes pointsEarned {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.8);
+            }
+            20% {
+                opacity: 1;
+                transform: translateY(0) scale(1.1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-50px) scale(1);
+            }
+        }
+        
+        .category-champions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-16);
+        }
+        
+        .champion-card {
+            background: var(--color-surface);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-16);
+            text-align: center;
+        }
+        
+        .champion-category {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-8);
+        }
+        
+        .champion-player {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-8);
+            margin-bottom: var(--space-8);
+        }
+        
+        .champion-stats {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+        }
+
+        .parent-user-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-12);
+            margin-bottom: var(--space-16);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--color-secondary);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+            margin: var(--space-8) 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--app-success);
+            transition: width var(--duration-normal) var(--ease-standard);
+        }
+
         @media (max-width: 768px) {
+            .leaderboard-tabs {
+                flex-wrap: wrap;
+            }
+            
+            .leaderboard-header,
+            .leaderboard-row {
+                grid-template-columns: 40px 1fr auto;
+                gap: var(--space-8);
+            }
+            
+            .progress-indicator {
+                display: none;
+            }
+            
+            .category-champions {
+                grid-template-columns: 1fr;
+            }
+            
+            .tab-btn {
+                min-width: 60px;
+                font-size: var(--font-size-xs);
+            }
+            
             .app-container {
                 margin: var(--space-12);
             }
@@ -489,13 +1049,76 @@
             .stats {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            .user-list {
+                grid-template-columns: 1fr;
+            }
+
+            .avatar-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .category-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .achievements-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .parent-user-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <div class="app-container">
+        <!-- User Selection Screen -->
+        <div class="screen active" id="user-screen">
+            <h1>🧮 Maths Adventure 🌟</h1>
+            <p class="subtitle">Choose your profile to continue your learning journey!</p>
+            
+            <div id="user-list" class="user-list">
+                <!-- Users will be populated here -->
+            </div>
+            
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="showCreateUser()">➕ Create New User</button>
+                <button class="btn btn-secondary" onclick="requestParentAccess()">👨‍👩‍👧‍👦 Parent View</button>
+            </div>
+        </div>
+
+        <!-- Create User Modal -->
+        <div class="screen" id="create-user-screen">
+            <h2>Create New User</h2>
+            <div class="form-group">
+                <label class="form-label" for="username-input">Username:</label>
+                <input type="text" class="form-control" id="username-input" placeholder="Enter your name" maxlength="20">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Choose your avatar:</label>
+                <div class="avatar-grid">
+                    <button class="avatar-btn" data-avatar="🚀">🚀</button>
+                    <button class="avatar-btn" data-avatar="🌟">🌟</button>
+                    <button class="avatar-btn" data-avatar="🎯">🎯</button>
+                    <button class="avatar-btn" data-avatar="🏆">🏆</button>
+                    <button class="avatar-btn" data-avatar="🎨">🎨</button>
+                    <button class="avatar-btn" data-avatar="🔬">🔬</button>
+                    <button class="avatar-btn" data-avatar="📚">📚</button>
+                    <button class="avatar-btn" data-avatar="⭐">⭐</button>
+                    <button class="avatar-btn" data-avatar="🌈">🌈</button>
+                    <button class="avatar-btn" data-avatar="🎪">🎪</button>
+                </div>
+            </div>
+            <div class="button-group">
+                <button class="btn btn-primary" id="save-user-btn" onclick="saveNewUser()" disabled>Create User</button>
+                <button class="btn btn-secondary" onclick="showUserScreen()">Cancel</button>
+            </div>
+        </div>
+
         <!-- Welcome Screen -->
-        <div class="screen active" id="welcome-screen">
+        <div class="screen" id="welcome-screen">
             <h1>🧮 Maths Adventure 🌟</h1>
             <p class="subtitle">Choose your learning adventure and improve your maths skills!</p>
             
@@ -511,9 +1134,31 @@
                     <div>Challenge Mode</div>
                     <div class="mode-description">Test yourself with 15 questions in 20 minutes</div>
                 </button>
+                
+                <button class="mode-button" onclick="showLeaderboard()">
+                    <div class="mode-icon">🏆</div>
+                    <div>Leaderboard</div>
+                    <div class="mode-description">See rankings &amp; compete with friends!</div>
+                </button>
             </div>
             
-            <button class="btn btn-secondary" onclick="showBestScores()">🏆 View Best Scores</button>
+            <div class="current-user-info">
+                <div class="user-avatar" id="current-user-avatar">🚀</div>
+                <div>
+                    <div class="user-name" id="current-user-name">Loading...</div>
+                    <div id="user-rank-display" style="font-size: var(--font-size-sm); color: var(--color-text-secondary);"></div>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button class="btn btn-secondary" onclick="showDashboard()">📊 View My Progress</button>
+                <button class="btn btn-secondary" onclick="showUserScreen()">👤 Switch User</button>
+                <button class="btn btn-secondary" onclick="showBestScores()">🏆 View Best Scores</button>
+            </div>
+            
+            <div class="button-group" style="margin-top: var(--space-16);">
+                <button class="btn btn-secondary" onclick="requestParentAccess()" style="font-size: var(--font-size-sm); padding: var(--space-6) var(--space-12);">👨‍👩‍👧‍👦 Parent View</button>
+            </div>
         </div>
 
         <!-- Question Screen -->
@@ -540,6 +1185,7 @@
             </div>
             
             <div class="button-group">
+                <button class="btn btn-secondary" onclick="showPauseMenu()">⏸️ Pause</button>
                 <button class="btn btn-secondary" onclick="confirmQuit()">🏠 Back to Menu</button>
                 <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()" style="display: none;">Next Question ➡️</button>
                 <button class="btn btn-primary" id="finish-btn" onclick="finishSession()" style="display: none;">Finish Session</button>
@@ -547,6 +1193,124 @@
             
             <div style="margin-top: var(--space-16); font-size: var(--font-size-sm); color: var(--color-text-secondary);">
                 <span id="hints-used">Hints used: 0</span>
+            </div>
+        </div>
+
+        <!-- Dashboard Screen -->
+        <div class="screen" id="dashboard-screen">
+            <div class="dashboard-header">
+                <div class="user-avatar" id="dash-user-avatar">🚀</div>
+                <div>
+                    <h2 id="dash-user-name">User Dashboard</h2>
+                    <p class="subtitle">Track your amazing progress!</p>
+                </div>
+            </div>
+            
+            <div class="dashboard-content">
+                <!-- Overall Statistics -->
+                <div class="dashboard-section">
+                    <h3>📊 Overall Statistics</h3>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <span class="stat-value" id="dash-total-questions">0</span>
+                            <div class="stat-label">Questions Attempted</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="dash-accuracy">0%</span>
+                            <div class="stat-label">Overall Accuracy</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="dash-hints-used">0</span>
+                            <div class="stat-label">Hints Used</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="dash-time-practiced">0m</span>
+                            <div class="stat-label">Time Practiced</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="dash-streak">0</span>
+                            <div class="stat-label">Day Streak</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="dash-achievements">0</span>
+                            <div class="stat-label">Achievements</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category Performance -->
+                <div class="dashboard-section">
+                    <h3>📈 Performance by Category</h3>
+                    <div id="category-performance" class="category-stats">
+                        <!-- Categories will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Recent Sessions -->
+                <div class="dashboard-section">
+                    <h3>📅 Recent Sessions</h3>
+                    <div id="recent-sessions" class="session-list">
+                        <!-- Sessions will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Incorrect Questions Review -->
+                <div class="dashboard-section">
+                    <h3>🎯 Review Mistakes</h3>
+                    <div class="mistake-review">
+                        <div class="mistake-stats">
+                            <div class="stat-item">
+                                <span class="stat-value" id="total-mistakes">0</span>
+                                <div class="stat-label">Questions to Review</div>
+                            </div>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn btn-primary" onclick="startMistakeMode()" id="practice-mistakes-btn">🔄 Practice My Mistakes</button>
+                            <button class="btn btn-secondary" onclick="showMistakesList()">📋 View All Mistakes</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Achievements -->
+                <div class="dashboard-section">
+                    <h3>🏆 Achievements</h3>
+                    <div id="achievements-grid" class="achievements-grid">
+                        <!-- Achievements will be populated here -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="showWelcome()">🏠 Back to Menu</button>
+                <button class="btn btn-secondary" onclick="exportUserData()">📤 Export Data</button>
+            </div>
+        </div>
+
+        <!-- Parent Dashboard Screen -->
+        <div class="screen" id="parent-dashboard-screen">
+            <h2>👨‍👩‍👧‍👦 Parent Dashboard</h2>
+            <p class="subtitle">Overview of all users' progress</p>
+            
+            <div id="parent-dashboard-content">
+                <!-- Parent dashboard content will be populated here -->
+            </div>
+            
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="showUserScreen()">🏠 Back to Users</button>
+                <button class="btn btn-secondary" onclick="exportAllData()">📤 Export All Data</button>
+                <button class="btn btn-secondary" onclick="showImportData()">📥 Import Data</button>
+            </div>
+        </div>
+
+        <!-- Mistakes List Screen -->
+        <div class="screen" id="mistakes-screen">
+            <h2>📋 Your Mistakes to Review</h2>
+            <div id="mistakes-list">
+                <!-- Mistakes will be populated here -->
+            </div>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="showDashboard()">📊 Back to Dashboard</button>
+                <button class="btn btn-secondary" onclick="clearMistakes()">🗑️ Clear All Mistakes</button>
             </div>
         </div>
 
@@ -576,8 +1340,12 @@
             </div>
             
             <div class="button-group">
+                <div id="session-achievements">
+                    <!-- New achievements will be shown here -->
+                </div>
                 <button class="btn btn-primary" onclick="startMode(currentMode)">🔄 Try Again</button>
                 <button class="btn btn-secondary" onclick="showWelcome()">🏠 Change Mode</button>
+                <button class="btn btn-secondary" onclick="showDashboard()">📊 View Progress</button>
                 <button class="btn btn-secondary" onclick="showBestScores()">🏆 Best Scores</button>
             </div>
         </div>
@@ -588,10 +1356,33 @@
             <div id="scores-container"></div>
             <button class="btn btn-primary" onclick="showWelcome()">🏠 Back to Menu</button>
         </div>
+        
+        <!-- Leaderboard Screen -->
+        <div class="screen" id="leaderboard-screen">
+            <h2>🏆 Leaderboard</h2>
+            <div class="leaderboard-tabs">
+                <button class="tab-btn active" data-tab="overall" onclick="showLeaderboardTab('overall')">📊 Overall</button>
+                <button class="tab-btn" data-tab="weekly" onclick="showLeaderboardTab('weekly')">📅 This Week</button>
+                <button class="tab-btn" data-tab="accuracy" onclick="showLeaderboardTab('accuracy')">🎯 Accuracy</button>
+                <button class="tab-btn" data-tab="time" onclick="showLeaderboardTab('time')">⏱️ Time</button>
+                <button class="tab-btn" data-tab="improvement" onclick="showLeaderboardTab('improvement')">📈 Improvement</button>
+                <button class="tab-btn" data-tab="streak" onclick="showLeaderboardTab('streak')">🔥 Streak</button>
+                <button class="tab-btn" data-tab="champions" onclick="showLeaderboardTab('champions')">🌟 Champions</button>
+            </div>
+            
+            <div id="leaderboard-content">
+                <!-- Leaderboard content will be populated here -->
+            </div>
+            
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="showWelcome()">🏠 Back to Menu</button>
+                <button class="btn btn-secondary" onclick="startMode('practice')">🎯 Practice to Climb!</button>
+            </div>
+        </div>
     </div>
 
     <footer style="position: fixed; bottom: 10px; right: 15px; font-size: 11px; color: rgba(255,255,255,0.7); background: rgba(0,0,0,0.2); padding: 4px 8px; border-radius: 4px;">
-        Version 1.2 - Extended word problems
+        Version 1.5 - Leaderboards &amp; friendly competition
     </footer>
 
     <script>
@@ -607,14 +1398,433 @@
         let timeRemaining = 0;
         let isAnswered = false;
         let currentHintShown = false;
+        let sessionQuestions = []; // Track questions in current session
+        let isMistakeMode = false;
 
-        // Names for word problems
-        const names = [
-            'Nacho', 'Javi', 'Gonza', 'Ignacio', 'Javier', 'Gonzalo', 'Gaby', 'Totu', 'Steven', 'Harry', 'Noah', 'Aiden',
+        // User management
+        let currentUser = null;
+        let allUsers = {};
+        let selectedAvatar = '🚀';
+        
+        // Leaderboard system
+        let leaderboards = {
+            overall: [],
+            weekly: [],
+            accuracy: [],
+            practiceTime: [],
+            improvement: [],
+            streak: [],
+            categories: {
+                'Word Problems': [],
+                'Basic Arithmetic': [],
+                'Advanced Arithmetic': [],
+                'Geometry & Measurement': [],
+                'Fractions & Patterns': [],
+                'Logic & Reasoning': []
+            }
+        };
+        
+        // Points system constants
+        const POINTS = {
+            correct_answer: 10,
+            correct_without_hint: 15,
+            first_try_correct: 20,
+            challenge_completion: 50,
+            perfect_session: 25,
+            daily_streak: 10,
+            retry_correction: 5,
+            ten_in_row: 30,
+            speed_bonus: 40
+        };
+        
+        let sessionPoints = 0;
+        let sessionPointsEarned = [];
+        let weeklyResetDate = getWeeklyResetDate();
+        let currentLeaderboardTab = 'overall';
+        let perfectStreak = 0;
+        let consecutiveCorrect = 0;
+        
+        // Leaderboard helper functions
+        function getWeeklyResetDate() {
+            const now = new Date();
+            const dayOfWeek = now.getDay();
+            const daysUntilMonday = dayOfWeek === 0 ? 1 : 8 - dayOfWeek; // Next Monday
+            const nextMonday = new Date(now.getTime() + daysUntilMonday * 24 * 60 * 60 * 1000);
+            nextMonday.setHours(0, 0, 0, 0);
+            return nextMonday;
+        }
+        
+        function checkWeeklyReset() {
+            const now = new Date();
+            if (now >= weeklyResetDate) {
+                // Reset weekly points for all users
+                Object.values(allUsers).forEach(user => {
+                    user.points.lastWeek = user.points.thisWeek || 0;
+                    user.points.thisWeek = 0;
+                });
+                weeklyResetDate = getWeeklyResetDate();
+                saveUserData();
+            }
+        }
+        
+        function calculatePoints(questionDetails) {
+            let points = 0;
+            
+            if (questionDetails.isCorrect) {
+                consecutiveCorrect++;
+                
+                // Base points for correct answer
+                points += POINTS.correct_answer;
+                
+                // Bonus for no hint used
+                if (!questionDetails.hintUsed) {
+                    points += POINTS.correct_without_hint - POINTS.correct_answer;
+                }
+                
+                // First try correct bonus
+                if (!questionDetails.hintUsed && currentQuestionIndex === 0) {
+                    points += POINTS.first_try_correct - POINTS.correct_without_hint;
+                }
+                
+                // Ten in a row bonus
+                if (consecutiveCorrect >= 10 && consecutiveCorrect % 10 === 0) {
+                    points += POINTS.ten_in_row;
+                    showPointsEarned(POINTS.ten_in_row, '10 in a row bonus! 🎯');
+                }
+                
+                // Track perfect streak
+                perfectStreak++;
+            } else {
+                consecutiveCorrect = 0;
+                perfectStreak = 0;
+            }
+            
+            return points;
+        }
+        
+        function showPointsEarned(points, message = '') {
+            const pointsDiv = document.createElement('div');
+            pointsDiv.className = 'points-earned';
+            pointsDiv.innerHTML = `+${points} points! ⭐${message ? '<br>' + message : ''}`;
+            document.body.appendChild(pointsDiv);
+            
+            setTimeout(() => {
+                if (pointsDiv.parentNode) {
+                    pointsDiv.parentNode.removeChild(pointsDiv);
+                }
+            }, 2000);
+        }
+        
+        function updateLeaderboards() {
+            checkWeeklyReset();
+            
+            // Overall leaderboard
+            leaderboards.overall = Object.values(allUsers)
+                .filter(user => !user.hideFromLeaderboards)
+                .sort((a, b) => (b.points.total || 0) - (a.points.total || 0))
+                .map((user, index) => ({
+                    rank: index + 1,
+                    username: user.username,
+                    avatar: user.avatar,
+                    points: user.points.total || 0,
+                    change: calculateRankChange(user, 'overall', index + 1)
+                }));
+            
+            // Weekly leaderboard
+            leaderboards.weekly = Object.values(allUsers)
+                .filter(user => !user.hideFromLeaderboards)
+                .sort((a, b) => (b.points.thisWeek || 0) - (a.points.thisWeek || 0))
+                .map((user, index) => ({
+                    rank: index + 1,
+                    username: user.username,
+                    avatar: user.avatar,
+                    points: user.points.thisWeek || 0,
+                    change: calculateRankChange(user, 'weekly', index + 1)
+                }));
+            
+            // Accuracy leaderboard
+            leaderboards.accuracy = Object.values(allUsers)
+                .filter(user => !user.hideFromLeaderboards && user.totalQuestionsAttempted >= 20)
+                .sort((a, b) => {
+                    const aAccuracy = (a.totalCorrect / a.totalQuestionsAttempted) * 100;
+                    const bAccuracy = (b.totalCorrect / b.totalQuestionsAttempted) * 100;
+                    return bAccuracy - aAccuracy;
+                })
+                .map((user, index) => {
+                    const accuracy = Math.round((user.totalCorrect / user.totalQuestionsAttempted) * 100);
+                    return {
+                        rank: index + 1,
+                        username: user.username,
+                        avatar: user.avatar,
+                        points: accuracy,
+                        displayValue: accuracy + '%',
+                        change: calculateRankChange(user, 'accuracy', index + 1)
+                    };
+                });
+            
+            // Practice time leaderboard (this week)
+            leaderboards.practiceTime = Object.values(allUsers)
+                .filter(user => !user.hideFromLeaderboards)
+                .sort((a, b) => getWeekTime(b) - getWeekTime(a))
+                .map((user, index) => ({
+                    rank: index + 1,
+                    username: user.username,
+                    avatar: user.avatar,
+                    points: getWeekTime(user),
+                    displayValue: formatTime(getWeekTime(user)),
+                    change: calculateRankChange(user, 'time', index + 1)
+                }));
+            
+            // Improvement leaderboard
+            leaderboards.improvement = Object.values(allUsers)
+                .filter(user => !user.hideFromLeaderboards && (user.points.lastWeek || 0) > 0)
+                .sort((a, b) => {
+                    const aImprovement = ((a.points.thisWeek || 0) - (a.points.lastWeek || 0)) / (a.points.lastWeek || 1) * 100;
+                    const bImprovement = ((b.points.thisWeek || 0) - (b.points.lastWeek || 0)) / (b.points.lastWeek || 1) * 100;
+                    return bImprovement - aImprovement;
+                })
+                .map((user, index) => {
+                    const improvement = Math.round(((user.points.thisWeek || 0) - (user.points.lastWeek || 0)) / (user.points.lastWeek || 1) * 100);
+                    return {
+                        rank: index + 1,
+                        username: user.username,
+                        avatar: user.avatar,
+                        points: improvement,
+                        displayValue: (improvement > 0 ? '+' : '') + improvement + '%',
+                        change: calculateRankChange(user, 'improvement', index + 1)
+                    };
+                });
+            
+            // Streak leaderboard
+            leaderboards.streak = Object.values(allUsers)
+                .filter(user => !user.hideFromLeaderboards)
+                .sort((a, b) => calculateStreak(b) - calculateStreak(a))
+                .map((user, index) => ({
+                    rank: index + 1,
+                    username: user.username,
+                    avatar: user.avatar,
+                    points: calculateStreak(user),
+                    displayValue: calculateStreak(user) + ' days 🔥',
+                    change: calculateRankChange(user, 'streak', index + 1)
+                }));
+            
+            // Category champions
+            Object.keys(leaderboards.categories).forEach(category => {
+                leaderboards.categories[category] = Object.values(allUsers)
+                    .filter(user => !user.hideFromLeaderboards && user.categoryStats[category] && user.categoryStats[category].attempted > 0)
+                    .sort((a, b) => {
+                        const aAccuracy = (a.categoryStats[category].correct / a.categoryStats[category].attempted) * 100;
+                        const bAccuracy = (b.categoryStats[category].correct / b.categoryStats[category].attempted) * 100;
+                        return bAccuracy - aAccuracy;
+                    })
+                    .slice(0, 3)
+                    .map((user, index) => {
+                        const accuracy = Math.round((user.categoryStats[category].correct / user.categoryStats[category].attempted) * 100);
+                        return {
+                            rank: index + 1,
+                            username: user.username,
+                            avatar: user.avatar,
+                            accuracy: accuracy,
+                            attempted: user.categoryStats[category].attempted
+                        };
+                    });
+            });
+            
+            // Update user ranks
+            Object.values(allUsers).forEach(user => {
+                user.leaderboardRanks.overall = leaderboards.overall.findIndex(entry => entry.username === user.username) + 1 || 0;
+                user.leaderboardRanks.weekly = leaderboards.weekly.findIndex(entry => entry.username === user.username) + 1 || 0;
+                user.leaderboardRanks.accuracy = leaderboards.accuracy.findIndex(entry => entry.username === user.username) + 1 || 0;
+                user.leaderboardRanks.time = leaderboards.practiceTime.findIndex(entry => entry.username === user.username) + 1 || 0;
+                user.leaderboardRanks.improvement = leaderboards.improvement.findIndex(entry => entry.username === user.username) + 1 || 0;
+                user.leaderboardRanks.streak = leaderboards.streak.findIndex(entry => entry.username === user.username) + 1 || 0;
+            });
+        }
+        
+        function calculateRankChange(user, type, currentRank) {
+            const previousRank = user.previousRanks[type] || 0;
+            if (previousRank === 0) return 'new';
+            if (currentRank < previousRank) return 'up';
+            if (currentRank > previousRank) return 'down';
+            return 'same';
+        }
+        
+        function calculateStreak(user = currentUser) {
+            if (!user || !user.streakDays || user.streakDays.length === 0) return 0;
+            
+            const today = new Date().toDateString();
+            const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000).toDateString();
+            
+            let streak = 0;
+            const sortedDays = user.streakDays.sort((a, b) => new Date(b) - new Date(a));
+            
+            // Check if user practiced today or yesterday to maintain streak
+            if (sortedDays[0] === today || sortedDays[0] === yesterday) {
+                let currentDate = new Date(sortedDays[0]);
+                streak = 1;
+                
+                for (let i = 1; i < sortedDays.length; i++) {
+                    const prevDate = new Date(currentDate.getTime() - 24 * 60 * 60 * 1000);
+                    if (sortedDays[i] === prevDate.toDateString()) {
+                        streak++;
+                        currentDate = prevDate;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            
+            return streak;
+        }
+        
+        // Parent access control
+        const PARENT_PASSWORD = '260283';
+        let parentFailedAttempts = 0;
+        let parentLockoutTime = 0;
+        let parentAccessGranted = false;
+        let keyPressCount = 0;
+        let keyPressTimer = null;
+
+        // Default avatars for easy selection
+        const defaultAvatars = ['🚀', '🌟', '🎯', '🏆', '🎨', '🔬', '📚', '⭐', '🌈', '🎪'];
+        
+        // Predefined names for quick user creation
+        const suggestedNames = [
+            'Nacho', 'Javi', 'Gonza', 'Ignacio', 'Javier', 'Gonzalo', 'Steven', 'Harry', 'Noah', 'Aden',
             'Liam', 'Rafa', 'Sergei', 'Ayana', 'Ramon', 'Iñigo', 'Luis', 'Jaime', 'Thiago', 'Leo',
             'Felipe', 'Enrique', 'Sofia', 'Flap', 'Ethan', 'Santi', 'William', 'Kaiser', 'Iñaki',
-            'Cristina', 'Loreto', 'Macarena', 'Ray', 'Nina', 'Ana', 'Maria', 'Sheina', 'Paloma'
+            'Cristina', 'Loreto', 'Macarena', 'Ray', 'Nina', 'Ana', 'Maria', 'Sheina', 'Paloma',
+            'Totu', 'Gaby'
         ];
+
+        // Achievement definitions
+        const achievements = {
+            firstSteps: { name: 'First Steps', icon: '👶', desc: 'Complete 10 questions', threshold: 10 },
+            centuryClub: { name: 'Century Club', icon: '💯', desc: 'Complete 100 questions', threshold: 100 },
+            perfectTen: { name: 'Perfect 10', icon: '🎯', desc: 'Get 10 in a row correct', threshold: 10 },
+            speedDemon: { name: 'Speed Demon', icon: '⚡', desc: 'Complete Challenge Mode under 15 minutes', threshold: 1 },
+            noHints: { name: 'No Hints Master', icon: '🧠', desc: 'Complete 20 questions without hints', threshold: 20 },
+            mistakeMaster: { name: 'Mistake Master', icon: '🔄', desc: 'Retry and correct 10 mistakes', threshold: 10 },
+            streakMaster: { name: 'Streak Master', icon: '🔥', desc: 'Practice for 7 days in a row', threshold: 7 },
+            mathWizard: { name: 'Math Wizard', icon: '🧙', desc: 'Achieve 90% accuracy over 50+ questions', threshold: 1 }
+        };
+
+        // Names for word problems (kept for compatibility)
+        const names = suggestedNames;
+
+        // User Data Management Functions
+        function initializeUserSystem() {
+            loadUserData();
+            if (Object.keys(allUsers).length === 0) {
+                // First time - show create user directly
+                showCreateUser();
+            } else {
+                showUserScreen();
+            }
+        }
+
+        function loadUserData() {
+            // In-memory storage - data persists only during session
+            // Note: All data is stored in JavaScript variables and will be lost when page refreshes
+            // This is due to sandboxed environment restrictions
+            if (Object.keys(allUsers).length === 0) {
+                // Initialize with some demo users for demonstration
+                initializeDemoUsers();
+            }
+        }
+
+        function saveUserData() {
+            // In-memory storage - no actual persistence
+            // Data is maintained in JavaScript variables during the session
+            console.log('User data saved to memory (session only)');
+        }
+        
+        function initializeDemoUsers() {
+            // Create some demo users for demonstration purposes
+            const demoUsers = ['Gonza', 'Nacho', 'Javi'];
+            const demoAvatars = ['🚀', '🌟', '🎯'];
+            
+            demoUsers.forEach((name, index) => {
+                if (!allUsers[name]) {
+                    const user = createUserProfile(name, demoAvatars[index]);
+                    // Add some demo progress
+                    user.totalQuestionsAttempted = Math.floor(Math.random() * 50) + 10;
+                    user.totalCorrect = Math.floor(user.totalQuestionsAttempted * (0.7 + Math.random() * 0.25));
+                    user.totalIncorrect = user.totalQuestionsAttempted - user.totalCorrect;
+                    user.hintsUsed = Math.floor(Math.random() * 10);
+                    
+                    // Add demo points
+                    user.points = {
+                        total: Math.floor(Math.random() * 2000) + 500,
+                        thisWeek: Math.floor(Math.random() * 500) + 100,
+                        lastWeek: Math.floor(Math.random() * 400) + 50
+                    };
+                    
+                    user.achievements = ['firstSteps'];
+                    if (user.totalQuestionsAttempted >= 100) {
+                        user.achievements.push('centuryClub');
+                    }
+                    
+                    // Add some streak days
+                    const today = new Date();
+                    for (let i = 0; i < Math.floor(Math.random() * 5) + 1; i++) {
+                        const day = new Date(today.getTime() - i * 24 * 60 * 60 * 1000);
+                        user.streakDays.push(day.toDateString());
+                    }
+                    
+                    allUsers[name] = user;
+                }
+            });
+        }
+
+        function createUserProfile(username, avatar) {
+            const now = new Date();
+            return {
+                username: username,
+                avatar: avatar,
+                createdDate: now.toLocaleDateString(),
+                lastActiveDate: now.toLocaleDateString(),
+                totalQuestionsAttempted: 0,
+                totalCorrect: 0,
+                totalIncorrect: 0,
+                hintsUsed: 0,
+                totalTimeSpent: 0, // in seconds
+                sessions: [],
+                dailyTime: {}, // Track time per day
+                weeklyTime: {}, // Track time per week
+                monthlyTime: {}, // Track time per month
+                incorrectQuestions: [],
+                categoryStats: {
+                    'Basic Arithmetic': { attempted: 0, correct: 0 },
+                    'Advanced Arithmetic': { attempted: 0, correct: 0 },
+                    'Word Problems': { attempted: 0, correct: 0 },
+                    'Geometry & Measurement': { attempted: 0, correct: 0 },
+                    'Fractions & Patterns': { attempted: 0, correct: 0 },
+                    'Logic & Reasoning': { attempted: 0, correct: 0 }
+                },
+                achievements: [],
+                streakDays: [],
+                perfectStreaks: [],
+                // Leaderboard data
+                points: {
+                    total: 0,
+                    thisWeek: 0,
+                    lastWeek: 0
+                },
+                leaderboardRanks: {
+                    overall: 0,
+                    weekly: 0,
+                    accuracy: 0,
+                    time: 0,
+                    improvement: 0,
+                    streak: 0
+                },
+                previousRanks: {},
+                hideFromLeaderboards: false
+            };
+        }
+
+
 
         // Utility functions
         function getRandomName() {
@@ -1665,6 +2875,14 @@
                 });
             }
 
+            // Add unique IDs to all questions that don't have them
+            questions.forEach((question, index) => {
+                if (!question.id) {
+                    const categoryCode = question.category.replace(/[^a-zA-Z]/g, '').toLowerCase().substring(0, 8);
+                    question.id = `${categoryCode}_${String(index + 1).padStart(4, '0')}`;
+                }
+            });
+            
             return shuffleArray(questions);
         }
 
@@ -1768,7 +2986,7 @@
             return false;
         }
 
-        // Game functions
+        // Screen Management Functions
         function showScreen(screenId) {
             document.querySelectorAll('.screen').forEach(screen => {
                 screen.classList.remove('active');
@@ -1776,7 +2994,331 @@
             document.getElementById(screenId).classList.add('active');
         }
 
+        function showUserScreen() {
+            populateUserList();
+            showScreen('user-screen');
+        }
+
+        function showCreateUser() {
+            document.getElementById('username-input').value = '';
+            selectedAvatar = defaultAvatars[0];
+            updateAvatarSelection();
+            updateSaveButton();
+            showScreen('create-user-screen');
+        }
+
+        function populateUserList() {
+            const userList = document.getElementById('user-list');
+            userList.innerHTML = '';
+            
+            if (Object.keys(allUsers).length === 0) {
+                userList.innerHTML = `
+                    <div style="text-align: center; padding: var(--space-32); color: var(--color-text-secondary);">
+                        <div style="font-size: var(--font-size-4xl); margin-bottom: var(--space-16);">👋</div>
+                        <p>No users yet! Create your first profile to get started.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            Object.values(allUsers).forEach(user => {
+                const accuracy = user.totalQuestionsAttempted > 0 ? 
+                    Math.round((user.totalCorrect / user.totalQuestionsAttempted) * 100) : 0;
+                
+                const userCard = document.createElement('div');
+                userCard.className = 'user-card';
+                userCard.onclick = () => selectUser(user.username);
+                
+                userCard.innerHTML = `
+                    <div class="user-card-avatar">${user.avatar}</div>
+                    <div class="user-card-name">${user.username}</div>
+                    <div class="user-card-stats">
+                        Questions: ${user.totalQuestionsAttempted}<br>
+                        Accuracy: ${accuracy}%<br>
+                        Last active: ${user.lastActiveDate}
+                    </div>
+                `;
+                
+                userList.appendChild(userCard);
+            });
+        }
+
+        function selectUser(username) {
+            currentUser = allUsers[username];
+            if (currentUser) {
+                currentUser.lastActiveDate = new Date().toLocaleDateString();
+                saveUserData();
+                showWelcome();
+            }
+        }
+
+        function updateAvatarSelection() {
+            document.querySelectorAll('.avatar-btn').forEach(btn => {
+                btn.classList.remove('selected');
+                if (btn.dataset.avatar === selectedAvatar) {
+                    btn.classList.add('selected');
+                }
+            });
+        }
+
+        function updateSaveButton() {
+            const username = document.getElementById('username-input').value.trim();
+            const saveBtn = document.getElementById('save-user-btn');
+            const isValid = username.length > 0 && !allUsers[username];
+            saveBtn.disabled = !isValid;
+        }
+
+        function saveNewUser() {
+            const username = document.getElementById('username-input').value.trim();
+            if (username && !allUsers[username]) {
+                currentUser = createUserProfile(username, selectedAvatar);
+                allUsers[username] = currentUser;
+                saveUserData();
+                showWelcome();
+            }
+        }
+
+        // Dashboard Functions
+        function showDashboard() {
+            if (!currentUser) {
+                showUserScreen();
+                return;
+            }
+            
+            updateDashboard();
+            showScreen('dashboard-screen');
+        }
+
+        function updateDashboard() {
+            // Update user info
+            document.getElementById('dash-user-avatar').textContent = currentUser.avatar;
+            document.getElementById('dash-user-name').textContent = `${currentUser.username}'s Dashboard`;
+            
+            // Update overall statistics
+            document.getElementById('dash-total-questions').textContent = currentUser.totalQuestionsAttempted;
+            const accuracy = currentUser.totalQuestionsAttempted > 0 ? 
+                Math.round((currentUser.totalCorrect / currentUser.totalQuestionsAttempted) * 100) : 0;
+            document.getElementById('dash-accuracy').textContent = `${accuracy}%`;
+            document.getElementById('dash-hints-used').textContent = currentUser.hintsUsed;
+            
+            // Add enhanced time display for individual user
+            const todayTime = getTodayTime(currentUser);
+            const weekTime = getWeekTime(currentUser);
+            
+            // Add time breakdown section before category performance
+            const timeBreakdown = document.querySelector('#time-breakdown');
+            if (!timeBreakdown) {
+                const timeSection = document.createElement('div');
+                timeSection.id = 'time-breakdown';
+                timeSection.className = 'dashboard-section';
+                timeSection.innerHTML = `
+                    <h3>🕰️ Your Practice Time</h3>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <span class="stat-value">${formatTime(todayTime)}</span>
+                            <div class="stat-label">Today</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">${formatTime(weekTime)}</span>
+                            <div class="stat-label">This Week</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">${formatTime(getAverageSessionDuration(currentUser))}</span>
+                            <div class="stat-label">Avg Session</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">${currentUser.sessions?.length || 0}</span>
+                            <div class="stat-label">Total Sessions</div>
+                        </div>
+                    </div>
+                `;
+                
+                const categorySection = document.querySelector('.dashboard-content .dashboard-section');
+                if (categorySection) {
+                    categorySection.parentNode.insertBefore(timeSection, categorySection);
+                }
+            } else {
+                // Update existing time breakdown
+                const stats = timeBreakdown.querySelectorAll('.stat-value');
+                stats[0].textContent = formatTime(todayTime);
+                stats[1].textContent = formatTime(weekTime);
+                stats[2].textContent = formatTime(getAverageSessionDuration(currentUser));
+                stats[3].textContent = currentUser.sessions?.length || 0;
+            }
+            
+            // Format time practiced with enhanced display
+            const todayTime = getTodayTime(currentUser);
+            const weekTime = getWeekTime(currentUser);
+            const totalTime = currentUser.totalTimeSpent;
+            
+            document.getElementById('dash-time-practiced').textContent = formatTime(totalTime);
+            
+            // Add motivational message about today's practice
+            const motivationalMsg = document.createElement('div');
+            motivationalMsg.style.cssText = 'font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-top: var(--space-8);';
+            if (todayTime > 0) {
+                motivationalMsg.textContent = `You practiced ${formatTime(todayTime)} today! Great job! 🌟`;
+            } else {
+                motivationalMsg.textContent = 'Start practicing today to begin your learning streak!';
+            }
+            
+            const timeStatItem = document.getElementById('dash-time-practiced').closest('.stat-item');
+            if (timeStatItem && !timeStatItem.querySelector('.motivational-msg')) {
+                motivationalMsg.className = 'motivational-msg';
+                timeStatItem.appendChild(motivationalMsg);
+            }
+            
+            // Calculate streak
+            const streak = calculateStreak();
+            document.getElementById('dash-streak').textContent = streak;
+            
+            // Count achievements
+            document.getElementById('dash-achievements').textContent = currentUser.achievements.length;
+            
+            // Update category performance
+            updateCategoryPerformance();
+            
+            // Update recent sessions
+            updateRecentSessions();
+            
+            // Update mistake count
+            document.getElementById('total-mistakes').textContent = currentUser.incorrectQuestions.length;
+            
+            // Enable/disable practice mistakes button
+            const practiceBtn = document.getElementById('practice-mistakes-btn');
+            if (practiceBtn) {
+                practiceBtn.disabled = currentUser.incorrectQuestions.length === 0;
+                practiceBtn.textContent = currentUser.incorrectQuestions.length === 0 ? 
+                    '🔄 No Mistakes to Practice' : '🔄 Practice My Mistakes';
+            }
+            
+            // Update achievements
+            updateAchievementsDisplay();
+        }
+
+        function updateCategoryPerformance() {
+            const container = document.getElementById('category-performance');
+            container.innerHTML = '';
+            
+            Object.entries(currentUser.categoryStats).forEach(([category, stats]) => {
+                const accuracy = stats.attempted > 0 ? Math.round((stats.correct / stats.attempted) * 100) : 0;
+                let scoreClass = 'needs-work';
+                if (accuracy >= 80) scoreClass = 'excellent';
+                else if (accuracy >= 60) scoreClass = 'good';
+                
+                const categoryItem = document.createElement('div');
+                categoryItem.className = 'category-item';
+                categoryItem.innerHTML = `
+                    <div class="category-name">${category}</div>
+                    <div class="category-score ${scoreClass}">${accuracy}% (${stats.correct}/${stats.attempted})</div>
+                `;
+                container.appendChild(categoryItem);
+            });
+        }
+
+        function updateRecentSessions() {
+            const container = document.getElementById('recent-sessions');
+            container.innerHTML = '';
+            
+            const recentSessions = currentUser.sessions.slice(-10).reverse();
+            
+            if (recentSessions.length === 0) {
+                container.innerHTML = '<p style="color: var(--color-text-secondary); text-align: center;">No sessions yet. Start practicing to see your progress!</p>';
+                return;
+            }
+            
+            recentSessions.forEach(session => {
+                const accuracy = session.questionsAnswered > 0 ? 
+                    Math.round((session.correct / session.questionsAnswered) * 100) : 0;
+                const minutes = Math.floor(session.timeSpent / 60);
+                const seconds = session.timeSpent % 60;
+                
+                const sessionItem = document.createElement('div');
+                sessionItem.className = 'session-item';
+                sessionItem.innerHTML = `
+                    <div class="session-info">
+                        <strong>${session.mode.charAt(0).toUpperCase() + session.mode.slice(1)} Mode</strong><br>
+                        <small>${session.date}</small>
+                    </div>
+                    <div class="session-stats">
+                        ${session.correct}/${session.questionsAnswered} (${accuracy}%)<br>
+                        ${minutes}:${seconds.toString().padStart(2, '0')}
+                    </div>
+                `;
+                container.appendChild(sessionItem);
+            });
+        }
+
+        function calculateStreak() {
+            if (currentUser.streakDays.length === 0) return 0;
+            
+            const today = new Date().toDateString();
+            const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000).toDateString();
+            
+            let streak = 0;
+            const sortedDays = currentUser.streakDays.sort((a, b) => new Date(b) - new Date(a));
+            
+            // Check if user practiced today or yesterday to maintain streak
+            if (sortedDays[0] === today || sortedDays[0] === yesterday) {
+                let currentDate = new Date(sortedDays[0]);
+                streak = 1;
+                
+                for (let i = 1; i < sortedDays.length; i++) {
+                    const prevDate = new Date(currentDate.getTime() - 24 * 60 * 60 * 1000);
+                    if (sortedDays[i] === prevDate.toDateString()) {
+                        streak++;
+                        currentDate = prevDate;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            
+            return streak;
+        }
+
+        function updateAchievementsDisplay() {
+            const container = document.getElementById('achievements-grid');
+            container.innerHTML = '';
+            
+            Object.entries(achievements).forEach(([key, achievement]) => {
+                const isUnlocked = currentUser.achievements.includes(key);
+                
+                const achievementItem = document.createElement('div');
+                achievementItem.className = `achievement-item ${isUnlocked ? 'unlocked' : ''}`;
+                achievementItem.innerHTML = `
+                    <div class="achievement-icon">${achievement.icon}</div>
+                    <div class="achievement-name">${achievement.name}</div>
+                    <div class="achievement-desc">${achievement.desc}</div>
+                `;
+                container.appendChild(achievementItem);
+            });
+        }
+
         function showWelcome() {
+            if (!currentUser) {
+                showUserScreen();
+                return;
+            }
+            
+            // Update leaderboards
+            updateLeaderboards();
+            
+            // Update current user display
+            document.getElementById('current-user-avatar').textContent = currentUser.avatar;
+            document.getElementById('current-user-name').textContent = currentUser.username;
+            
+            // Show user's rank
+            const rankDisplay = document.getElementById('user-rank-display');
+            const overallRank = currentUser.leaderboardRanks.overall;
+            const totalPoints = currentUser.points.total || 0;
+            if (overallRank > 0) {
+                const suffix = overallRank === 1 ? 'st 🥇' : overallRank === 2 ? 'nd 🥈' : overallRank === 3 ? 'rd 🥉' : 'th 🏅';
+                rankDisplay.textContent = `Rank: ${overallRank}${suffix} • ${totalPoints} points`;
+            } else {
+                rankDisplay.textContent = 'Start practicing to join the leaderboard!';
+            }
+            
             showScreen('welcome-screen');
             if (timerInterval) {
                 clearInterval(timerInterval);
@@ -1785,7 +3327,13 @@
         }
 
         function startMode(mode) {
+            if (!currentUser) {
+                showUserScreen();
+                return;
+            }
+            
             currentMode = mode;
+            isMistakeMode = false;
             questionBank = generateQuestionBank();
             
             if (mode === 'challenge') {
@@ -1798,6 +3346,44 @@
             score = 0;
             totalQuestions = 0;
             hintsUsed = 0;
+            sessionQuestions = [];
+            startTime = Date.now();
+            sessionPoints = 0;
+            sessionPointsEarned = [];
+            perfectStreak = 0;
+            consecutiveCorrect = 0;
+            
+            showQuestion();
+            showScreen('question-screen');
+        }
+
+        function startMistakeMode() {
+            if (!currentUser || currentUser.incorrectQuestions.length === 0) {
+                alert('No mistakes to review! Keep practicing and come back later.');
+                return;
+            }
+            
+            currentMode = 'practice';
+            isMistakeMode = true;
+            
+            // Create question bank from incorrect questions
+            questionBank = currentUser.incorrectQuestions.map(mistake => ({
+                question: mistake.questionText,
+                answer: mistake.correctAnswer,
+                acceptableAnswers: mistake.acceptableAnswers || [],
+                hint: mistake.hint || 'Think step by step!',
+                explanation: mistake.explanation || 'Review the solution carefully.',
+                category: mistake.category || 'Review',
+                id: mistake.questionId
+            }));
+            
+            questionBank = shuffleArray(questionBank);
+            
+            currentQuestionIndex = 0;
+            score = 0;
+            totalQuestions = 0;
+            hintsUsed = 0;
+            sessionQuestions = [];
             startTime = Date.now();
             
             showQuestion();
@@ -1916,6 +3502,40 @@
                 score++;
             }
             
+            // Track question details for session recording
+            const questionId = question.id;
+            const questionDetails = {
+                questionId: questionId,
+                questionText: question.question,
+                correctAnswer: question.answer,
+                userAnswer: userAnswer,
+                isCorrect: isCorrect,
+                category: question.category,
+                hintUsed: currentHintShown,
+                timeSpent: Math.floor((Date.now() - startTime) / 1000) // rough estimate
+            };
+            
+            sessionQuestions.push(questionDetails);
+            
+            // Calculate and award points
+            const pointsEarned = calculatePoints(questionDetails);
+            if (pointsEarned > 0) {
+                sessionPoints += pointsEarned;
+                showPointsEarned(pointsEarned);
+            }
+            
+            // If incorrect and not in mistake mode, add to incorrect questions
+            if (!isCorrect && !isMistakeMode) {
+                addToIncorrectQuestions(questionDetails);
+            }
+            
+            // If correct and in mistake mode, remove from incorrect questions
+            if (isCorrect && isMistakeMode) {
+                removeFromIncorrectQuestions(questionId);
+                // Award retry correction points
+                sessionPoints += POINTS.retry_correction;
+            }
+            
             // Show feedback
             const feedbackContainer = document.getElementById('feedback-container');
             const encouragement = isCorrect ? 
@@ -1976,11 +3596,36 @@
             // Calculate final stats
             const percentage = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
             
+            // Record session and update user stats
+            if (currentUser && totalQuestions > 0) {
+                // Store previous ranks for change tracking
+                currentUser.previousRanks = { ...currentUser.leaderboardRanks };
+                
+                recordSession(timeTaken, percentage);
+                updateUserStats();
+                checkForNewAchievements();
+                updateLeaderboards();
+                saveUserData();
+                
+                // Show leaderboard changes
+                showLeaderboardChanges();
+            }
+            
             // Update results screen
             document.getElementById('final-score').textContent = `${score}/${totalQuestions}`;
             document.getElementById('final-percentage').textContent = `${percentage}%`;
             document.getElementById('final-hints').textContent = hintsUsed;
             document.getElementById('final-time').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Show session points earned
+            if (sessionPoints > 0) {
+                document.getElementById('final-message').innerHTML += `
+                    <div style="background: var(--color-bg-3); border-radius: var(--radius-base); padding: var(--space-16); margin: var(--space-16) 0;">
+                        <div style="font-size: var(--font-size-xl); color: var(--app-success); font-weight: var(--font-weight-bold);">+${sessionPoints} Points Earned! ⭐</div>
+                        <div style="font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-top: var(--space-4);">Total Points: ${currentUser.points.total}</div>
+                    </div>
+                `;
+            }
             
             // Set celebration and message based on performance
             let celebration = '🎉';
@@ -2009,6 +3654,9 @@
             // Save best score
             saveBestScore(currentMode, score, totalQuestions, percentage, timeTaken, hintsUsed);
             
+            // Show any new achievements
+            showSessionAchievements();
+            
             showScreen('results-screen');
         }
 
@@ -2016,6 +3664,182 @@
             if (confirm('Are you sure you want to go back to the menu? Your progress will be lost.')) {
                 showWelcome();
             }
+        }
+
+        // Session recording and user stat functions
+        function recordSession(timeTaken, percentage) {
+            const now = new Date();
+            
+            // Award session completion bonuses
+            if (currentMode === 'challenge') {
+                sessionPoints += POINTS.challenge_completion;
+                
+                // Speed bonus for challenge mode (under 15 minutes)
+                if (timeTaken < 900) {
+                    sessionPoints += POINTS.speed_bonus;
+                    showPointsEarned(POINTS.speed_bonus, 'Speed demon bonus! ⚡');
+                }
+            }
+            
+            // Perfect session bonus
+            if (percentage === 100 && totalQuestions >= 5) {
+                sessionPoints += POINTS.perfect_session;
+                showPointsEarned(POINTS.perfect_session, 'Perfect session! 🏆');
+            }
+            
+            // Daily streak bonus
+            const today = new Date().toDateString();
+            if (!currentUser.streakDays.includes(today)) {
+                sessionPoints += POINTS.daily_streak;
+                currentUser.streakDays.push(today);
+            }
+            
+            // Update user points
+            if (!currentUser.points) {
+                currentUser.points = { total: 0, thisWeek: 0, lastWeek: 0 };
+            }
+            currentUser.points.total = (currentUser.points.total || 0) + sessionPoints;
+            currentUser.points.thisWeek = (currentUser.points.thisWeek || 0) + sessionPoints;
+            
+            const session = {
+                date: now.toLocaleDateString(),
+                startTime: startTime,
+                endTime: Date.now(),
+                durationSeconds: timeTaken,
+                mode: isMistakeMode ? 'mistakes' : currentMode,
+                questionsAnswered: totalQuestions,
+                correct: score,
+                incorrect: totalQuestions - score,
+                hintsUsed: hintsUsed,
+                timeSpent: timeTaken,
+                pointsEarned: sessionPoints,
+                questions: sessionQuestions
+            };
+            
+            currentUser.sessions.push(session);
+            
+            // Update time tracking
+            updateTimeTracking(timeTaken, now);
+            
+            // Keep only last 50 sessions
+            if (currentUser.sessions.length > 50) {
+                currentUser.sessions = currentUser.sessions.slice(-50);
+            }
+        }
+        
+        function updateUserStats() {
+            currentUser.totalQuestionsAttempted += totalQuestions;
+            currentUser.totalCorrect += score;
+            currentUser.totalIncorrect += (totalQuestions - score);
+            currentUser.hintsUsed += hintsUsed;
+            currentUser.totalTimeSpent += Math.floor((Date.now() - startTime) / 1000);
+            currentUser.lastActiveDate = new Date().toLocaleDateString();
+            
+            // Update category stats
+            sessionQuestions.forEach(q => {
+                if (currentUser.categoryStats[q.category]) {
+                    currentUser.categoryStats[q.category].attempted++;
+                    if (q.isCorrect) {
+                        currentUser.categoryStats[q.category].correct++;
+                    }
+                }
+            });
+        }
+        
+        function addToIncorrectQuestions(questionDetails) {
+            // Check if question already exists
+            const existingIndex = currentUser.incorrectQuestions.findIndex(
+                q => q.questionId === questionDetails.questionId
+            );
+            
+            if (existingIndex >= 0) {
+                // Update existing entry
+                currentUser.incorrectQuestions[existingIndex].timesAttempted++;
+                currentUser.incorrectQuestions[existingIndex].timesIncorrect++;
+                currentUser.incorrectQuestions[existingIndex].lastAttemptDate = new Date().toLocaleDateString();
+            } else {
+                // Add new entry
+                currentUser.incorrectQuestions.push({
+                    questionId: questionDetails.questionId,
+                    questionText: questionDetails.questionText,
+                    correctAnswer: questionDetails.correctAnswer,
+                    userAnswer: questionDetails.userAnswer,
+                    category: questionDetails.category,
+                    attemptedDate: new Date().toLocaleDateString(),
+                    lastAttemptDate: new Date().toLocaleDateString(),
+                    timesAttempted: 1,
+                    timesIncorrect: 1,
+                    hint: questionBank[currentQuestionIndex].hint,
+                    explanation: questionBank[currentQuestionIndex].explanation,
+                    acceptableAnswers: questionBank[currentQuestionIndex].acceptableAnswers
+                });
+            }
+            
+            // Keep only last 100 unique questions
+            if (currentUser.incorrectQuestions.length > 100) {
+                currentUser.incorrectQuestions = currentUser.incorrectQuestions.slice(-100);
+            }
+        }
+        
+        function removeFromIncorrectQuestions(questionId) {
+            currentUser.incorrectQuestions = currentUser.incorrectQuestions.filter(
+                q => q.questionId !== questionId
+            );
+        }
+        
+        function checkForNewAchievements() {
+            const newAchievements = [];
+            
+            // First Steps
+            if (currentUser.totalQuestionsAttempted >= 10 && !currentUser.achievements.includes('firstSteps')) {
+                currentUser.achievements.push('firstSteps');
+                newAchievements.push(achievements.firstSteps);
+            }
+            
+            // Century Club
+            if (currentUser.totalQuestionsAttempted >= 100 && !currentUser.achievements.includes('centuryClub')) {
+                currentUser.achievements.push('centuryClub');
+                newAchievements.push(achievements.centuryClub);
+            }
+            
+            // Speed Demon (Challenge under 15 minutes)
+            if (currentMode === 'challenge' && Math.floor((Date.now() - startTime) / 1000) < 900 && !currentUser.achievements.includes('speedDemon')) {
+                currentUser.achievements.push('speedDemon');
+                newAchievements.push(achievements.speedDemon);
+            }
+            
+            // No Hints Master
+            const sessionsWithoutHints = currentUser.sessions.filter(s => s.hintsUsed === 0 && s.questionsAnswered >= 5).length;
+            if (sessionsWithoutHints >= 4 && !currentUser.achievements.includes('noHints')) {
+                currentUser.achievements.push('noHints');
+                newAchievements.push(achievements.noHints);
+            }
+            
+            // Math Wizard (90% accuracy over 50+ questions)
+            if (currentUser.totalQuestionsAttempted >= 50) {
+                const accuracy = (currentUser.totalCorrect / currentUser.totalQuestionsAttempted) * 100;
+                if (accuracy >= 90 && !currentUser.achievements.includes('mathWizard')) {
+                    currentUser.achievements.push('mathWizard');
+                    newAchievements.push(achievements.mathWizard);
+                }
+            }
+            
+            // Streak Master
+            const streak = calculateStreak();
+            if (streak >= 7 && !currentUser.achievements.includes('streakMaster')) {
+                currentUser.achievements.push('streakMaster');
+                newAchievements.push(achievements.streakMaster);
+            }
+            
+            return newAchievements;
+        }
+        
+        function showSessionAchievements() {
+            // This would show any achievements unlocked during the session
+            const container = document.getElementById('session-achievements');
+            container.innerHTML = '';
+            
+            // For now, just a placeholder - could be enhanced to show actual new achievements
         }
 
         // In-memory best scores storage
@@ -2077,9 +3901,785 @@
             showScreen('scores-screen');
         }
 
-        // Initialize the app
+        // Leaderboard Functions
+        function showLeaderboard() {
+            if (!currentUser) {
+                showUserScreen();
+                return;
+            }
+            
+            updateLeaderboards();
+            showLeaderboardTab('overall');
+            showScreen('leaderboard-screen');
+        }
+        
+        function showLeaderboardTab(tabName) {
+            currentLeaderboardTab = tabName;
+            
+            // Update tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.tab === tabName) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Show appropriate leaderboard
+            const content = document.getElementById('leaderboard-content');
+            
+            switch(tabName) {
+                case 'overall':
+                    renderLeaderboard(leaderboards.overall, 'Points', 'overall');
+                    break;
+                case 'weekly':
+                    renderLeaderboard(leaderboards.weekly, 'Points This Week', 'weekly');
+                    break;
+                case 'accuracy':
+                    renderLeaderboard(leaderboards.accuracy, 'Accuracy', 'accuracy');
+                    break;
+                case 'time':
+                    renderLeaderboard(leaderboards.practiceTime, 'Practice Time', 'time');
+                    break;
+                case 'improvement':
+                    renderLeaderboard(leaderboards.improvement, 'Improvement', 'improvement');
+                    break;
+                case 'streak':
+                    renderLeaderboard(leaderboards.streak, 'Streak', 'streak');
+                    break;
+                case 'champions':
+                    renderCategoryChampions();
+                    break;
+            }
+        }
+        
+        function renderLeaderboard(data, statLabel, type) {
+            const content = document.getElementById('leaderboard-content');
+            let html = '';
+            
+            if (data.length === 0) {
+                html = `
+                    <div style="text-align: center; padding: var(--space-48); color: var(--color-text-secondary);">
+                        <div style="font-size: var(--font-size-4xl); margin-bottom: var(--space-16);">🏆</div>
+                        <p>No data yet! Start practicing to appear on the leaderboard.</p>
+                    </div>
+                `;
+            } else {
+                html = `
+                    <div class="leaderboard-table">
+                        <div class="leaderboard-header">
+                            <div>Rank</div>
+                            <div>Player</div>
+                            <div>${statLabel}</div>
+                            <div>Change</div>
+                        </div>
+                `;
+                
+                // Show top 10 or all if less than 10
+                const displayData = data.slice(0, 10);
+                
+                // Find current user position if not in top 10
+                const userPosition = data.findIndex(entry => entry.username === currentUser.username);
+                const showUserPosition = userPosition >= 10;
+                
+                displayData.forEach((entry, index) => {
+                    const isCurrentUser = entry.username === currentUser.username;
+                    html += renderLeaderboardRow(entry, isCurrentUser);
+                });
+                
+                // Show current user position if not in top 10
+                if (showUserPosition) {
+                    html += `<div style="text-align: center; padding: var(--space-12); color: var(--color-text-secondary); font-style: italic;">...</div>`;
+                    const userEntry = data[userPosition];
+                    html += renderLeaderboardRow(userEntry, true);
+                }
+                
+                html += '</div>';
+                
+                // Show motivational message
+                html += getMotivationalMessage(type, userPosition);
+                
+                // Show next rank info
+                if (userPosition >= 0 && userPosition < data.length - 1) {
+                    const nextEntry = data[userPosition - 1];
+                    const currentEntry = data[userPosition];
+                    const gap = nextEntry.points - currentEntry.points;
+                    if (gap > 0) {
+                        html += `
+                            <div class="next-rank-info">
+                                <strong>${gap} ${type === 'accuracy' ? 'more correct answers' : type === 'time' ? 'more practice time' : type === 'streak' ? 'more days' : 'points'} needed to reach ${nextEntry.rank}${getRankSuffix(nextEntry.rank)} place!</strong><br>
+                                <small>Keep practicing! 💪</small>
+                            </div>
+                        `;
+                    }
+                }
+            }
+            
+            content.innerHTML = html;
+        }
+        
+        function renderLeaderboardRow(entry, isCurrentUser = false) {
+            const rankClass = entry.rank === 1 ? 'rank-1' : entry.rank === 2 ? 'rank-2' : entry.rank === 3 ? 'rank-3' : 'rank-other';
+            const changeClass = entry.change === 'up' ? 'rank-up' : entry.change === 'down' ? 'rank-down' : entry.change === 'new' ? 'rank-new' : 'rank-same';
+            const changeIcon = entry.change === 'up' ? '↑' : entry.change === 'down' ? '↓' : entry.change === 'new' ? '🆕' : '→';
+            
+            const medal = entry.rank === 1 ? '🥇' : entry.rank === 2 ? '🥈' : entry.rank === 3 ? '🥉' : '🏅';
+            
+            return `
+                <div class="leaderboard-row ${isCurrentUser ? 'current-user' : ''}">
+                    <div class="rank-display ${rankClass}">
+                        ${medal} ${entry.rank}
+                    </div>
+                    <div class="player-info">
+                        <div class="player-avatar">${entry.avatar}</div>
+                        <div class="player-name">${entry.username}${isCurrentUser ? ' (You)' : ''}</div>
+                    </div>
+                    <div class="player-stats">${entry.displayValue || entry.points}</div>
+                    <div class="progress-indicator">
+                        <span class="rank-change ${changeClass}">${changeIcon}</span>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function renderCategoryChampions() {
+            const content = document.getElementById('leaderboard-content');
+            let html = '<div class="category-champions">';
+            
+            Object.entries(leaderboards.categories).forEach(([category, champions]) => {
+                const categoryEmojis = {
+                    'Word Problems': '📝',
+                    'Basic Arithmetic': '➕',
+                    'Advanced Arithmetic': '🧮',
+                    'Geometry & Measurement': '📏',
+                    'Fractions & Patterns': '🔢',
+                    'Logic & Reasoning': '🧩'
+                };
+                
+                html += `
+                    <div class="champion-card">
+                        <div class="champion-category">${categoryEmojis[category] || '🎆'} ${category}</div>
+                `;
+                
+                if (champions.length > 0) {
+                    champions.forEach((champion, index) => {
+                        const medal = index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉';
+                        html += `
+                            <div class="champion-player">
+                                ${medal} ${champion.avatar} ${champion.username}
+                            </div>
+                            <div class="champion-stats">${champion.accuracy}% (${champion.attempted} questions)</div>
+                        `;
+                        if (index < champions.length - 1) html += '<hr style="margin: var(--space-8) 0; border: 1px solid var(--color-border);">';
+                    });
+                } else {
+                    html += '<div style="color: var(--color-text-secondary); font-style: italic;">No champions yet!</div>';
+                }
+                
+                html += '</div>';
+            });
+            
+            html += '</div>';
+            content.innerHTML = html;
+        }
+        
+        function getMotivationalMessage(type, userPosition) {
+            if (userPosition === -1) {
+                return '<div class="motivational-message">Start practicing to join the leaderboard! 🎆</div>';
+            }
+            
+            let message = '';
+            if (userPosition === 0) {
+                message = 'You\'re the champion! 👑';
+            } else if (userPosition < 3) {
+                message = 'Almost there! Keep pushing! 🌟';
+            } else if (userPosition < 10) {
+                message = 'You\'re in the top 10! Great work! ⭐';
+            } else {
+                const pointsToTop10 = 'Keep going to reach the top 10! 💪';
+                message = pointsToTop10;
+            }
+            
+            return `<div class="motivational-message">${message}</div>`;
+        }
+        
+        function getRankSuffix(rank) {
+            if (rank % 10 === 1 && rank !== 11) return 'st';
+            if (rank % 10 === 2 && rank !== 12) return 'nd';
+            if (rank % 10 === 3 && rank !== 13) return 'rd';
+            return 'th';
+        }
+        
+        function showLeaderboardChanges() {
+            // This could show notifications about rank changes after a session
+            const currentRank = currentUser.leaderboardRanks.overall;
+            const previousRank = currentUser.previousRanks.overall || 0;
+            
+            if (currentRank > 0 && previousRank > 0 && currentRank !== previousRank) {
+                let changeMessage = '';
+                if (currentRank < previousRank) {
+                    changeMessage = `You moved up from ${previousRank}${getRankSuffix(previousRank)} to ${currentRank}${getRankSuffix(currentRank)} place! 🎉`;
+                } else {
+                    changeMessage = `You moved down from ${previousRank}${getRankSuffix(previousRank)} to ${currentRank}${getRankSuffix(currentRank)} place. Keep practicing! 💪`;
+                }
+                
+                setTimeout(() => {
+                    showPointsEarned(0, changeMessage);
+                }, 1000);
+            }
+        }
+        
+        // Additional UI Functions
+        function showMistakesList() {
+            const container = document.getElementById('mistakes-list');
+            container.innerHTML = '';
+            
+            if (currentUser.incorrectQuestions.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--color-text-secondary);">No mistakes to review! Great job! 🎆</p>';
+            } else {
+                currentUser.incorrectQuestions.forEach((mistake, index) => {
+                    const mistakeItem = document.createElement('div');
+                    mistakeItem.className = 'mistake-item';
+                    mistakeItem.innerHTML = `
+                        <div class="mistake-question">${mistake.questionText}</div>
+                        <div class="mistake-details">
+                            <strong>Correct Answer:</strong> ${mistake.correctAnswer}<br>
+                            <strong>Your Answer:</strong> ${mistake.userAnswer}<br>
+                            <strong>Category:</strong> ${mistake.category}<br>
+                            <strong>Times Attempted:</strong> ${mistake.timesAttempted}<br>
+                            <small>Last attempted: ${mistake.lastAttemptDate}</small>
+                        </div>
+                    `;
+                    container.appendChild(mistakeItem);
+                });
+            }
+            
+            showScreen('mistakes-screen');
+        }
+        
+        function clearMistakes() {
+            if (confirm('Are you sure you want to clear all your mistakes? This cannot be undone.')) {
+                currentUser.incorrectQuestions = [];
+                saveUserData();
+                showDashboard();
+            }
+        }
+        
+        function showParentDashboard() {
+            if (!parentAccessGranted) {
+                requestParentAccess();
+                return;
+            }
+            
+            const container = document.getElementById('parent-dashboard-content');
+            container.innerHTML = '';
+            
+            if (Object.keys(allUsers).length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--color-text-secondary);">No users to display.</p>';
+            } else {
+                // Screen Time Tracker Section
+                const timeSection = document.createElement('div');
+                timeSection.className = 'dashboard-section';
+                timeSection.innerHTML = '<h3>📱 Screen Time Summary</h3>';
+                
+                // Today's summary
+                const todayTable = createTimeTable('Today', 'today');
+                timeSection.appendChild(todayTable);
+                
+                // This week's summary
+                const weekTable = createTimeTable('This Week', 'week');
+                timeSection.appendChild(weekTable);
+                
+                // All time summary
+                const allTimeTable = createTimeTable('All Time', 'allTime');
+                timeSection.appendChild(allTimeTable);
+                
+                container.appendChild(timeSection);
+                
+                // Export button
+                const exportSection = document.createElement('div');
+                exportSection.innerHTML = `
+                    <div class="button-group" style="margin: var(--space-24) 0;">
+                        <button class="btn btn-secondary" onclick="exportTimeReport()">📊 Export Time Report</button>
+                        <button class="btn btn-secondary" onclick="exitParentView()">🚪 Exit Parent View</button>
+                    </div>
+                `;
+                container.appendChild(exportSection);
+                
+                // User overview grid
+                const userGrid = document.createElement('div');
+                userGrid.className = 'parent-user-grid';
+                
+                Object.values(allUsers).forEach(user => {
+                    const accuracy = user.totalQuestionsAttempted > 0 ? 
+                        Math.round((user.totalCorrect / user.totalQuestionsAttempted) * 100) : 0;
+                    const todayTime = getTodayTime(user);
+                    const weekTime = getWeekTime(user);
+                    const avgSession = getAverageSessionDuration(user);
+                    
+                    const userCard = document.createElement('div');
+                    userCard.className = 'parent-user-card';
+                    userCard.innerHTML = `
+                        <div class="parent-user-header">
+                            <div class="user-avatar">${user.avatar}</div>
+                            <div>
+                                <h3>${user.username}</h3>
+                                <small>Last active: ${user.lastActiveDate}</small>
+                            </div>
+                        </div>
+                        <div class="stats">
+                            <div class="stat-item">
+                                <span class="stat-value">${formatTime(todayTime)}</span>
+                                <div class="stat-label">Today</div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">${formatTime(weekTime)}</span>
+                                <div class="stat-label">This Week</div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">${accuracy}%</span>
+                                <div class="stat-label">Accuracy</div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">${formatTime(avgSession)}</span>
+                                <div class="stat-label">Avg Session</div>
+                            </div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${Math.min(accuracy, 100)}%;"></div>
+                        </div>
+                    `;
+                    userGrid.appendChild(userCard);
+                });
+                
+                container.appendChild(userGrid);
+            }
+            
+            showScreen('parent-dashboard-screen');
+        }
+        
+        function exportUserData() {
+            if (!currentUser) return;
+            
+            const data = {
+                user: currentUser,
+                exportDate: new Date().toISOString(),
+                version: '1.3'
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${currentUser.username}_math_progress.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        function exportAllData() {
+            const data = {
+                users: allUsers,
+                exportDate: new Date().toISOString(),
+                version: '1.3'
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `all_math_users_${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        function showImportData() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        try {
+                            const data = JSON.parse(e.target.result);
+                            if (data.users) {
+                                // Importing all users
+                                Object.assign(allUsers, data.users);
+                            } else if (data.user) {
+                                // Importing single user
+                                allUsers[data.user.username] = data.user;
+                            }
+                            saveUserData();
+                            alert('Data imported successfully!');
+                            showParentDashboard();
+                        } catch (error) {
+                            alert('Error importing data: ' + error.message);
+                        }
+                    };
+                    reader.readAsText(file);
+                }
+            };
+            input.click();
+        }
+        
+        function showPauseMenu() {
+            const options = [
+                'Resume',
+                'View My Progress', 
+                'Switch User',
+                'Quit to Menu'
+            ];
+            
+            const choice = prompt(`Game Paused\n\nChoose an option:\n1. Resume\n2. View My Progress\n3. Switch User\n4. Quit to Menu\n\nEnter 1, 2, 3, or 4:`);
+            
+            switch(choice) {
+                case '1':
+                    // Just resume - do nothing
+                    break;
+                case '2':
+                    showDashboard();
+                    break;
+                case '3':
+                    if (confirm('Your current session will be lost. Continue?')) {
+                        showUserScreen();
+                    }
+                    break;
+                case '4':
+                    confirmQuit();
+                    break;
+                default:
+                    // Invalid choice or cancel - resume
+                    break;
+            }
+        }
+        
+        // Time Tracking Functions
+        function updateTimeTracking(timeTaken, date) {
+            const today = date.toDateString();
+            const week = getWeekKey(date);
+            const month = getMonthKey(date);
+            
+            // Update daily time
+            if (!currentUser.dailyTime[today]) {
+                currentUser.dailyTime[today] = 0;
+            }
+            currentUser.dailyTime[today] += timeTaken;
+            
+            // Update weekly time
+            if (!currentUser.weeklyTime[week]) {
+                currentUser.weeklyTime[week] = 0;
+            }
+            currentUser.weeklyTime[week] += timeTaken;
+            
+            // Update monthly time
+            if (!currentUser.monthlyTime[month]) {
+                currentUser.monthlyTime[month] = 0;
+            }
+            currentUser.monthlyTime[month] += timeTaken;
+        }
+        
+        function getTodayTime(user) {
+            const today = new Date().toDateString();
+            return user.dailyTime?.[today] || 0;
+        }
+        
+        function getWeekTime(user) {
+            const thisWeek = getWeekKey(new Date());
+            return user.weeklyTime?.[thisWeek] || 0;
+        }
+        
+        function getMonthTime(user) {
+            const thisMonth = getMonthKey(new Date());
+            return user.monthlyTime?.[thisMonth] || 0;
+        }
+        
+        function getAverageSessionDuration(user) {
+            if (!user.sessions || user.sessions.length === 0) return 0;
+            const totalTime = user.sessions.reduce((sum, session) => sum + (session.timeSpent || 0), 0);
+            return Math.round(totalTime / user.sessions.length);
+        }
+        
+        function formatTime(seconds) {
+            if (seconds < 60) return `${seconds} sec`;
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            if (minutes < 60) {
+                return remainingSeconds > 0 ? `${minutes}m ${remainingSeconds}s` : `${minutes} min`;
+            }
+            const hours = Math.floor(minutes / 60);
+            const remainingMinutes = minutes % 60;
+            return remainingMinutes > 0 ? `${hours}h ${remainingMinutes}m` : `${hours}h`;
+        }
+        
+        function getWeekKey(date) {
+            const year = date.getFullYear();
+            const week = getWeekNumber(date);
+            return `${year}-W${week}`;
+        }
+        
+        function getMonthKey(date) {
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+            return `${year}-${month.toString().padStart(2, '0')}`;
+        }
+        
+        function getWeekNumber(date) {
+            const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+            const dayNum = d.getUTCDay() || 7;
+            d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+            const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+            return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+        }
+        
+        function createTimeTable(title, period) {
+            const table = document.createElement('div');
+            table.innerHTML = `<h4 style="margin: var(--space-16) 0; color: var(--color-primary);">${title} (${new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}):</h4>`;
+            
+            const tableHTML = `
+                <table style="width: 100%; border-collapse: collapse; margin-bottom: var(--space-24);">
+                    <thead>
+                        <tr style="background: var(--color-bg-1); border-bottom: 2px solid var(--color-border);">
+                            <th style="padding: var(--space-12); text-align: left; border: 1px solid var(--color-border);">User</th>
+                            <th style="padding: var(--space-12); text-align: center; border: 1px solid var(--color-border);">Time ${title}</th>
+                            <th style="padding: var(--space-12); text-align: center; border: 1px solid var(--color-border);">Sessions</th>
+                            ${period === 'allTime' ? '<th style="padding: var(--space-12); text-align: center; border: 1px solid var(--color-border);">Avg/Session</th>' : ''}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${Object.values(allUsers).map(user => {
+                            let time, sessionCount;
+                            switch(period) {
+                                case 'today':
+                                    time = getTodayTime(user);
+                                    sessionCount = user.sessions?.filter(s => s.date === new Date().toLocaleDateString()).length || 0;
+                                    break;
+                                case 'week':
+                                    time = getWeekTime(user);
+                                    const thisWeek = getWeekKey(new Date());
+                                    sessionCount = user.sessions?.filter(s => {
+                                        const sessionDate = new Date(s.startTime || s.date);
+                                        return getWeekKey(sessionDate) === thisWeek;
+                                    }).length || 0;
+                                    break;
+                                case 'allTime':
+                                    time = user.totalTimeSpent;
+                                    sessionCount = user.sessions?.length || 0;
+                                    break;
+                            }
+                            
+                            return `
+                                <tr style="border-bottom: 1px solid var(--color-border);">
+                                    <td style="padding: var(--space-12); border: 1px solid var(--color-border);">${user.avatar} ${user.username}</td>
+                                    <td style="padding: var(--space-12); text-align: center; border: 1px solid var(--color-border);">${formatTime(time)}</td>
+                                    <td style="padding: var(--space-12); text-align: center; border: 1px solid var(--color-border);">${sessionCount}</td>
+                                    ${period === 'allTime' ? `<td style="padding: var(--space-12); text-align: center; border: 1px solid var(--color-border);">${formatTime(getAverageSessionDuration(user))}</td>` : ''}
+                                </tr>
+                            `;
+                        }).join('')}
+                    </tbody>
+                </table>
+            `;
+            
+            table.innerHTML += tableHTML;
+            return table;
+        }
+        
+        // Parent Access Functions
+        function requestParentAccess() {
+            const now = Date.now();
+            if (parentLockoutTime > now) {
+                const remaining = Math.ceil((parentLockoutTime - now) / 1000);
+                alert(`Too many failed attempts. Please wait ${remaining} seconds before trying again.`);
+                return;
+            }
+            
+            showPasswordModal();
+        }
+        
+        function showPasswordModal() {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.7);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 1000;
+            `;
+            
+            modal.innerHTML = `
+                <div style="
+                    background: var(--color-surface);
+                    border-radius: var(--radius-lg);
+                    padding: var(--space-32);
+                    text-align: center;
+                    box-shadow: var(--shadow-lg);
+                    max-width: 400px;
+                    width: 90%;
+                ">
+                    <h2 style="color: var(--color-primary); margin-bottom: var(--space-16);">🔒 Parent Dashboard</h2>
+                    <p style="margin-bottom: var(--space-24); color: var(--color-text-secondary);">This area is for parents only.<br>Please enter the password:</p>
+                    
+                    <input type="password" id="parent-password" placeholder="Enter password" style="
+                        width: 100%;
+                        padding: var(--space-12);
+                        font-size: var(--font-size-lg);
+                        border: 2px solid var(--color-border);
+                        border-radius: var(--radius-base);
+                        margin-bottom: var(--space-16);
+                        text-align: center;
+                    ">
+                    
+                    <div id="password-error" style="color: var(--color-error); margin-bottom: var(--space-16); min-height: 20px;"></div>
+                    
+                    <div class="button-group">
+                        <button class="btn btn-secondary" onclick="closePasswordModal()">Cancel</button>
+                        <button class="btn btn-primary" onclick="validateParentPassword()">Enter</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            document.getElementById('parent-password').focus();
+            
+            // Add enter key support
+            document.getElementById('parent-password').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    validateParentPassword();
+                }
+            });
+            
+            window.currentPasswordModal = modal;
+        }
+        
+        function validateParentPassword() {
+            const input = document.getElementById('parent-password');
+            const password = input.value;
+            const errorDiv = document.getElementById('password-error');
+            
+            if (password === PARENT_PASSWORD) {
+                parentAccessGranted = true;
+                parentFailedAttempts = 0;
+                closePasswordModal();
+                showParentDashboard();
+            } else {
+                parentFailedAttempts++;
+                errorDiv.textContent = `Incorrect password. Attempts: ${parentFailedAttempts}/3`;
+                input.value = '';
+                input.focus();
+                
+                if (parentFailedAttempts >= 3) {
+                    parentLockoutTime = Date.now() + 30000; // 30 seconds lockout
+                    errorDiv.textContent = 'Too many attempts. Locked for 30 seconds.';
+                    setTimeout(() => {
+                        closePasswordModal();
+                    }, 2000);
+                }
+            }
+        }
+        
+        function closePasswordModal() {
+            if (window.currentPasswordModal) {
+                document.body.removeChild(window.currentPasswordModal);
+                window.currentPasswordModal = null;
+            }
+        }
+        
+        function exitParentView() {
+            parentAccessGranted = false;
+            showUserScreen();
+        }
+        
+        function exportTimeReport() {
+            const data = {
+                exportDate: new Date().toISOString(),
+                users: Object.values(allUsers).map(user => ({
+                    username: user.username,
+                    todayTime: getTodayTime(user),
+                    weekTime: getWeekTime(user),
+                    totalTime: user.totalTimeSpent,
+                    sessionCount: user.sessions?.length || 0,
+                    averageSession: getAverageSessionDuration(user),
+                    sessions: user.sessions?.map(session => ({
+                        date: session.date,
+                        duration: session.timeSpent,
+                        mode: session.mode,
+                        questionsAnswered: session.questionsAnswered,
+                        correct: session.correct
+                    })) || []
+                }))
+            };
+            
+            // Create CSV format
+            let csv = 'Username,Date,Start Time,End Time,Duration (seconds),Mode,Questions Answered,Correct\n';
+            
+            Object.values(allUsers).forEach(user => {
+                user.sessions?.forEach(session => {
+                    const startTime = session.startTime ? new Date(session.startTime).toLocaleTimeString() : 'N/A';
+                    const endTime = session.endTime ? new Date(session.endTime).toLocaleTimeString() : 'N/A';
+                    csv += `${user.username},${session.date},${startTime},${endTime},${session.timeSpent || 0},${session.mode},${session.questionsAnswered || 0},${session.correct || 0}\n`;
+                });
+            });
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `time_report_${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        // Event Listeners
         document.addEventListener('DOMContentLoaded', function() {
-            showWelcome();
+            // Avatar selection
+            document.querySelectorAll('.avatar-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    selectedAvatar = this.dataset.avatar;
+                    updateAvatarSelection();
+                });
+            });
+            
+            // Username input
+            const usernameInput = document.getElementById('username-input');
+            if (usernameInput) {
+                usernameInput.addEventListener('input', updateSaveButton);
+                usernameInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        saveNewUser();
+                    }
+                });
+            }
+            
+            // Initialize user system
+            initializeUserSystem();
+            
+            // Update leaderboards on load
+            updateLeaderboards();
+            
+            // Keyboard shortcut for parent access (triple P)
+            document.addEventListener('keydown', function(e) {
+                if (e.key.toLowerCase() === 'p') {
+                    keyPressCount++;
+                    
+                    if (keyPressTimer) {
+                        clearTimeout(keyPressTimer);
+                    }
+                    
+                    keyPressTimer = setTimeout(() => {
+                        keyPressCount = 0;
+                    }, 2000);
+                    
+                    if (keyPressCount >= 3) {
+                        keyPressCount = 0;
+                        requestParentAccess();
+                    }
+                }
+            });
         });
     </script>
 </body>
