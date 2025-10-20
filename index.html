@@ -3,94 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SuperHero Maths - Version 2.3 Complete</title>
+    <title>SuperHero Maths</title>
     <style>
-        /* Design System CSS */
         :root {
-            /* Primitive Color Tokens */
-            --color-white: rgba(255, 255, 255, 1);
-            --color-black: rgba(0, 0, 0, 1);
-            --color-cream-50: rgba(252, 252, 249, 1);
-            --color-cream-100: rgba(255, 255, 253, 1);
-            --color-gray-200: rgba(245, 245, 245, 1);
-            --color-gray-300: rgba(167, 169, 169, 1);
-            --color-gray-400: rgba(119, 124, 124, 1);
-            --color-slate-500: rgba(98, 108, 113, 1);
-            --color-brown-600: rgba(94, 82, 64, 1);
-            --color-charcoal-700: rgba(31, 33, 33, 1);
-            --color-charcoal-800: rgba(38, 40, 40, 1);
-            --color-slate-900: rgba(19, 52, 59, 1);
-            --color-teal-300: rgba(50, 184, 198, 1);
-            --color-teal-400: rgba(45, 166, 178, 1);
-            --color-teal-500: rgba(33, 128, 141, 1);
-            --color-teal-600: rgba(29, 116, 128, 1);
-            --color-teal-700: rgba(26, 104, 115, 1);
-            --color-red-400: rgba(255, 84, 89, 1);
-            --color-red-500: rgba(192, 21, 47, 1);
-            --color-orange-400: rgba(230, 129, 97, 1);
-            --color-orange-500: rgba(168, 75, 47, 1);
-
-            /* RGB versions for opacity control */
-            --color-brown-600-rgb: 94, 82, 64;
-            --color-teal-500-rgb: 33, 128, 141;
-            --color-slate-900-rgb: 19, 52, 59;
-            --color-slate-500-rgb: 98, 108, 113;
-            --color-red-500-rgb: 192, 21, 47;
-            --color-red-400-rgb: 255, 84, 89;
-
-            /* Background color tokens */
-            --color-bg-1: rgba(59, 130, 246, 0.08);
-            --color-bg-2: rgba(245, 158, 11, 0.08);
-            --color-bg-3: rgba(34, 197, 94, 0.08);
-            --color-bg-4: rgba(239, 68, 68, 0.08);
-
-            /* Semantic Color Tokens */
-            --color-background: var(--color-cream-50);
-            --color-surface: var(--color-cream-100);
-            --color-text: var(--color-slate-900);
-            --color-text-secondary: var(--color-slate-500);
-            --color-primary: var(--color-teal-500);
-            --color-primary-hover: var(--color-teal-600);
-            --color-primary-active: var(--color-teal-700);
-            --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
-            --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
-            --color-border: rgba(var(--color-brown-600-rgb), 0.2);
-            --color-btn-primary-text: var(--color-cream-50);
-            --color-error: var(--color-red-500);
-            --color-success: var(--color-teal-500);
-
-            /* Typography */
-            --font-family-base: "Arial", sans-serif;
-            --font-size-sm: 12px;
-            --font-size-base: 14px;
-            --font-size-lg: 18px;
-            --font-size-xl: 20px;
-            --font-size-2xl: 24px;
-            --font-size-3xl: 28px;
-            --font-size-4xl: 36px;
-            --font-weight-normal: 400;
-            --font-weight-medium: 500;
-            --font-weight-bold: 600;
-
-            /* Spacing */
-            --space-4: 4px;
-            --space-8: 8px;
-            --space-12: 12px;
-            --space-16: 16px;
-            --space-20: 20px;
-            --space-24: 24px;
-            --space-32: 32px;
-
-            /* Border Radius */
-            --radius-base: 8px;
-            --radius-lg: 12px;
-
-            /* Shadows */
-            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+            --color-primary: rgba(33, 128, 141, 1);
+            --color-primary-hover: rgba(29, 116, 128, 1);
+            --color-surface: rgba(255, 255, 253, 1);
+            --color-text: rgba(19, 52, 59, 1);
+            --color-text-secondary: rgba(98, 108, 113, 1);
+            --color-border: rgba(94, 82, 64, 0.2);
+            --color-success: rgba(33, 128, 141, 1);
+            --color-error: rgba(192, 21, 47, 1);
         }
 
-        /* Base styles */
         * {
             margin: 0;
             padding: 0;
@@ -98,28 +23,26 @@
         }
 
         body {
-            font-family: var(--font-family-base);
+            font-family: Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--color-text);
+            padding: 20px;
         }
 
         .app-container {
             width: 100%;
             max-width: 800px;
-            margin: var(--space-20);
         }
 
         .screen {
             display: none;
             background: var(--color-surface);
-            border-radius: var(--radius-lg);
-            padding: var(--space-32);
-            box-shadow: var(--shadow-md);
-            text-align: center;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .screen.active {
@@ -127,110 +50,98 @@
         }
 
         h1 {
-            font-size: var(--font-size-4xl);
+            font-size: 36px;
             color: var(--color-primary);
-            margin-bottom: var(--space-16);
+            margin-bottom: 16px;
+            text-align: center;
         }
 
         h2 {
-            font-size: var(--font-size-3xl);
+            font-size: 28px;
             color: var(--color-primary);
-            margin-bottom: var(--space-24);
+            margin-bottom: 24px;
+            text-align: center;
         }
 
         .subtitle {
-            font-size: var(--font-size-lg);
+            font-size: 18px;
             color: var(--color-text-secondary);
-            margin-bottom: var(--space-32);
+            margin-bottom: 32px;
+            text-align: center;
         }
 
-        /* Button Styles */
         .btn {
-            padding: var(--space-12) var(--space-24);
+            padding: 12px 24px;
             border: none;
-            border-radius: var(--radius-base);
-            font-size: var(--font-size-base);
-            font-weight: var(--font-weight-medium);
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.2s;
             min-height: 44px;
-            min-width: 120px;
-        }
-
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
         }
 
         .btn-primary {
             background: var(--color-primary);
-            color: var(--color-btn-primary-text);
+            color: white;
         }
 
-        .btn-primary:hover:not(:disabled) {
+        .btn-primary:hover {
             background: var(--color-primary-hover);
         }
 
         .btn-secondary {
-            background: var(--color-secondary);
+            background: rgba(94, 82, 64, 0.12);
             color: var(--color-text);
             border: 1px solid var(--color-border);
         }
 
-        .btn-secondary:hover:not(:disabled) {
-            background: var(--color-secondary-hover);
-        }
-
         .button-group {
             display: flex;
-            gap: var(--space-12);
+            gap: 12px;
             justify-content: center;
             flex-wrap: wrap;
-            margin: var(--space-16) 0;
+            margin: 16px 0;
         }
 
-        /* User Selection */
         .user-list {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: var(--space-16);
-            margin-bottom: var(--space-32);
+            gap: 16px;
+            margin-bottom: 32px;
         }
 
         .user-card {
-            background: var(--color-bg-1);
+            background: rgba(59, 130, 246, 0.08);
             border: 2px solid var(--color-border);
-            border-radius: var(--radius-lg);
-            padding: var(--space-24);
+            border-radius: 12px;
+            padding: 24px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.2s;
             text-align: center;
         }
 
         .user-card:hover {
             transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
             border-color: var(--color-primary);
         }
 
         .user-avatar {
-            font-size: var(--font-size-4xl);
-            margin-bottom: var(--space-12);
+            font-size: 36px;
+            margin-bottom: 12px;
         }
 
         .user-name {
-            font-size: var(--font-size-xl);
-            font-weight: var(--font-weight-bold);
-            color: var(--color-text);
-            margin-bottom: var(--space-8);
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
         }
 
         .user-stats {
-            font-size: var(--font-size-sm);
+            font-size: 12px;
             color: var(--color-text-secondary);
         }
 
-        /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
@@ -250,33 +161,29 @@
 
         .modal-content {
             background: var(--color-surface);
-            padding: var(--space-32);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-md);
+            padding: 32px;
+            border-radius: 12px;
             max-width: 500px;
             width: 90%;
         }
 
         .form-group {
-            margin-bottom: var(--space-16);
-            text-align: left;
+            margin-bottom: 16px;
         }
 
         .form-label {
             display: block;
-            margin-bottom: var(--space-8);
-            font-weight: var(--font-weight-medium);
-            font-size: var(--font-size-sm);
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 12px;
         }
 
         .form-control {
             width: 100%;
-            padding: var(--space-12);
-            font-size: var(--font-size-base);
+            padding: 12px;
+            font-size: 14px;
             border: 2px solid var(--color-border);
-            border-radius: var(--radius-base);
-            background: var(--color-surface);
-            color: var(--color-text);
+            border-radius: 8px;
         }
 
         .form-control:focus {
@@ -287,18 +194,16 @@
         .avatar-selection {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: var(--space-8);
-            margin-bottom: var(--space-16);
+            gap: 8px;
         }
 
         .avatar-option {
-            background: var(--color-secondary);
+            background: rgba(94, 82, 64, 0.12);
             border: 2px solid var(--color-border);
-            border-radius: var(--radius-base);
-            padding: var(--space-12);
-            font-size: var(--font-size-2xl);
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 24px;
             cursor: pointer;
-            transition: all 0.2s ease;
             text-align: center;
             min-height: 60px;
             display: flex;
@@ -308,66 +213,37 @@
 
         .avatar-option:hover {
             border-color: var(--color-primary);
-            background: var(--color-secondary-hover);
         }
 
         .avatar-option.selected {
             background: var(--color-primary);
-            color: white;
             border-color: var(--color-primary);
         }
 
-        /* Question Screen */
-        .progress-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: var(--space-24);
-            padding: var(--space-16);
-            background: var(--color-bg-2);
-            border-radius: var(--radius-base);
-            flex-wrap: wrap;
-            gap: var(--space-16);
-        }
-
-        .timer {
-            font-size: var(--font-size-xl);
-            font-weight: var(--font-weight-bold);
-            color: var(--color-primary);
-        }
-
-        .timer.warning {
-            color: var(--color-orange-500);
-        }
-
-        .timer.danger {
-            color: var(--color-red-500);
-        }
-
         .question-container {
-            background: var(--color-bg-1);
-            border-radius: var(--radius-lg);
-            padding: var(--space-24);
-            margin-bottom: var(--space-24);
+            background: rgba(59, 130, 246, 0.08);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
             border: 2px solid var(--color-border);
         }
 
         .question-text {
-            font-size: var(--font-size-xl);
-            margin-bottom: var(--space-24);
-            color: var(--color-text);
+            font-size: 20px;
+            margin-bottom: 24px;
+            text-align: center;
         }
 
         .answer-input {
             width: 100%;
             max-width: 300px;
-            padding: var(--space-12) var(--space-16);
-            font-size: var(--font-size-lg);
+            padding: 12px 16px;
+            font-size: 18px;
             border: 2px solid var(--color-border);
-            border-radius: var(--radius-base);
-            margin-bottom: var(--space-16);
+            border-radius: 8px;
             text-align: center;
-            background: var(--color-surface);
+            display: block;
+            margin: 0 auto 16px;
         }
 
         .answer-input:focus {
@@ -376,462 +252,88 @@
         }
 
         .feedback {
-            margin: var(--space-16) 0;
-            padding: var(--space-16);
-            border-radius: var(--radius-base);
-            font-size: var(--font-size-base);
-            font-weight: var(--font-weight-medium);
+            margin: 16px 0;
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
         }
 
         .feedback.correct {
-            background: rgba(var(--color-teal-500-rgb), 0.1);
+            background: rgba(33, 128, 141, 0.1);
             color: var(--color-success);
             border: 2px solid var(--color-success);
         }
 
         .feedback.incorrect {
-            background: rgba(var(--color-red-500-rgb), 0.1);
+            background: rgba(192, 21, 47, 0.1);
             color: var(--color-error);
             border: 2px solid var(--color-error);
         }
 
-        /* Error Display */
-        .error-display {
-            display: none;
-            background: rgba(var(--color-red-500-rgb), 0.1);
-            color: var(--color-error);
-            border: 2px solid var(--color-error);
-            border-radius: var(--radius-base);
-            padding: var(--space-16);
-            margin: var(--space-16) 0;
-            font-weight: var(--font-weight-medium);
-        }
-
-        /* Leaderboard */
-        .leaderboard-item {
+        .progress-info {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            padding: var(--space-12);
-            margin-bottom: var(--space-8);
-            background: var(--color-bg-3);
-            border-radius: var(--radius-base);
+            margin-bottom: 24px;
+            padding: 16px;
+            background: rgba(245, 158, 11, 0.08);
+            border-radius: 8px;
         }
 
-        .player-info {
-            display: flex;
-            align-items: center;
-            gap: var(--space-12);
-        }
-
-        .rank {
-            font-weight: var(--font-weight-bold);
-            color: var(--color-primary);
-        }
-
-        /* Mode Selection Styles */
-        .mode-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--space-24);
-            margin-bottom: var(--space-32);
-        }
-
-        .mode-card {
-            background: var(--color-bg-1);
-            border: 2px solid var(--color-border);
-            border-radius: var(--radius-lg);
-            padding: var(--space-32);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .mode-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--color-primary);
-        }
-
-        .mode-icon {
-            font-size: 3rem;
-            margin-bottom: var(--space-16);
-        }
-
-        .mode-card h3 {
-            font-size: var(--font-size-2xl);
-            margin-bottom: var(--space-12);
-            color: var(--color-primary);
-        }
-
-        .mode-card p {
-            color: var(--color-text-secondary);
-            margin-bottom: var(--space-16);
-        }
-
-        .mode-stats {
-            font-size: var(--font-size-sm);
-            font-weight: var(--font-weight-bold);
-            color: var(--color-success);
-        }
-
-        /* Enhanced Game Screen */
-        .question-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: var(--space-16);
-            padding-bottom: var(--space-12);
-            border-bottom: 1px solid var(--color-border);
-        }
-
-        .question-category {
-            background: var(--color-primary);
-            color: white;
-            padding: var(--space-4) var(--space-12);
-            border-radius: var(--radius-base);
-            font-size: var(--font-size-sm);
-            font-weight: var(--font-weight-bold);
-        }
-
-        .difficulty {
-            color: var(--color-orange-500);
-            font-size: var(--font-size-lg);
-        }
-
-        .answer-section {
-            margin: var(--space-24) 0;
-        }
-
-        .input-help {
-            font-size: var(--font-size-sm);
-            color: var(--color-text-secondary);
-            margin-top: var(--space-8);
-            font-style: italic;
-        }
-
-        .progress-left, .progress-right {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-8);
-        }
-
-        .progress-right {
-            text-align: right;
-        }
-
-        .game-footer {
-            margin-top: var(--space-24);
-            display: flex;
-            justify-content: center;
-            gap: var(--space-12);
-            flex-wrap: wrap;
-        }
-
-        /* Results Screen */
-        .results-container {
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .final-score {
-            text-align: center;
-            margin-bottom: var(--space-32);
-        }
-
-        .score-number {
-            font-size: 4rem;
-            font-weight: var(--font-weight-bold);
-            color: var(--color-primary);
-            line-height: 1;
-        }
-
-        .score-label {
-            font-size: var(--font-size-lg);
-            color: var(--color-text-secondary);
-            margin-top: var(--space-8);
-        }
-
-        .results-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-16);
-            margin-bottom: var(--space-24);
-        }
-
-        .stat-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: var(--space-12);
-            background: var(--color-bg-2);
-            border-radius: var(--radius-base);
-        }
-
-        .stat-label {
-            font-weight: var(--font-weight-medium);
-        }
-
-        .stat-value {
-            font-weight: var(--font-weight-bold);
-            color: var(--color-primary);
-        }
-
-        /* Hint Container */
-        .hint-container {
-            background: var(--color-bg-2);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-base);
-            padding: var(--space-16);
-            margin: var(--space-16) 0;
-        }
-
-        .hint-text {
-            color: var(--color-text);
-            font-style: italic;
-        }
-
-        /* Achievement styles */
-        .achievement {
-            background: linear-gradient(135deg, var(--color-teal-500), var(--color-teal-600));
-            color: white;
-            padding: var(--space-16);
-            border-radius: var(--radius-lg);
-            text-align: center;
-            margin: var(--space-16) 0;
-        }
-
-        /* Mistake review */
-        .mistake-item {
-            background: rgba(var(--color-red-500-rgb), 0.05);
-            border: 1px solid rgba(var(--color-red-500-rgb), 0.2);
-            border-radius: var(--radius-base);
-            padding: var(--space-16);
-            margin-bottom: var(--space-12);
-        }
-
-        .mistake-question {
-            font-weight: var(--font-weight-medium);
-            margin-bottom: var(--space-8);
-        }
-
-        .mistake-answers {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-12);
-            font-size: var(--font-size-sm);
-        }
-
-        .your-answer {
-            color: var(--color-error);
-        }
-
-        .correct-answer {
-            color: var(--color-success);
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
-            .app-container {
-                margin: var(--space-12);
-            }
-
-            .screen {
-                padding: var(--space-24);
-            }
-
-            h1 {
-                font-size: var(--font-size-3xl);
-            }
-
             .user-list {
                 grid-template-columns: 1fr;
             }
-
-            .progress-info {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .mode-cards {
-                grid-template-columns: 1fr;
-            }
-
-            .question-header {
-                flex-direction: column;
-                gap: var(--space-12);
-                text-align: center;
-            }
-
-            .results-stats {
-                grid-template-columns: 1fr;
-            }
-
-            .score-number {
-                font-size: 3rem;
-            }
-
-            .mistake-answers {
-                grid-template-columns: 1fr;
+            h1 {
+                font-size: 28px;
             }
         }
     </style>
 </head>
 <body>
     <div class="app-container">
-        <!-- Error Display -->
-        <div id="errorDisplay" class="error-display"></div>
-
         <!-- User Selection Screen -->
         <div class="screen active" id="userScreen">
             <h1>🦸 SuperHero Maths</h1>
             <p class="subtitle">Choose your profile to start learning!</p>
             
-            <div id="userList" class="user-list">
-                <!-- Users will be populated here -->
-            </div>
+            <div id="userList" class="user-list"></div>
             
             <div class="button-group">
                 <button class="btn btn-primary" id="createUserBtn">➕ Create New User</button>
                 <button class="btn btn-secondary" id="parentViewBtn">👨‍👩‍👧‍👦 Parent View</button>
-                <button class="btn btn-secondary" id="leaderboardBtn">🏆 Leaderboard</button>
             </div>
         </div>
 
-        <!-- Mode Selection Screen -->
-        <div class="screen" id="modeScreen">
-            <h2>Choose Your Mode</h2>
-            <p class="subtitle">Welcome back, <span id="welcomeUser">User</span>!</p>
-            
-            <div class="mode-cards">
-                <div class="mode-card" id="practiceMode">
-                    <div class="mode-icon">📚</div>
-                    <h3>Practice Mode</h3>
-                    <p>Learn at your own pace with hints and unlimited time</p>
-                    <div class="mode-stats" id="practiceStats">Best: 0 points</div>
-                </div>
-                
-                <div class="mode-card" id="challengeMode">
-                    <div class="mode-icon">⚡</div>
-                    <h3>Challenge Mode</h3>
-                    <p>Test your skills with timed questions and compete!</p>
-                    <div class="mode-stats" id="challengeStats">Best: 0 points</div>
-                </div>
-            </div>
-            
-            <div class="button-group">
-                <button class="btn btn-secondary" onclick="backToUsers()">← Back to Users</button>
-            </div>
-        </div>
-
-        <!-- Game Screen (Practice & Challenge) -->
-        <div class="screen" id="gameScreen">
+        <!-- Practice Screen -->
+        <div class="screen" id="practiceScreen">
             <div class="progress-info">
-                <div class="progress-left">
-                    <div id="questionNumber">Question 1 of 10</div>
-                    <div id="scoreDisplay">Score: 0 points</div>
-                    <div id="streakDisplay">Streak: 0</div>
-                </div>
-                <div class="progress-right">
-                    <div class="timer" id="timerDisplay">∞</div>
-                    <div id="modeDisplay">Practice Mode</div>
-                </div>
+                <div id="questionNumber">Question 1</div>
+                <div id="scoreDisplay">Score: 0/0</div>
             </div>
             
             <div class="question-container">
-                <div class="question-header">
-                    <div class="question-category" id="questionCategory">Arithmetic</div>
-                    <div class="difficulty" id="difficultyLevel">★★☆</div>
-                </div>
-                
-                <div class="question-text" id="questionText">Loading question...</div>
-                
-                <div class="answer-section">
-                    <input type="text" class="answer-input" id="answerInput" placeholder="Type your answer...">
-                    <div class="input-help" id="inputHelp">Enter a number (e.g., 42)</div>
-                </div>
+                <div class="question-text" id="questionText">Loading...</div>
+                <input type="text" class="answer-input" id="answerInput" name="answer" placeholder="Type your answer...">
                 
                 <div class="button-group">
-                    <button class="btn btn-primary" id="submitBtn">Submit Answer</button>
-                    <button class="btn btn-secondary" id="hintBtn" style="display: none;">💡 Hint</button>
-                    <button class="btn btn-secondary" id="nextBtn" style="display: none;">Next →</button>
+                    <button class="btn btn-primary" id="submitBtn" disabled>Submit Answer</button>
                 </div>
                 
                 <div id="feedbackContainer"></div>
-                <div id="hintContainer" style="display: none;"></div>
-            </div>
-            
-            <div class="game-footer">
-                <button class="btn btn-secondary" id="pauseBtn">⏸️ Pause</button>
-                <button class="btn btn-secondary" onclick="backToModes()">🏠 Back to Menu</button>
-            </div>
-        </div>
-
-        <!-- Results Screen -->
-        <div class="screen" id="resultsScreen">
-            <h2>🎉 Game Complete!</h2>
-            <div class="results-container">
-                <div class="final-score">
-                    <div class="score-number" id="finalScore">0</div>
-                    <div class="score-label">Total Points</div>
-                </div>
-                
-                <div class="results-stats">
-                    <div class="stat-item">
-                        <span class="stat-label">Correct:</span>
-                        <span class="stat-value" id="finalCorrect">0/10</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-label">Accuracy:</span>
-                        <span class="stat-value" id="finalAccuracy">0%</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-label">Best Streak:</span>
-                        <span class="stat-value" id="finalStreak">0</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-label">Time:</span>
-                        <span class="stat-value" id="finalTime">0:00</span>
-                    </div>
-                </div>
-                
-                <div id="achievementContainer" style="display: none;">
-                    <h3>🏆 New Achievement!</h3>
-                    <div id="achievementText"></div>
-                </div>
-                
-                <div id="mistakeReview" style="display: none;">
-                    <h3>📝 Review Mistakes</h3>
-                    <div id="mistakesList"></div>
-                </div>
             </div>
             
             <div class="button-group">
-                <button class="btn btn-primary" id="playAgainBtn">🔄 Play Again</button>
-                <button class="btn btn-secondary" id="viewLeaderboardBtn">🏆 Leaderboard</button>
-                <button class="btn btn-secondary" onclick="backToModes()">🏠 Back to Menu</button>
-            </div>
-        </div>
-
-        <!-- Leaderboard Screen -->
-        <div class="screen" id="leaderboardScreen">
-            <h2>🏆 Leaderboard</h2>
-            <div id="leaderboardList">
-                <!-- Leaderboard will be populated here -->
-            </div>
-            <div class="button-group">
-                <button class="btn btn-primary" onclick="backToUsers()">🏠 Back to Menu</button>
+                <button class="btn btn-secondary" id="backBtn">🏠 Back to Menu</button>
             </div>
         </div>
 
         <!-- Parent Dashboard -->
         <div class="screen" id="parentScreen">
             <h2>👨‍👩‍👧‍👦 Parent Dashboard</h2>
-            <div id="parentContent">
-                <!-- Parent dashboard content -->
-            </div>
+            <div id="parentContent"></div>
             <div class="button-group">
-                <button class="btn btn-primary" onclick="backToMenu()">🏠 Back to Menu</button>
+                <button class="btn btn-primary" id="backToMenuBtn">🏠 Back to Menu</button>
             </div>
         </div>
     </div>
@@ -842,13 +344,11 @@
             <h2>Create New User</h2>
             <div class="form-group">
                 <label class="form-label" for="usernameInput">Name:</label>
-                <input type="text" class="form-control" id="usernameInput" placeholder="Enter your name" maxlength="20">
+                <input type="text" class="form-control" id="usernameInput" name="username" placeholder="Enter your name" maxlength="20">
             </div>
             <div class="form-group">
                 <label class="form-label">Choose your avatar:</label>
-                <div class="avatar-selection" id="avatarSelection">
-                    <!-- Avatars will be populated here -->
-                </div>
+                <div class="avatar-selection" id="avatarSelection"></div>
             </div>
             <div class="button-group">
                 <button class="btn btn-primary" id="confirmCreateBtn">Create</button>
@@ -858,161 +358,85 @@
     </div>
 
     <script type="module">
-        'use strict';
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDeCXHxMolX3VxoDiIndMXjEU_EQJ2G_HI",
+            authDomain: "superheromaths.firebaseapp.com",
+            projectId: "superheromaths",
+            storageBucket: "superheromaths.firebasestorage.app",
+            messagingSenderId: "695354044143",
+            appId: "1:695354044143:web:e78e885474bd1b0693b51a"
+        };
 
-        // Main initialization function - ASYNC
-        async function initializeApp() {
-            console.log('Starting app initialization...');
-            
-            // Firebase Configuration
-            const firebaseConfig = {
-                apiKey: "AIzaSyDeCXHxMolX3VxoDiIndMXjEU_EQJ2G_HI",
-                authDomain: "superheromaths.firebaseapp.com",
-                projectId: "superheromaths",
-                storageBucket: "superheromaths.firebasestorage.app",
-                messagingSenderId: "695354044143",
-                appId: "1:695354044143:web:e78e885474bd1b0693b51a"
-            };
-            
-            // STEP 1: Load Firebase modules (AWAIT completion)
-            try {
-                const { initializeApp: initFB } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js');
-                const { getFirestore, collection, doc, setDoc, getDoc, getDocs, updateDoc, onSnapshot, query, orderBy } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js');
-                
-                // STEP 2: Initialize Firebase
-                const app = initFB(firebaseConfig);
-                window.db = getFirestore(app);
-                window.firestoreFunctions = { collection, doc, setDoc, getDoc, getDocs, updateDoc, onSnapshot, query, orderBy };
-                
-                console.log('Firebase initialized successfully');
-            } catch (error) {
-                console.error('Firebase initialization error:', error);
-                console.log('App will work in offline mode with localStorage');
-                window.db = null;
-            }
-            
-            // STEP 3: Set up UI and event listeners (AFTER Firebase loads)
-            setupButtons();
-            setupEventListeners();
-            await loadUsers();
-            
-            // STEP 5: Setup real-time listeners
-            if (window.db) {
-                setupRealtimeListeners();
-            }
-            
-            console.log('App initialization complete!');
-        }
-        
-        // Global State
+        // Global variables
+        let db = null;
+        let firebaseFunctions = null;
         let users = {};
         let currentUser = null;
         let selectedAvatar = '🚀';
         let currentQuestion = null;
         let score = 0;
         let questionCount = 0;
-        let timeRemaining = 0;
-        let timerInterval = null;
-        
-        // Predefined names for word problems (40 names as specified)
+
         const names = ['Nacho', 'Javi', 'Gonza', 'Ignacio', 'Javier', 'Gonzalo', 'Steven', 'Harry', 'Noah', 'Aiden', 'Liam', 'Rafa', 'Sergei', 'Ayana', 'Ramon', 'Iñigo', 'Luis', 'Jaime', 'Thiago', 'Leo', 'Felipe', 'Enrique', 'Sofia', 'Flap', 'Ethan', 'Santi', 'William', 'Kaiser', 'Iñaki', 'Cristina', 'Loreto', 'Macarena', 'Ray', 'Nina', 'Ana', 'Maria', 'Sheina', 'Paloma', 'Totu', 'Gaby'];
         const avatars = ['🚀', '⚽', '🎨', '🌟', '🎮', '🦄', '🌈', '🎯', '⭐', '🔥', '💫', '🎪', '🎭', '🎬', '🎤', '🏀'];
         
-        // Game state variables
-        let currentMode = 'practice'; // 'practice' or 'challenge'
-        let gameQuestions = [];
-        let questionIndex = 0;
-        let gameScore = 0;
-        let streak = 0;
-        let maxStreak = 0;
-        let mistakes = [];
-        let gameStartTime = 0;
-        let hintsUsed = 0;
-        let gameStats = {
-            correct: 0,
-            attempted: 0,
-            totalTime: 0
-        };
-        
-        // Complete question bank (553 questions)
-        const questionBank = [
+        // Generate all 553 questions
+        function generateAllQuestions() {
+            const allQuestions = [];
+            
             // Basic Addition (50 questions)
-            { type: 'addition', category: 'Arithmetic', difficulty: 1, question: 'What is 2 + 3?', answer: 5, hint: 'Count on your fingers: 2, then add 3 more.' },
-            { type: 'addition', category: 'Arithmetic', difficulty: 1, question: 'What is 5 + 4?', answer: 9, hint: 'Think: 5 + 5 = 10, so 5 + 4 is one less.' },
-            { type: 'addition', category: 'Arithmetic', difficulty: 1, question: 'What is 6 + 2?', answer: 8, hint: 'Count up from 6: 7, 8!' },
-            { type: 'addition', category: 'Arithmetic', difficulty: 1, question: 'What is 3 + 7?', answer: 10, hint: 'This makes a perfect 10!' },
-            { type: 'addition', category: 'Arithmetic', difficulty: 1, question: 'What is 8 + 1?', answer: 9, hint: 'Adding 1 is like counting to the next number.' },
-            { type: 'addition', category: 'Arithmetic', difficulty: 1, question: 'What is 4 + 5?', answer: 9, hint: 'Think: 4 + 4 = 8, plus one more makes 9.' },
-            { type: 'addition', category: 'Arithmetic', difficulty: 1, question: 'What is 7 + 3?', answer: 10, hint: 'Another way to make 10!' },
-            { type: 'addition', category: 'Arithmetic', difficulty: 1, question: 'What is 9 + 1?', answer: 10, hint: 'Adding 1 to 9 gives you 10.' },
-            { type: 'addition', category: 'Arithmetic', difficulty: 1, question: 'What is 2 + 6?', answer: 8, hint: 'Count on from 6: 7, 8!' },
-            { type: 'addition', category: 'Arithmetic', difficulty: 1, question: 'What is 5 + 5?', answer: 10, hint: 'Double 5 makes 10!' },
+            const additionPairs = [
+                [2,3], [5,4], [6,2], [3,7], [8,1], [4,5], [7,3], [9,1], [2,6], [5,5],
+                [12,8], [15,7], [23,9], [34,16], [27,15], [19,13], [28,14], [36,18], [45,27], [52,29],
+                [11,9], [14,6], [17,8], [21,19], [33,17], [25,25], [38,12], [41,29], [46,34], [53,27],
+                [16,24], [29,31], [37,23], [44,16], [48,32], [51,19], [55,25], [58,22], [62,18], [67,23],
+                [13,17], [26,14], [35,25], [42,28], [49,31], [56,24], [63,27], [71,19], [78,22], [85,15]
+            ];
+            additionPairs.forEach(([a, b]) => {
+                allQuestions.push({
+                    question: `What is ${a} + ${b}?`,
+                    answer: a + b,
+                    type: 'addition'
+                });
+            });
             
-            // More Addition with larger numbers (40 more)
-            { type: 'addition', category: 'Arithmetic', difficulty: 2, question: 'What is 12 + 8?', answer: 20, hint: 'Think: 12 + 8 = 10 + 2 + 8 = 10 + 10 = 20' },
-            { type: 'addition', category: 'Arithmetic', difficulty: 2, question: 'What is 15 + 7?', answer: 22, hint: 'Break it down: 15 + 5 + 2 = 20 + 2 = 22' },
-            { type: 'addition', category: 'Arithmetic', difficulty: 2, question: 'What is 23 + 9?', answer: 32, hint: 'Add 10 first: 23 + 10 = 33, then subtract 1' },
-            { type: 'addition', category: 'Arithmetic', difficulty: 2, question: 'What is 34 + 16?', answer: 50, hint: '30 + 10 = 40, and 4 + 6 = 10, so 40 + 10 = 50' },
-            { type: 'addition', category: 'Arithmetic', difficulty: 2, question: 'What is 27 + 15?', answer: 42, hint: '27 + 10 = 37, then 37 + 5 = 42' },
-            { type: 'addition', category: 'Arithmetic', difficulty: 2, question: 'What is 19 + 13?', answer: 32, hint: '19 + 1 = 20, then 20 + 12 = 32' },
-            { type: 'addition', category: 'Arithmetic', difficulty: 2, question: 'What is 28 + 14?', answer: 42, hint: '28 + 12 = 40, then 40 + 2 = 42' },
-            { type: 'addition', category: 'Arithmetic', difficulty: 2, question: 'What is 36 + 18?', answer: 54, hint: '36 + 20 = 56, then 56 - 2 = 54' },
-            { type: 'addition', category: 'Arithmetic', difficulty: 2, question: 'What is 45 + 27?', answer: 72, hint: '45 + 25 = 70, then 70 + 2 = 72' },
-            { type: 'addition', category: 'Arithmetic', difficulty: 2, question: 'What is 52 + 29?', answer: 81, hint: '52 + 30 = 82, then 82 - 1 = 81' },
-            
-            // Continue with more questions to reach 553 total
-            // For brevity, I'll include a representative sample and add the rest programmatically
-        ];
-        
-        // Generate additional questions programmatically to reach 553 total
-        function generateQuestionBank() {
-            const questions = [...questionBank];
-            
-            // Generate subtraction questions (80 questions)
+            // Subtraction (80 questions)
             for (let i = 0; i < 80; i++) {
                 const a = Math.floor(Math.random() * 50) + 10;
                 const b = Math.floor(Math.random() * a);
-                questions.push({
-                    type: 'subtraction',
-                    category: 'Arithmetic',
-                    difficulty: Math.floor((a + b) / 20) + 1,
+                allQuestions.push({
                     question: `What is ${a} - ${b}?`,
                     answer: a - b,
-                    hint: `Think: ${a} take away ${b} leaves ${a - b}`
+                    type: 'subtraction'
                 });
             }
             
-            // Generate multiplication questions (80 questions)
+            // Multiplication (80 questions)
             for (let i = 0; i < 80; i++) {
                 const a = Math.floor(Math.random() * 12) + 1;
                 const b = Math.floor(Math.random() * 12) + 1;
-                questions.push({
-                    type: 'multiplication',
-                    category: 'Arithmetic',
-                    difficulty: Math.max(Math.floor(a / 4), Math.floor(b / 4)) + 1,
+                allQuestions.push({
                     question: `What is ${a} × ${b}?`,
                     answer: a * b,
-                    hint: `Think of ${a} groups of ${b}, or ${b} groups of ${a}`
+                    type: 'multiplication'
                 });
             }
             
-            // Generate division questions (60 questions)
+            // Division (60 questions)
             for (let i = 0; i < 60; i++) {
                 const b = Math.floor(Math.random() * 12) + 1;
                 const result = Math.floor(Math.random() * 12) + 1;
                 const a = b * result;
-                questions.push({
-                    type: 'division',
-                    category: 'Arithmetic',
-                    difficulty: Math.floor(a / 20) + 1,
+                allQuestions.push({
                     question: `What is ${a} ÷ ${b}?`,
                     answer: result,
-                    hint: `Think: How many ${b}s go into ${a}?`
+                    type: 'division'
                 });
             }
             
-            // Generate word problems (200 questions)
-            const wordProblemTemplates = [
+            // Word Problems (200 questions)
+            const wordTemplates = [
                 {
                     template: '{name} has {a} apples and buys {b} more. How many apples does {name} have in total?',
                     operation: (a, b) => a + b,
@@ -1032,11 +456,31 @@
                     template: '{name} has {a} candies to share equally among {b} friends. How many candies does each friend get?',
                     operation: (a, b) => Math.floor(a / b),
                     type: 'word_division'
+                },
+                {
+                    template: '{name} reads {a} pages on Monday and {b} pages on Tuesday. How many pages did {name} read in total?',
+                    operation: (a, b) => a + b,
+                    type: 'word_addition'
+                },
+                {
+                    template: '{name} has {a} marbles and loses {b} of them. How many marbles does {name} have now?',
+                    operation: (a, b) => a - b,
+                    type: 'word_subtraction'
+                },
+                {
+                    template: '{name} saves ${a} every week for {b} weeks. How much money does {name} save in total?',
+                    operation: (a, b) => a * b,
+                    type: 'word_multiplication'
+                },
+                {
+                    template: '{name} has {a} cookies to pack into {b} boxes. How many cookies go in each box if divided equally?',
+                    operation: (a, b) => Math.floor(a / b),
+                    type: 'word_division'
                 }
             ];
             
             for (let i = 0; i < 200; i++) {
-                const template = wordProblemTemplates[i % wordProblemTemplates.length];
+                const template = wordTemplates[i % wordTemplates.length];
                 const name = names[i % names.length];
                 let a, b;
                 
@@ -1057,274 +501,183 @@
                     .replace('{a}', a)
                     .replace('{b}', b);
                 
-                questions.push({
-                    type: template.type,
-                    category: 'Word Problems',
-                    difficulty: Math.floor((a + b) / 15) + 1,
+                allQuestions.push({
                     question: questionText,
                     answer: template.operation(a, b),
-                    hint: `Read the problem carefully and identify the key numbers: ${a} and ${b}`
+                    type: template.type
                 });
             }
             
-            // Generate fraction questions (43 more to reach 553)
+            // Fractions and Decimals (83 questions to reach 553 total)
             for (let i = 0; i < 43; i++) {
                 const numerator = Math.floor(Math.random() * 8) + 1;
                 const denominator = Math.floor(Math.random() * 8) + 2;
-                const wholeNumber = Math.floor(Math.random() * 5);
                 
-                if (i % 2 === 0) {
-                    questions.push({
-                        type: 'fraction',
-                        category: 'Fractions',
-                        difficulty: 3,
-                        question: `What is ${numerator}/${denominator} as a decimal? (Round to 2 decimal places)`,
-                        answer: Math.round((numerator / denominator) * 100) / 100,
-                        hint: `Divide ${numerator} by ${denominator}`
+                allQuestions.push({
+                    question: `What is ${numerator}/${denominator} as a decimal? (Round to 2 decimal places)`,
+                    answer: Math.round((numerator / denominator) * 100) / 100,
+                    type: 'fraction'
+                });
+            }
+            
+            // More mixed operations (40 questions)
+            for (let i = 0; i < 40; i++) {
+                const a = Math.floor(Math.random() * 20) + 5;
+                const b = Math.floor(Math.random() * 10) + 1;
+                const c = Math.floor(Math.random() * 10) + 1;
+                
+                if (i % 4 === 0) {
+                    allQuestions.push({
+                        question: `What is ${a} + ${b} - ${c}?`,
+                        answer: a + b - c,
+                        type: 'mixed'
+                    });
+                } else if (i % 4 === 1) {
+                    allQuestions.push({
+                        question: `What is ${a} - ${b} + ${c}?`,
+                        answer: a - b + c,
+                        type: 'mixed'
+                    });
+                } else if (i % 4 === 2) {
+                    allQuestions.push({
+                        question: `What is ${b} × ${c} + ${a}?`,
+                        answer: b * c + a,
+                        type: 'mixed'
                     });
                 } else {
-                    const total = wholeNumber * denominator + numerator;
-                    questions.push({
-                        type: 'fraction',
-                        category: 'Fractions',
-                        difficulty: 3,
-                        question: `How many ${denominator}ths are there in ${wholeNumber} and ${numerator}/${denominator}?`,
-                        answer: total,
-                        hint: `Convert the whole number to ${denominator}ths first, then add ${numerator}`
+                    const divisor = Math.floor(Math.random() * 5) + 2;
+                    const dividend = divisor * b;
+                    allQuestions.push({
+                        question: `What is ${dividend} ÷ ${divisor} + ${c}?`,
+                        answer: b + c,
+                        type: 'mixed'
                     });
                 }
             }
             
-            return questions;
+            console.log(`✅ Generated ${allQuestions.length} questions`);
+            return allQuestions;
         }
         
-        // Initialize full question bank
-        let allQuestions = generateQuestionBank();
-        
-        // Error handling function
-        function showError(message) {
-            const errorDiv = document.getElementById('errorDisplay');
-            if (errorDiv) {
-                errorDiv.textContent = message;
-                errorDiv.style.display = 'block';
-                setTimeout(() => {
-                    errorDiv.style.display = 'none';
-                }, 5000);
-            }
-        }
-        
-        // Setup buttons
-        function setupButtons() {
-            console.log('Setting up buttons...');
-            
-            // Create User button
-            const createBtn = document.getElementById('createUserBtn');
-            if (createBtn) {
-                createBtn.addEventListener('click', showCreateUserModal);
-                console.log('Create button listener attached');
-            } else {
-                console.error('Create button not found!');
-            }
-            
-            // Parent View button
-            const parentBtn = document.getElementById('parentViewBtn');
-            if (parentBtn) {
-                parentBtn.addEventListener('click', showParentPasswordModal);
-                console.log('Parent button listener attached');
-            } else {
-                console.error('Parent button not found!');
-            }
-            
-            // Modal buttons
-            const confirmBtn = document.getElementById('confirmCreateBtn');
-            if (confirmBtn) {
-                confirmBtn.addEventListener('click', createUser);
-            }
-            
-            const cancelBtn = document.getElementById('cancelCreateBtn');
-            if (cancelBtn) {
-                cancelBtn.addEventListener('click', closeCreateUserModal);
+        const questions = generateAllQuestions();
+
+        // Initialize Firebase
+        async function initFirebase() {
+            try {
+                console.log('Initializing Firebase...');
+                const { initializeApp } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js');
+                const { getFirestore, collection, doc, setDoc, getDocs, updateDoc } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js');
+                
+                const app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                firebaseFunctions = { collection, doc, setDoc, getDocs, updateDoc };
+                
+                console.log('✅ Firebase initialized successfully');
+                return true;
+            } catch (error) {
+                console.error('❌ Firebase initialization failed:', error);
+                alert('Error connecting to database: ' + error.message);
+                return false;
             }
         }
 
-        // Setup other event listeners
-        function setupEventListeners() {
-            // Close modal on outside click
-            const modal = document.getElementById('createUserModal');
-            if (modal) {
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal) {
-                        closeCreateUserModal();
-                    }
-                });
-            }
-            
-            // Enter key in username input
-            const usernameInput = document.getElementById('usernameInput');
-            if (usernameInput) {
-                usernameInput.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') {
-                        createUser();
-                    }
-                });
-            }
-            
-        }
-        
-        function setupGameControls() {
-            // Submit button and answer input
-            const submitBtn = document.getElementById('submitBtn');
-            const answerInput = document.getElementById('answerInput');
-            const hintBtn = document.getElementById('hintBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            
-            if (submitBtn && answerInput) {
-                // Submit button click
-                submitBtn.addEventListener('click', submitAnswer);
-                
-                // Answer input validation
-                answerInput.addEventListener('input', function() {
-                    const value = this.value.trim();
-                    submitBtn.disabled = value === '';
-                });
-                
-                // Enter key to submit or next
-                answerInput.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') {
-                        if (submitBtn.style.display !== 'none' && !submitBtn.disabled) {
-                            submitAnswer();
-                        } else if (nextBtn && nextBtn.style.display !== 'none') {
-                            nextQuestion();
-                        }
-                    }
-                });
-                
-                console.log('Game controls setup complete');
-            }
-            
-            // Hint button
-            if (hintBtn) {
-                hintBtn.addEventListener('click', showHint);
-            }
-            
-            // Next button
-            if (nextBtn) {
-                nextBtn.addEventListener('click', nextQuestion);
-            }
-            
-            // Leaderboard button
-            const leaderboardBtn = document.getElementById('leaderboardBtn');
-            if (leaderboardBtn) {
-                leaderboardBtn.addEventListener('click', showLeaderboard);
-                console.log('Leaderboard button listener attached');
-            }
-        }
-
-        // Firebase functions with fallback
+        // Save user to Firebase
         async function saveUser(username, userData) {
-            try {
-                if (window.db && window.firestoreFunctions) {
-                    const { doc, setDoc } = window.firestoreFunctions;
-                    await setDoc(doc(window.db, 'users', username), userData);
-                    console.log('User saved to Firebase:', username);
-                } else {
-                    // Fallback to in-memory storage
-                    users[username] = userData;
-                    console.log('User saved to memory:', username);
-                }
-            } catch (error) {
-                console.error('Error saving user:', error);
-                showError('Error saving user: ' + error.message);
-                // Fallback to in-memory storage
-                users[username] = userData;
+            if (!db || !firebaseFunctions) {
+                throw new Error('Database not connected');
             }
+            
+            const { doc, setDoc } = firebaseFunctions;
+            await setDoc(doc(db, 'users', username), userData);
+            console.log('User saved:', username);
         }
-        
+
+        // Load users from Firebase
         async function loadUsers() {
-            console.log('Loading users...');
-            let loadedUsers = {};
-            
-            try {
-                if (window.db && window.firestoreFunctions) {
-                    // Load from Firebase
-                    const { collection, getDocs } = window.firestoreFunctions;
-                    const snapshot = await getDocs(collection(window.db, 'users'));
-                    snapshot.forEach(doc => {
-                        loadedUsers[doc.id] = doc.data();
-                    });
-                    console.log('Loaded users from Firebase:', Object.keys(loadedUsers).length);
-                } else {
-                    // Use in-memory storage
-                    loadedUsers = users;
-                    console.log('Using in-memory users:', Object.keys(loadedUsers).length);
-                }
-            } catch (error) {
-                console.error('Error loading users:', error);
-                loadedUsers = users;
-            }
-            
-            users = loadedUsers;
-            updateUserList();
-        }
-        
-        // User creation modal functions
-        function showCreateUserModal() {
-            console.log('Opening create user modal');
-            const modal = document.getElementById('createUserModal');
-            if (!modal) {
-                console.error('Modal not found!');
+            if (!db || !firebaseFunctions) {
+                console.log('Database not connected, skipping load');
                 return;
             }
+            
+            try {
+                const { collection, getDocs } = firebaseFunctions;
+                const snapshot = await getDocs(collection(db, 'users'));
+                
+                users = {};
+                snapshot.forEach(doc => {
+                    users[doc.id] = doc.data();
+                });
+                
+                console.log(`Loaded ${Object.keys(users).length} users`);
+                updateUserList();
+            } catch (error) {
+                console.error('Error loading users:', error);
+                alert('Error loading users: ' + error.message);
+            }
+        }
+
+        // Update user list display
+        function updateUserList() {
+            const userList = document.getElementById('userList');
+            userList.innerHTML = '';
+            
+            if (Object.keys(users).length === 0) {
+                userList.innerHTML = '<p style="text-align: center; color: #666;">No users yet! Create your first profile to get started.</p>';
+                return;
+            }
+            
+            Object.values(users).forEach(user => {
+                const card = document.createElement('div');
+                card.className = 'user-card';
+                card.innerHTML = `
+                    <div class="user-avatar">${user.avatar}</div>
+                    <div class="user-name">${user.username}</div>
+                    <div class="user-stats">
+                        Score: ${user.totalCorrect || 0}/${user.totalAttempted || 0}<br>
+                        Points: ${user.totalPoints || 0}
+                    </div>
+                `;
+                card.onclick = () => selectUser(user.username);
+                userList.appendChild(card);
+            });
+        }
+
+        // Show create user modal
+        function showCreateUserModal() {
+            const modal = document.getElementById('createUserModal');
             modal.classList.add('show');
             
-            // Clear form
-            const usernameInput = document.getElementById('usernameInput');
-            if (usernameInput) {
-                usernameInput.value = '';
-                usernameInput.focus();
-            }
+            document.getElementById('usernameInput').value = '';
+            document.getElementById('usernameInput').focus();
             
-            // Setup avatars
-            renderAvatarGrid();
-        }
-        
-        function closeCreateUserModal() {
-            const modal = document.getElementById('createUserModal');
-            if (modal) {
-                modal.classList.remove('show');
-            }
-        }
-        
-        function renderAvatarGrid() {
+            // Render avatars
             const grid = document.getElementById('avatarSelection');
-            if (!grid) return;
-            
             grid.innerHTML = '';
-            avatars.forEach((emoji, index) => {
+            avatars.forEach((emoji, i) => {
                 const div = document.createElement('div');
-                div.className = 'avatar-option';
-                if (index === 0) div.classList.add('selected');
+                div.className = 'avatar-option' + (i === 0 ? ' selected' : '');
                 div.textContent = emoji;
-                div.addEventListener('click', function() {
+                div.onclick = function() {
                     document.querySelectorAll('.avatar-option').forEach(el => el.classList.remove('selected'));
                     this.classList.add('selected');
                     selectedAvatar = emoji;
-                });
+                };
                 grid.appendChild(div);
             });
             selectedAvatar = avatars[0];
         }
-        
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('createUserModal').classList.remove('show');
+        }
+
+        // Create user
         async function createUser() {
             const username = document.getElementById('usernameInput').value.trim();
             
             if (!username) {
                 alert('Please enter a name');
-                return;
-            }
-            
-            if (username.length < 2) {
-                alert('Name must be at least 2 characters');
                 return;
             }
             
@@ -1340,102 +693,38 @@
                     totalPoints: 0,
                     totalCorrect: 0,
                     totalAttempted: 0,
-                    createdAt: new Date(),
-                    lastActive: new Date()
+                    createdAt: new Date().toISOString()
                 };
                 
                 await saveUser(username, userData);
-                closeCreateUserModal();
-                alert(`Welcome, ${username}! 🎉`);
-                await loadUsers();
+                users[username] = userData;
                 
-                console.log('User created successfully:', username);
+                closeModal();
+                updateUserList();
+                alert(`Welcome, ${username}! 🎉`);
             } catch (error) {
                 console.error('Error creating user:', error);
                 alert('Error creating user: ' + error.message);
             }
         }
-        
-        function updateUserList() {
-            const userList = document.getElementById('userList');
-            if (!userList) {
-                console.error('User list container not found');
-                return;
-            }
-            
-            userList.innerHTML = '';
-            
-            if (Object.keys(users).length === 0) {
-                userList.innerHTML = '<p style="text-align: center; color: #666;">No users yet. Create one to get started!</p>';
-                return;
-            }
-            
-            Object.values(users).forEach(user => {
-                const card = document.createElement('button');
-                card.className = 'user-card';
-                card.innerHTML = `
-                    <div class="user-avatar">${user.avatar}</div>
-                    <div class="user-name">${user.username}</div>
-                    <div class="user-stats">Points: ${user.totalPoints || 0}</div>
-                `;
-                card.addEventListener('click', () => selectUser(user.username));
-                userList.appendChild(card);
-            });
-        }
-        
+
+        // Select user and start practice
         function selectUser(username) {
-            console.log('User selected:', username);
-            window.currentUserName = username;
             currentUser = users[username];
-            
-            // Update welcome message
-            const welcomeUser = document.getElementById('welcomeUser');
-            if (welcomeUser) {
-                welcomeUser.textContent = currentUser.username;
-            }
-            
-            // Update mode stats
-            updateModeStats();
-            
-            // Show mode selection screen
-            showScreen('modeScreen');
+            console.log('User selected:', username);
+            startPractice();
         }
-        
-        function updateModeStats() {
-            if (!currentUser) return;
-            
-            const practiceStats = document.getElementById('practiceStats');
-            const challengeStats = document.getElementById('challengeStats');
-            
-            if (practiceStats) {
-                practiceStats.textContent = `Best: ${currentUser.practiceHighScore || 0} points`;
-            }
-            if (challengeStats) {
-                challengeStats.textContent = `Best: ${currentUser.challengeHighScore || 0} points`;
-            }
-        }
-        
-        function setupModeSelection() {
-            const practiceMode = document.getElementById('practiceMode');
-            const challengeMode = document.getElementById('challengeMode');
-            
-            if (practiceMode) {
-                practiceMode.addEventListener('click', () => startGame('practice'));
-            }
-            if (challengeMode) {
-                challengeMode.addEventListener('click', () => startGame('challenge'));
-            }
-        }
-        
-        // Practice mode functions
+
+        // Start practice mode
         function startPractice() {
-            showScreen('practiceScreen');
             score = 0;
             questionCount = 0;
-            nextQuestion();
+            showScreen('practiceScreen');
+            loadNextQuestion();
         }
-        
-        function nextQuestion() {
+
+        // Load next question
+        function loadNextQuestion() {
             currentQuestion = questions[Math.floor(Math.random() * questions.length)];
             questionCount++;
             
@@ -1444,29 +733,20 @@
             document.getElementById('scoreDisplay').textContent = `Score: ${score}/${questionCount - 1}`;
             
             const answerInput = document.getElementById('answerInput');
-            if (answerInput) {
-                answerInput.value = '';
-                answerInput.disabled = false;
-                answerInput.focus();
-            }
+            answerInput.value = '';
+            answerInput.disabled = false;
+            answerInput.focus();
             
-            const submitBtn = document.getElementById('submitBtn');
-            if (submitBtn) {
-                submitBtn.style.display = 'block';
-                submitBtn.disabled = true;
-            }
-            
-            // Clear feedback
+            document.getElementById('submitBtn').disabled = true;
             document.getElementById('feedbackContainer').innerHTML = '';
         }
-        
-        function submitAnswer() {
+
+        // Submit answer
+        async function submitAnswer() {
             const userAnswer = parseFloat(document.getElementById('answerInput').value);
             const correct = userAnswer === currentQuestion.answer;
             
-            if (correct) {
-                score++;
-            }
+            if (correct) score++;
             
             // Update user stats
             if (currentUser) {
@@ -1476,94 +756,39 @@
                     currentUser.totalPoints = (currentUser.totalPoints || 0) + 10;
                 }
                 
-                // Save updated user data
-                saveUser(currentUser.username, currentUser);
+                try {
+                    await saveUser(currentUser.username, currentUser);
+                } catch (error) {
+                    console.error('Error saving user:', error);
+                }
             }
             
             // Show feedback
-            const feedbackContainer = document.getElementById('feedbackContainer');
+            const container = document.getElementById('feedbackContainer');
             const feedback = document.createElement('div');
             feedback.className = `feedback ${correct ? 'correct' : 'incorrect'}`;
-            feedback.innerHTML = correct ? 
-                '✅ Correct! Well done!' : 
-                `❌ Incorrect. The answer is ${currentQuestion.answer}`;
+            feedback.textContent = correct ? '✅ Correct! Well done!' : `❌ Incorrect. The answer is ${currentQuestion.answer}`;
+            container.innerHTML = '';
+            container.appendChild(feedback);
             
-            feedbackContainer.innerHTML = '';
-            feedbackContainer.appendChild(feedback);
-            
-            // Update display
             document.getElementById('scoreDisplay').textContent = `Score: ${score}/${questionCount}`;
             
             // Next question after delay
-            setTimeout(() => {
-                nextQuestion();
-            }, 2000);
+            setTimeout(loadNextQuestion, 2000);
         }
-        
-        // Navigation functions
-        function showScreen(screenId) {
-            document.querySelectorAll('.screen').forEach(screen => {
-                screen.classList.remove('active');
-            });
-            document.getElementById(screenId).classList.add('active');
-        }
-        
-        function backToMenu() {
-            showScreen('userScreen');
-        }
-        
-        // Parent view function
-        function showParentPasswordModal() {
-            const password = prompt('🔒 Enter parent password:');
-            if (password === '260283') {
-                showParentDashboard();
-            } else if (password !== null) {
-                alert('Incorrect password');
-            }
-        }
-        
+
+        // Show parent dashboard
         function showParentDashboard() {
-            showScreen('parentScreen');
-            updateParentDashboard();
-        }
-        
-        // Real-time listeners setup
-        function setupRealtimeListeners() {
-            if (!window.db || !window.firestoreFunctions) return;
-            
-            try {
-                const { collection, onSnapshot } = window.firestoreFunctions;
-                
-                // Listen for user updates
-                const unsubscribe = onSnapshot(collection(window.db, 'users'), (snapshot) => {
-                    const updatedUsers = {};
-                    snapshot.forEach(doc => {
-                        updatedUsers[doc.id] = doc.data();
-                    });
-                    
-                    users = updatedUsers;
-                    updateUserList();
-                    
-                    // Update current user if viewing parent dashboard
-                    const parentScreen = document.getElementById('parentScreen');
-                    if (parentScreen && parentScreen.classList.contains('active')) {
-                        updateParentDashboard();
-                    }
-                    
-                    console.log('Real-time user data updated');
-                });
-                
-                console.log('Real-time listeners setup complete');
-            } catch (error) {
-                console.error('Error setting up real-time listeners:', error);
+            const password = prompt('🔒 Enter parent password:');
+            if (password !== '260283') {
+                if (password !== null) alert('Incorrect password');
+                return;
             }
-        }
-        
-        function updateParentDashboard() {
-            const parentContent = document.getElementById('parentContent');
-            if (!parentContent) return;
             
-            let html = '<h3>📈 Detailed User Statistics</h3>';
+            showScreen('parentScreen');
+            
+            const content = document.getElementById('parentContent');
+            let html = '<h3>User Statistics</h3>';
             
             if (Object.keys(users).length === 0) {
                 html += '<p>No users to display.</p>';
@@ -1571,513 +796,93 @@
                 Object.values(users).forEach(user => {
                     const accuracy = user.totalAttempted > 0 ? 
                         Math.round((user.totalCorrect / user.totalAttempted) * 100) : 0;
-                    const avgTime = user.gamesPlayed > 0 ? 
-                        Math.round((user.totalTime || 0) / (user.gamesPlayed * 60000)) : 0;
                     
                     html += `
-                        <div class="card" style="margin-bottom: 16px;">
-                            <div class="card__body">
-                                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-                                    <span style="font-size: 2rem;">${user.avatar}</span>
-                                    <div>
-                                        <h4>${user.username}</h4>
-                                        <div style="font-size: 12px; color: var(--color-text-secondary);">
-                                            Last active: ${user.lastActive ? new Date(user.lastActive).toLocaleDateString() : 'Never'}
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
-                                    <div class="stat-item">
-                                        <span class="stat-label">Total Points:</span>
-                                        <span class="stat-value">${user.totalPoints || 0}</span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-label">Games Played:</span>
-                                        <span class="stat-value">${user.gamesPlayed || 0}</span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-label">Accuracy:</span>
-                                        <span class="stat-value">${accuracy}%</span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-label">Avg Time:</span>
-                                        <span class="stat-value">${avgTime} min</span>
-                                    </div>
-                                </div>
-                                
-                                <div style="display: flex; justify-content: space-between; font-size: 12px;">
-                                    <div><strong>Practice High:</strong> ${user.practiceHighScore || 0}</div>
-                                    <div><strong>Challenge High:</strong> ${user.challengeHighScore || 0}</div>
-                                    <div><strong>Questions:</strong> ${user.totalCorrect || 0}/${user.totalAttempted || 0}</div>
-                                </div>
+                        <div style="background: rgba(34, 197, 94, 0.08); padding: 16px; margin-bottom: 12px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <span style="font-size: 2rem;">${user.avatar}</span>
+                                <span style="font-weight: 600;">${user.username}</span>
+                            </div>
+                            <div>
+                                ${user.totalCorrect}/${user.totalAttempted} (${accuracy}%) | ${user.totalPoints || 0} pts
                             </div>
                         </div>
                     `;
                 });
             }
             
-            parentContent.innerHTML = html;
+            content.innerHTML = html;
         }
-        
-        // Leaderboard functionality
-        async function showLeaderboard() {
-            const leaderboardList = document.getElementById('leaderboardList');
-            if (!leaderboardList) return;
-            
-            // Create leaderboard categories
-            const leaderboards = [
-                { title: '🏆 Top Total Points', key: 'totalPoints', suffix: ' pts' },
-                { title: '⚡ Best Challenge Score', key: 'challengeHighScore', suffix: ' pts' },
-                { title: '📚 Best Practice Score', key: 'practiceHighScore', suffix: ' pts' },
-                { title: '🎯 Most Accurate', key: 'accuracy', suffix: '%', calculate: true },
-                { title: '🔥 Most Questions Correct', key: 'totalCorrect', suffix: '' },
-                { title: '💪 Most Games Played', key: 'gamesPlayed', suffix: ' games' },
-                { title: '⏱️ Fastest Average Time', key: 'avgTime', suffix: ' min', calculate: true, reverse: true }
-            ];
-            
-            let html = '<div style="display: grid; gap: 24px;">';
-            
-            leaderboards.forEach(board => {
-                // Calculate values and sort users
-                const sortedUsers = Object.values(users).map(user => {
-                    let value;
-                    if (board.calculate) {
-                        if (board.key === 'accuracy') {
-                            value = user.totalAttempted > 0 ? Math.round((user.totalCorrect / user.totalAttempted) * 100) : 0;
-                        } else if (board.key === 'avgTime') {
-                            value = user.gamesPlayed > 0 ? Math.round((user.totalTime || 0) / (user.gamesPlayed * 60000)) : 0;
-                        }
-                    } else {
-                        value = user[board.key] || 0;
-                    }
-                    return { ...user, sortValue: value };
-                }).sort((a, b) => {
-                    if (board.reverse) {
-                        return a.sortValue === 0 ? 1 : b.sortValue === 0 ? -1 : a.sortValue - b.sortValue;
-                    }
-                    return b.sortValue - a.sortValue;
-                }).slice(0, 5);
-                
-                html += `
-                    <div class="card">
-                        <div class="card__body">
-                            <h4 style="margin-bottom: 16px;">${board.title}</h4>
-                `;
-                
-                if (sortedUsers.length === 0 || (sortedUsers.length > 0 && sortedUsers[0].sortValue === 0)) {
-                    html += '<p style="color: var(--color-text-secondary);">No data available yet</p>';
-                } else {
-                    sortedUsers.forEach((user, index) => {
-                        if (user.sortValue > 0) {
-                            html += `
-                                <div class="leaderboard-item">
-                                    <div class="player-info">
-                                        <span class="rank">#${index + 1}</span>
-                                        <span style="font-size: 1.5rem;">${user.avatar}</span>
-                                        <span>${user.username}</span>
-                                    </div>
-                                    <div><strong>${user.sortValue}${board.suffix}</strong></div>
-                                </div>
-                            `;
-                        }
-                    });
-                }
-                
-                html += '</div></div>';
-            });
-            
-            html += '</div>';
-            leaderboardList.innerHTML = html;
-            showScreen('leaderboardScreen');
+
+        // Show screen
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
         }
-        
-        function startGame(mode) {
-            currentMode = mode;
-            
-            // Reset game state
-            questionIndex = 0;
-            gameScore = 0;
-            streak = 0;
-            maxStreak = 0;
-            mistakes = [];
-            hintsUsed = 0;
-            gameStats = { correct: 0, attempted: 0, totalTime: 0 };
-            gameStartTime = Date.now();
-            
-            // Select questions based on mode
-            if (mode === 'practice') {
-                gameQuestions = shuffleArray([...allQuestions]).slice(0, 10);
-            } else {
-                gameQuestions = shuffleArray([...allQuestions]).slice(0, 15);
-            }
-            
-            // Update UI for mode
-            const modeDisplay = document.getElementById('modeDisplay');
-            if (modeDisplay) {
-                modeDisplay.textContent = mode === 'practice' ? 'Practice Mode' : 'Challenge Mode';
-            }
-            
-            // Setup game UI
-            const hintBtn = document.getElementById('hintBtn');
-            if (hintBtn) {
-                hintBtn.style.display = mode === 'practice' ? 'inline-block' : 'none';
-            }
-            
-            // Start timer for challenge mode
-            if (mode === 'challenge') {
-                timeRemaining = 300; // 5 minutes
-                startTimer();
-            } else {
-                document.getElementById('timerDisplay').textContent = '∞';
-            }
-            
-            showScreen('gameScreen');
-            loadNextQuestion();
-        }
-        
-        function shuffleArray(array) {
-            const shuffled = [...array];
-            for (let i = shuffled.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-            }
-            return shuffled;
-        }
-        
-        function loadNextQuestion() {
-            if (questionIndex >= gameQuestions.length) {
-                endGame();
-                return;
-            }
-            
-            currentQuestion = gameQuestions[questionIndex];
-            
-            // Update UI
-            document.getElementById('questionNumber').textContent = `Question ${questionIndex + 1} of ${gameQuestions.length}`;
-            document.getElementById('questionText').textContent = currentQuestion.question;
-            document.getElementById('questionCategory').textContent = currentQuestion.category;
-            document.getElementById('difficultyLevel').textContent = '★'.repeat(Math.min(currentQuestion.difficulty, 3)) + '☆'.repeat(3 - Math.min(currentQuestion.difficulty, 3));
-            
-            // Setup input
-            const answerInput = document.getElementById('answerInput');
-            const submitBtn = document.getElementById('submitBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const hintBtn = document.getElementById('hintBtn');
-            const hintContainer = document.getElementById('hintContainer');
-            
-            if (answerInput) {
-                answerInput.value = '';
-                answerInput.disabled = false;
-                answerInput.focus();
-            }
-            
-            if (submitBtn) {
-                submitBtn.style.display = 'inline-block';
-                submitBtn.disabled = true;
-            }
-            
-            if (nextBtn) nextBtn.style.display = 'none';
-            if (hintContainer) hintContainer.style.display = 'none';
-            
-            // Clear feedback
-            document.getElementById('feedbackContainer').innerHTML = '';
-            
-            // Update input help text
-            const inputHelp = document.getElementById('inputHelp');
-            if (inputHelp) {
-                if (currentQuestion.type === 'fraction') {
-                    inputHelp.textContent = 'Enter a decimal number (e.g., 0.75)';
-                } else {
-                    inputHelp.textContent = 'Enter a number (e.g., 42)';
-                }
-            }
-        }
-        
-        function showHint() {
-            const hintContainer = document.getElementById('hintContainer');
-            if (hintContainer && currentQuestion.hint) {
-                hintContainer.innerHTML = `
-                    <div class="hint-container">
-                        <strong>💡 Hint:</strong>
-                        <div class="hint-text">${currentQuestion.hint}</div>
-                    </div>
-                `;
-                hintContainer.style.display = 'block';
-                hintsUsed++;
-            }
-        }
-        
-        function submitAnswer() {
-            const userAnswerText = document.getElementById('answerInput').value.trim();
-            const userAnswer = parseFloat(userAnswerText);
-            
-            if (isNaN(userAnswer)) {
-                alert('Please enter a valid number');
-                return;
-            }
-            
-            gameStats.attempted++;
-            
-            // Check answer with some tolerance for decimals
-            const tolerance = 0.01;
-            const correct = Math.abs(userAnswer - currentQuestion.answer) < tolerance;
-            
-            let points = 0;
-            if (correct) {
-                gameStats.correct++;
-                streak++;
-                maxStreak = Math.max(maxStreak, streak);
-                
-                // Calculate points
-                points = currentQuestion.difficulty * 10;
-                if (streak >= 3) points *= 1.5; // Streak bonus
-                if (currentMode === 'practice' && hintsUsed === 0) points *= 1.2; // No hints bonus
-                points = Math.floor(points);
-                
-                gameScore += points;
-            } else {
-                streak = 0;
-                mistakes.push({
-                    question: currentQuestion.question,
-                    userAnswer: userAnswerText,
-                    correctAnswer: currentQuestion.answer,
-                    category: currentQuestion.category
-                });
-            }
-            
-            // Show feedback
-            showFeedback(correct, points, currentQuestion.answer);
-            
-            // Update displays
-            updateGameDisplays();
-            
-            // Setup for next question
-            const submitBtn = document.getElementById('submitBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const answerInput = document.getElementById('answerInput');
-            
-            if (submitBtn) submitBtn.style.display = 'none';
-            if (nextBtn) {
-                nextBtn.style.display = 'inline-block';
-                nextBtn.focus();
-            }
-            if (answerInput) answerInput.disabled = true;
-        }
-        
-        function showFeedback(correct, points, correctAnswer) {
-            const feedbackContainer = document.getElementById('feedbackContainer');
-            if (!feedbackContainer) return;
-            
-            const feedback = document.createElement('div');
-            feedback.className = `feedback ${correct ? 'correct' : 'incorrect'}`;
-            
-            if (correct) {
-                let message = `✅ Correct! +${points} points`;
-                if (streak >= 3) message += ` 🔥 ${streak} streak!`;
-                feedback.innerHTML = message;
-            } else {
-                feedback.innerHTML = `❌ Incorrect. The correct answer is ${correctAnswer}`;
-            }
-            
-            feedbackContainer.innerHTML = '';
-            feedbackContainer.appendChild(feedback);
-        }
-        
-        function nextQuestion() {
-            questionIndex++;
-            loadNextQuestion();
-        }
-        
-        function updateGameDisplays() {
-            document.getElementById('scoreDisplay').textContent = `Score: ${gameScore} points`;
-            document.getElementById('streakDisplay').textContent = `Streak: ${streak}`;
-        }
-        
-        function startTimer() {
-            if (timerInterval) clearInterval(timerInterval);
-            
-            timerInterval = setInterval(() => {
-                timeRemaining--;
-                
-                const minutes = Math.floor(timeRemaining / 60);
-                const seconds = timeRemaining % 60;
-                const timerDisplay = document.getElementById('timerDisplay');
-                
-                if (timerDisplay) {
-                    timerDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-                    
-                    if (timeRemaining <= 30) {
-                        timerDisplay.className = 'timer danger';
-                    } else if (timeRemaining <= 60) {
-                        timerDisplay.className = 'timer warning';
-                    }
-                }
-                
-                if (timeRemaining <= 0) {
-                    clearInterval(timerInterval);
-                    endGame();
-                }
-            }, 1000);
-        }
-        
-        function endGame() {
-            if (timerInterval) {
-                clearInterval(timerInterval);
-                timerInterval = null;
-            }
-            
-            gameStats.totalTime = Date.now() - gameStartTime;
-            
-            // Update user stats
-            if (currentUser) {
-                currentUser.totalAttempted = (currentUser.totalAttempted || 0) + gameStats.attempted;
-                currentUser.totalCorrect = (currentUser.totalCorrect || 0) + gameStats.correct;
-                currentUser.totalPoints = (currentUser.totalPoints || 0) + gameScore;
-                currentUser.gamesPlayed = (currentUser.gamesPlayed || 0) + 1;
-                currentUser.totalTime = (currentUser.totalTime || 0) + gameStats.totalTime;
-                
-                // Update high scores
-                if (currentMode === 'practice') {
-                    currentUser.practiceHighScore = Math.max(currentUser.practiceHighScore || 0, gameScore);
-                } else {
-                    currentUser.challengeHighScore = Math.max(currentUser.challengeHighScore || 0, gameScore);
-                }
-                
-                currentUser.lastActive = new Date();
-                saveUser(currentUser.username, currentUser);
-            }
-            
-            // Show results
-            showResults();
-        }
-        
-        function showResults() {
-            // Update results display
-            document.getElementById('finalScore').textContent = gameScore;
-            document.getElementById('finalCorrect').textContent = `${gameStats.correct}/${gameStats.attempted}`;
-            document.getElementById('finalAccuracy').textContent = `${Math.round((gameStats.correct / Math.max(gameStats.attempted, 1)) * 100)}%`;
-            document.getElementById('finalStreak').textContent = maxStreak;
-            
-            const minutes = Math.floor(gameStats.totalTime / 60000);
-            const seconds = Math.floor((gameStats.totalTime % 60000) / 1000);
-            document.getElementById('finalTime').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-            
-            // Check for achievements
-            checkAchievements();
-            
-            // Show mistakes if any
-            if (mistakes.length > 0) {
-                showMistakeReview();
-            }
-            
-            // Setup result buttons
-            const playAgainBtn = document.getElementById('playAgainBtn');
-            const viewLeaderboardBtn = document.getElementById('viewLeaderboardBtn');
-            
-            if (playAgainBtn) {
-                playAgainBtn.onclick = () => startGame(currentMode);
-            }
-            if (viewLeaderboardBtn) {
-                viewLeaderboardBtn.onclick = () => showLeaderboard();
-            }
-            
-            showScreen('resultsScreen');
-        }
-        
-        function checkAchievements() {
-            const achievements = [];
-            
-            // Perfect game
-            if (gameStats.correct === gameStats.attempted && gameStats.attempted >= 10) {
-                achievements.push('🏆 Perfect Game - 100% Accuracy!');
-            }
-            
-            // Speed demon
-            if (currentMode === 'challenge' && gameStats.totalTime < 180000 && gameStats.correct >= 10) {
-                achievements.push('⚡ Speed Demon - Finished in under 3 minutes!');
-            }
-            
-            // Streak master
-            if (maxStreak >= 10) {
-                achievements.push('🔥 Streak Master - 10+ correct in a row!');
-            }
-            
-            // High scorer
-            if (gameScore >= 500) {
-                achievements.push('⭐ High Scorer - 500+ points!');
-            }
-            
-            if (achievements.length > 0) {
-                const achievementContainer = document.getElementById('achievementContainer');
-                const achievementText = document.getElementById('achievementText');
-                if (achievementContainer && achievementText) {
-                    achievementText.innerHTML = achievements.map(a => `<div class="achievement">${a}</div>`).join('');
-                    achievementContainer.style.display = 'block';
-                }
-            }
-        }
-        
-        function showMistakeReview() {
-            const mistakeReview = document.getElementById('mistakeReview');
-            const mistakesList = document.getElementById('mistakesList');
-            
-            if (mistakeReview && mistakesList) {
-                mistakesList.innerHTML = mistakes.map(mistake => `
-                    <div class="mistake-item">
-                        <div class="mistake-question">${mistake.question}</div>
-                        <div class="mistake-answers">
-                            <div class="your-answer">Your answer: ${mistake.userAnswer}</div>
-                            <div class="correct-answer">Correct answer: ${mistake.correctAnswer}</div>
-                        </div>
-                    </div>
-                `).join('');
-                mistakeReview.style.display = 'block';
-            }
-        }
-        
-        function backToModes() {
-            showScreen('modeScreen');
-        }
-        
-        function backToUsers() {
+
+        // Back to menu
+        function backToMenu() {
             showScreen('userScreen');
         }
-        
-        // Make functions global for onclick handlers
-        window.backToMenu = backToModes;
-        window.backToModes = backToModes;
-        window.backToUsers = backToUsers;
-        window.showHint = showHint;
-        window.nextQuestion = nextQuestion;
-        window.submitAnswer = submitAnswer;
-        
-        // STEP 4: Start initialization when DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initializeApp);
-        } else {
-            // DOM already loaded
-            initializeApp();
-        }
-        
-        // Set up global event handlers for dynamic content
-        document.addEventListener('click', function(e) {
-            if (e.target.matches('[onclick]')) {
-                e.preventDefault();
-                const onclickValue = e.target.getAttribute('onclick');
-                if (onclickValue.includes('backToModes')) {
-                    backToModes();
-                } else if (onclickValue.includes('backToUsers')) {
-                    backToUsers();
-                } else if (onclickValue.includes('showLeaderboard')) {
-                    showLeaderboard();
-                }
+
+        // Main initialization
+        async function init() {
+            console.log('🚀 Starting SuperHero Maths...');
+            
+            // Initialize Firebase first
+            const firebaseReady = await initFirebase();
+            
+            if (!firebaseReady) {
+                alert('Cannot connect to database. Please check your internet connection and refresh the page.');
+                return;
             }
-        });
-        
-        console.log('🎉 SuperHero Maths - Version 2.3 (Complete + Async) - 553 Questions - All Features - Loaded Successfully!');
-        console.log(`📊 Total Questions Available: ${allQuestions.length}`);
-        console.log('✨ Features: Practice Mode, Challenge Mode, 7 Leaderboards, Parent Dashboard, Time Tracking, Achievements, Hints, Mistake Review');
+            
+            // Load users
+            await loadUsers();
+            
+            // Set up all event listeners
+            document.getElementById('createUserBtn').onclick = showCreateUserModal;
+            document.getElementById('parentViewBtn').onclick = showParentDashboard;
+            document.getElementById('confirmCreateBtn').onclick = createUser;
+            document.getElementById('cancelCreateBtn').onclick = closeModal;
+            document.getElementById('backBtn').onclick = backToMenu;
+            document.getElementById('backToMenuBtn').onclick = backToMenu;
+            
+            // Modal click outside to close
+            document.getElementById('createUserModal').onclick = function(e) {
+                if (e.target === this) closeModal();
+            };
+            
+            // Username input enter key
+            document.getElementById('usernameInput').onkeypress = function(e) {
+                if (e.key === 'Enter') createUser();
+            };
+            
+            // Answer input
+            const answerInput = document.getElementById('answerInput');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            answerInput.oninput = function() {
+                submitBtn.disabled = this.value.trim() === '';
+            };
+            
+            answerInput.onkeypress = function(e) {
+                if (e.key === 'Enter' && !submitBtn.disabled) {
+                    submitAnswer();
+                }
+            };
+            
+            submitBtn.onclick = submitAnswer;
+            
+            console.log('✅ App ready!');
+        }
+
+        // Start when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
     </script>
 </body>
 </html>
