@@ -545,32 +545,44 @@
 
     <script type="module">
         'use strict';
-        
-        // Firebase Configuration (EXACT as provided)
-        const firebaseConfig = {
-            apiKey: "AIzaSyDeCXHxMolX3VxoDiIndMXjEU_EQJ2G_HI",
-            authDomain: "superheromaths.firebaseapp.com",
-            projectId: "superheromaths",
-            storageBucket: "superheromaths.firebasestorage.app",
-            messagingSenderId: "695354044143",
-            appId: "1:695354044143:web:e78e885474bd1b0693b51a"
-        };
-        
-        // Firebase modules - proper imports with error handling
-        let app, db;
-        try {
-            const { initializeApp } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js');
-            const { getFirestore, collection, doc, setDoc, getDoc, getDocs, updateDoc, onSnapshot, query, orderBy } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js');
+
+        // Main initialization function - ASYNC
+        async function initializeApp() {
+            console.log('Starting app initialization...');
             
-            app = initializeApp(firebaseConfig);
-            db = getFirestore(app);
-            console.log('Firebase initialized successfully');
+            // Firebase Configuration
+            const firebaseConfig = {
+                apiKey: "AIzaSyDeCXHxMolX3VxoDiIndMXjEU_EQJ2G_HI",
+                authDomain: "superheromaths.firebaseapp.com",
+                projectId: "superheromaths",
+                storageBucket: "superheromaths.firebasestorage.app",
+                messagingSenderId: "695354044143",
+                appId: "1:695354044143:web:e78e885474bd1b0693b51a"
+            };
             
-            // Store Firebase functions globally for use
-            window.firebaseFunctions = { collection, doc, setDoc, getDoc, getDocs, updateDoc, onSnapshot, query, orderBy };
-        } catch (error) {
-            console.error('Firebase initialization error:', error);
-            showError('Firebase connection error. App will work in offline mode.');
+            // STEP 1: Load Firebase modules (AWAIT completion)
+            try {
+                const { initializeApp: initFB } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js');
+                const { getFirestore, collection, doc, setDoc, getDoc, getDocs, updateDoc, onSnapshot, query, orderBy } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js');
+                
+                // STEP 2: Initialize Firebase
+                const app = initFB(firebaseConfig);
+                window.db = getFirestore(app);
+                window.firestoreFunctions = { collection, doc, setDoc, getDoc, getDocs, updateDoc, onSnapshot, query, orderBy };
+                
+                console.log('Firebase initialized successfully');
+            } catch (error) {
+                console.error('Firebase initialization error:', error);
+                console.log('App will work in offline mode with localStorage');
+                window.db = null;
+            }
+            
+            // STEP 3: Set up UI and event listeners (AFTER Firebase loads)
+            setupButtons();
+            setupEventListeners();
+            await loadUsers();
+            
+            console.log('App initialization complete!');
         }
         
         // Global State
@@ -613,40 +625,133 @@
             }
         }
         
+        // Setup buttons
+        function setupButtons() {
+            console.log('Setting up buttons...');
+            
+            // Create User button
+            const createBtn = document.getElementById('createUserBtn');
+            if (createBtn) {
+                createBtn.addEventListener('click', showCreateUserModal);
+                console.log('Create button listener attached');
+            } else {
+                console.error('Create button not found!');
+            }
+            
+            // Parent View button
+            const parentBtn = document.getElementById('parentViewBtn');
+            if (parentBtn) {
+                parentBtn.addEventListener('click', showParentPasswordModal);
+                console.log('Parent button listener attached');
+            } else {
+                console.error('Parent button not found!');
+            }
+            
+            // Modal buttons
+            const confirmBtn = document.getElementById('confirmCreateBtn');
+            if (confirmBtn) {
+                confirmBtn.addEventListener('click', createUser);
+            }
+            
+            const cancelBtn = document.getElementById('cancelCreateBtn');
+            if (cancelBtn) {
+                cancelBtn.addEventListener('click', closeCreateUserModal);
+            }
+        }
+
+        // Setup other event listeners
+        function setupEventListeners() {
+            // Close modal on outside click
+            const modal = document.getElementById('createUserModal');
+            if (modal) {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        closeCreateUserModal();
+                    }
+                });
+            }
+            
+            // Enter key in username input
+            const usernameInput = document.getElementById('usernameInput');
+            if (usernameInput) {
+                usernameInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        createUser();
+                    }
+                });
+            }
+            
+            // Submit button and answer input
+            const submitBtn = document.getElementById('submitBtn');
+            const answerInput = document.getElementById('answerInput');
+            
+            if (submitBtn && answerInput) {
+                // Submit button click
+                submitBtn.addEventListener('click', submitAnswer);
+                
+                // Answer input validation
+                answerInput.addEventListener('input', function() {
+                    const value = this.value.trim();
+                    submitBtn.disabled = value === '';
+                });
+                
+                // Enter key to submit
+                answerInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter' && !submitBtn.disabled) {
+                        submitAnswer();
+                    }
+                });
+                
+                console.log('Answer input and submit button setup complete');
+            } else {
+                console.error('Submit button or answer input not found!');
+            }
+        }
+
         // Firebase functions with fallback
         async function saveUser(username, userData) {
             try {
-                if (db && window.firebaseFunctions) {
-                    const { doc, setDoc } = window.firebaseFunctions;
-                    await setDoc(doc(db, 'users', username), userData);
+                if (window.db && window.firestoreFunctions) {
+                    const { doc, setDoc } = window.firestoreFunctions;
+                    await setDoc(doc(window.db, 'users', username), userData);
                     console.log('User saved to Firebase:', username);
                 } else {
-                    // Fallback to memory storage
+                    // Fallback to in-memory storage
                     users[username] = userData;
                     console.log('User saved to memory:', username);
                 }
             } catch (error) {
                 console.error('Error saving user:', error);
                 showError('Error saving user: ' + error.message);
-                // Fallback to memory
+                // Fallback to in-memory storage
                 users[username] = userData;
             }
         }
         
         async function loadUsers() {
+            console.log('Loading users...');
+            let loadedUsers = {};
+            
             try {
-                if (db && window.firebaseFunctions) {
-                    const { collection, getDocs } = window.firebaseFunctions;
-                    const querySnapshot = await getDocs(collection(db, 'users'));
-                    querySnapshot.forEach((doc) => {
-                        users[doc.id] = doc.data();
+                if (window.db && window.firestoreFunctions) {
+                    // Load from Firebase
+                    const { collection, getDocs } = window.firestoreFunctions;
+                    const snapshot = await getDocs(collection(window.db, 'users'));
+                    snapshot.forEach(doc => {
+                        loadedUsers[doc.id] = doc.data();
                     });
-                    console.log('Users loaded from Firebase');
+                    console.log('Loaded users from Firebase:', Object.keys(loadedUsers).length);
+                } else {
+                    // Use in-memory storage
+                    loadedUsers = users;
+                    console.log('Using in-memory users:', Object.keys(loadedUsers).length);
                 }
             } catch (error) {
                 console.error('Error loading users:', error);
-                showError('Error loading users from cloud');
+                loadedUsers = users;
             }
+            
+            users = loadedUsers;
             updateUserList();
         }
         
@@ -668,7 +773,7 @@
             }
             
             // Setup avatars
-            setupAvatarSelection();
+            renderAvatarGrid();
         }
         
         function closeCreateUserModal() {
@@ -678,44 +783,41 @@
             }
         }
         
-        function setupAvatarSelection() {
-            const container = document.getElementById('avatarSelection');
-            if (!container) return;
+        function renderAvatarGrid() {
+            const grid = document.getElementById('avatarSelection');
+            if (!grid) return;
             
-            container.innerHTML = '';
+            grid.innerHTML = '';
             avatars.forEach((emoji, index) => {
-                const option = document.createElement('div');
-                option.className = 'avatar-option';
-                option.textContent = emoji;
-                option.dataset.emoji = emoji;
-                
-                if (index === 0) {
-                    option.classList.add('selected');
-                    selectedAvatar = emoji;
-                }
-                
-                option.onclick = function() {
-                    document.querySelectorAll('.avatar-option').forEach(opt => {
-                        opt.classList.remove('selected');
-                    });
+                const div = document.createElement('div');
+                div.className = 'avatar-option';
+                if (index === 0) div.classList.add('selected');
+                div.textContent = emoji;
+                div.addEventListener('click', function() {
+                    document.querySelectorAll('.avatar-option').forEach(el => el.classList.remove('selected'));
                     this.classList.add('selected');
-                    selectedAvatar = this.dataset.emoji;
-                };
-                
-                container.appendChild(option);
+                    selectedAvatar = emoji;
+                });
+                grid.appendChild(div);
             });
+            selectedAvatar = avatars[0];
         }
         
         async function createUser() {
             const username = document.getElementById('usernameInput').value.trim();
             
             if (!username) {
-                showError('Please enter a name');
+                alert('Please enter a name');
+                return;
+            }
+            
+            if (username.length < 2) {
+                alert('Name must be at least 2 characters');
                 return;
             }
             
             if (users[username]) {
-                showError('Username already exists');
+                alert('Username already exists');
                 return;
             }
             
@@ -724,61 +826,58 @@
                     username: username,
                     avatar: selectedAvatar,
                     totalPoints: 0,
-                    createdAt: new Date(),
                     totalCorrect: 0,
-                    totalAttempted: 0
+                    totalAttempted: 0,
+                    createdAt: new Date(),
+                    lastActive: new Date()
                 };
                 
                 await saveUser(username, userData);
                 closeCreateUserModal();
-                updateUserList();
+                alert(`Welcome, ${username}! 🎉`);
+                await loadUsers();
+                
                 console.log('User created successfully:', username);
             } catch (error) {
                 console.error('Error creating user:', error);
-                showError('Error creating user: ' + error.message);
+                alert('Error creating user: ' + error.message);
             }
         }
         
         function updateUserList() {
             const userList = document.getElementById('userList');
-            if (!userList) return;
+            if (!userList) {
+                console.error('User list container not found');
+                return;
+            }
             
             userList.innerHTML = '';
             
             if (Object.keys(users).length === 0) {
-                userList.innerHTML = `
-                    <div style="text-align: center; padding: var(--space-32); color: var(--color-text-secondary);">
-                        <div style="font-size: var(--font-size-4xl); margin-bottom: var(--space-16);">👋</div>
-                        <p>No users yet! Create your first profile to get started.</p>
-                    </div>
-                `;
+                userList.innerHTML = '<p style="text-align: center; color: #666;">No users yet. Create one to get started!</p>';
                 return;
             }
             
             Object.values(users).forEach(user => {
-                const userCard = document.createElement('div');
-                userCard.className = 'user-card';
-                userCard.onclick = () => selectUser(user.username);
-                
-                userCard.innerHTML = `
+                const card = document.createElement('button');
+                card.className = 'user-card';
+                card.innerHTML = `
                     <div class="user-avatar">${user.avatar}</div>
                     <div class="user-name">${user.username}</div>
-                    <div class="user-stats">
-                        Score: ${user.totalCorrect}/${user.totalAttempted}<br>
-                        Points: ${user.totalPoints || 0}
-                    </div>
+                    <div class="user-stats">Points: ${user.totalPoints || 0}</div>
                 `;
-                
-                userList.appendChild(userCard);
+                card.addEventListener('click', () => selectUser(user.username));
+                userList.appendChild(card);
             });
         }
         
         function selectUser(username) {
+            console.log('User selected:', username);
+            // Store current user in memory
+            window.currentUserName = username;
             currentUser = users[username];
-            if (currentUser) {
-                console.log('User selected:', username);
-                startPractice();
-            }
+            // Navigate to main app (implement this)
+            alert(`Selected user: ${username}\n\nApp features coming next!`);
         }
         
         // Practice mode functions
@@ -868,11 +967,11 @@
         
         // Parent view function
         function showParentPasswordModal() {
-            const password = prompt('Enter parent password:');
+            const password = prompt('🔒 Enter parent password:');
             if (password === '260283') {
-                showParentDashboard();
+                alert('Parent Dashboard\n\n(Features will be implemented next)');
             } else if (password !== null) {
-                showError('Incorrect password');
+                alert('Incorrect password');
             }
         }
         
@@ -914,100 +1013,15 @@
         // Make functions global for onclick handlers
         window.backToMenu = backToMenu;
         
-        // DOM Event Listeners
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM loaded, setting up app...');
-            
-            // Create User button
-            const createBtn = document.getElementById('createUserBtn');
-            if (createBtn) {
-                createBtn.onclick = function() {
-                    console.log('Create user clicked');
-                    showCreateUserModal();
-                };
-                console.log('Create button setup complete');
-            } else {
-                console.error('Create button not found!');
-            }
-            
-            // Parent View button
-            const parentBtn = document.getElementById('parentViewBtn');
-            if (parentBtn) {
-                parentBtn.onclick = function() {
-                    console.log('Parent view clicked');
-                    showParentPasswordModal();
-                };
-                console.log('Parent button setup complete');
-            } else {
-                console.error('Parent button not found!');
-            }
-            
-            // Modal buttons
-            const confirmBtn = document.getElementById('confirmCreateBtn');
-            if (confirmBtn) {
-                confirmBtn.onclick = createUser;
-            }
-            
-            const cancelBtn = document.getElementById('cancelCreateBtn');
-            if (cancelBtn) {
-                cancelBtn.onclick = closeCreateUserModal;
-            }
-            
-            // Submit button and answer input
-            const submitBtn = document.getElementById('submitBtn');
-            const answerInput = document.getElementById('answerInput');
-            
-            if (submitBtn && answerInput) {
-                // Submit button click
-                submitBtn.onclick = function() {
-                    submitAnswer();
-                };
-                
-                // Answer input validation
-                answerInput.oninput = function() {
-                    const value = this.value.trim();
-                    submitBtn.disabled = value === '';
-                };
-                
-                // Enter key to submit
-                answerInput.onkeypress = function(e) {
-                    if (e.key === 'Enter' && !submitBtn.disabled) {
-                        submitAnswer();
-                    }
-                };
-                
-                console.log('Answer input and submit button setup complete');
-            } else {
-                console.error('Submit button or answer input not found!');
-            }
-            
-            // Username input enter key
-            const usernameInput = document.getElementById('usernameInput');
-            if (usernameInput) {
-                usernameInput.onkeypress = function(e) {
-                    if (e.key === 'Enter') {
-                        createUser();
-                    }
-                };
-            }
-            
-            // Close modal when clicking outside
-            const modal = document.getElementById('createUserModal');
-            if (modal) {
-                modal.onclick = function(e) {
-                    if (e.target === this) {
-                        closeCreateUserModal();
-                    }
-                };
-            }
-            
-            // Load users
-            loadUsers();
-            
-            console.log('App setup complete');
-        });
+        // STEP 4: Start initialization when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeApp);
+        } else {
+            // DOM already loaded
+            initializeApp();
+        }
         
-        console.log('🎉 SuperHero Maths App - Version 2.2 (Stable Foundation) - Loaded Successfully!');
+        console.log('🎉 SuperHero Maths App - Version 2.2.1 - Async Init Fixed (Thanks to Gonzalo\'s Friend!) - Loaded Successfully!');
     </script>
 </body>
 </html>
