@@ -1261,7 +1261,7 @@
             <div class="question-container">
                 <div class="question-text" id="question-text">Loading question...</div>
                 
-                <input type="text" class="answer-input" id="answer-input" placeholder="Type your answer here..." onkeypress="handleKeyPress(event)">
+                <input type="text" class="answer-input" id="answer-input" placeholder="Type your answer here...">
                 
                 <div class="button-group">
                     <button class="btn btn-hint" id="hint-btn" onclick="showHint()">💡 Hint</button>
@@ -1473,17 +1473,18 @@
 
 
     <footer style="position: fixed; bottom: 10px; right: 15px; font-size: 11px; color: rgba(255,255,255,0.7); background: rgba(0,0,0,0.2); padding: 4px 8px; border-radius: 4px;">
-        Version 2.0 - Cloud Sync Edition ☁️ | Powered by Firebase | Real Madrid best team in the world
+        Version 2.1.1 (Debug-Stable) ☁️ | Leaderboard &amp; UX robust, always submit | Firebase Real-time
     </footer>
 
 
 
     <script>
+        'use strict';
         // ============================================
         // FIREBASE INTEGRATION - REAL-TIME CLOUD SYNC
         // ============================================
         console.log('🚀 SuperHero Maths App starting with Firebase...');
-        console.log('Version: 2.0 - Cloud Sync Edition ☁️');
+        console.log('Version: 2.1.1 (Debug-Stable): Leaderboard & UX robust, always submit');
         
         // Game state
         let currentMode = '';
@@ -1768,6 +1769,8 @@
                         streak++;
                         currentDate = prevDate;
                     } else {
+                        // Continue with existing leaderboard rendering code
+                        try {
                         break;
                     }
                 }
@@ -3342,24 +3345,52 @@
             }
             
             Object.values(allUsers).forEach(user => {
-                const accuracy = user.totalQuestionsAttempted > 0 ? 
-                    Math.round((user.totalCorrect / user.totalQuestionsAttempted) * 100) : 0;
-                
-                const userCard = document.createElement('div');
-                userCard.className = 'user-card';
-                userCard.onclick = () => selectUser(user.username);
-                
-                userCard.innerHTML = `
-                    <div class="user-card-avatar">${user.avatar}</div>
-                    <div class="user-card-name">${user.username}</div>
-                    <div class="user-card-stats">
-                        Questions: ${user.totalQuestionsAttempted}<br>
-                        Accuracy: ${accuracy}%<br>
-                        Last active: ${user.lastActiveDate}
-                    </div>
-                `;
-                
-                userList.appendChild(userCard);
+                try {
+                    const accuracy = user.totalQuestionsAttempted > 0 ? 
+                        Math.round((user.totalCorrect / user.totalQuestionsAttempted) * 100) : 0;
+                    
+                    // CRITICAL FIX: User cards as proper button elements for accessibility
+                    const userCard = document.createElement('button');
+                    userCard.className = 'user-card';
+                    userCard.tabIndex = 0;
+                    userCard.setAttribute('aria-label', `Select user ${user.username}`);
+                    
+                    // Click handler
+                    userCard.onclick = () => selectUser(user.username);
+                    
+                    // Keyboard navigation
+                    userCard.addEventListener('keydown', function(event) {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                            event.preventDefault();
+                            selectUser(user.username);
+                        }
+                    });
+                    
+                    userCard.innerHTML = `
+                        <div class="user-card-avatar">${user.avatar}</div>
+                        <div class="user-card-name">${user.username}</div>
+                        <div class="user-card-stats">
+                            Questions: ${user.totalQuestionsAttempted}<br>
+                            Accuracy: ${accuracy}%<br>
+                            Last active: ${user.lastActiveDate}
+                        </div>
+                    `;
+                    
+                    userList.appendChild(userCard);
+                } catch (error) {
+                    console.error('❌ Error creating user card for:', user.username, error);
+                    // CRITICAL FIX: Show error instead of silent failure
+                    const errorCard = document.createElement('div');
+                    errorCard.className = 'user-card';
+                    errorCard.style.border = '2px solid var(--color-error)';
+                    errorCard.innerHTML = `
+                        <div style="color: var(--color-error); text-align: center;">
+                            ❌ Error loading ${user.username || 'user'}<br>
+                            <small>Please refresh the page</small>
+                        </div>
+                    `;
+                    userList.appendChild(errorCard);
+                }
             });
         }
 
@@ -3638,6 +3669,28 @@
                 return;
             }
             
+            // CRITICAL FIX: Complete state cleanup when returning to welcome
+            console.log('🏠 Returning to welcome - Cleaning up state');
+            
+            // Clear any existing timers
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                console.log('✅ Timer cleared on welcome');
+            }
+            
+            // Reset game state variables
+            isAnswered = false;
+            currentHintShown = false;
+            sessionQuestions = [];
+            
+            // Clear timer display
+            const timerDisplay = document.getElementById('timer-display');
+            if (timerDisplay) {
+                timerDisplay.textContent = '';
+                timerDisplay.className = 'timer'; // Reset classes
+            }
+            
             // Update leaderboards
             updateLeaderboards();
             
@@ -3657,10 +3710,7 @@
             }
             
             showScreen('welcome-screen');
-            if (timerInterval) {
-                clearInterval(timerInterval);
-                timerInterval = null;
-            }
+            console.log('✅ Welcome screen loaded successfully');
         }
 
         async function startMode(mode) {
@@ -3669,16 +3719,20 @@
                 return;
             }
             
+            // CRITICAL FIX: Complete state reset for mode changes
+            console.log('🎯 Starting mode:', mode, '- Resetting all state');
+            
+            // Clear any existing timers
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                console.log('✅ Timer cleared');
+            }
+            
+            // Reset all game state
             currentMode = mode;
             isMistakeMode = false;
             questionBank = generateQuestionBank();
-            
-            if (mode === 'challenge') {
-                questionBank = shuffleArray(questionBank).slice(0, 15);
-                timeRemaining = 20 * 60; // 20 minutes in seconds
-                startTimer();
-            }
-            
             currentQuestionIndex = 0;
             score = 0;
             totalQuestions = 0;
@@ -3689,12 +3743,29 @@
             sessionPointsEarned = [];
             perfectStreak = 0;
             consecutiveCorrect = 0;
+            isAnswered = false;
+            currentHintShown = false;
+            
+            // Reset UI elements completely
+            const timerDisplay = document.getElementById('timer-display');
+            if (timerDisplay) {
+                timerDisplay.textContent = '';
+                timerDisplay.className = 'timer'; // Reset classes
+            }
+            
+            if (mode === 'challenge') {
+                questionBank = shuffleArray(questionBank).slice(0, 15);
+                timeRemaining = 20 * 60; // 20 minutes in seconds
+                startTimer();
+            }
             
             // Start tracking live session
             await trackLiveSession();
             
             showQuestion();
             showScreen('question-screen');
+            
+            console.log('✅ Mode started successfully:', mode);
         }
 
         function startMistakeMode() {
@@ -3772,6 +3843,29 @@
                 answerInput.readOnly = false; // Never readonly
                 answerInput.value = ''; // Clear previous answer
                 answerInput.focus(); // Auto-focus for immediate typing
+                
+                // CRITICAL FIX: Always setup Enter key handler on every question
+                // Remove any existing listeners to prevent double-binding
+                const newInput = answerInput.cloneNode(true);
+                answerInput.parentNode.replaceChild(newInput, answerInput);
+                
+                // Setup Enter key handler
+                newInput.addEventListener('keypress', function(event) {
+                    if (event.key === 'Enter') {
+                        const submitBtn = document.getElementById('submit-btn');
+                        if (submitBtn && !submitBtn.disabled) {
+                            submitAnswer();
+                        }
+                    }
+                });
+                
+                // Setup input validation for submit button state
+                newInput.addEventListener('input', function() {
+                    const submitBtn = document.getElementById('submit-btn');
+                    if (submitBtn) {
+                        submitBtn.disabled = this.value.trim() === '';
+                    }
+                });
             }
             
             // Update progress
@@ -3786,8 +3880,13 @@
             const percentage = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
             document.getElementById('score-display').textContent = `Score: ${score}/${totalQuestions} (${percentage}%)`;
             
-            // Reset UI
-            document.getElementById('submit-btn').disabled = true;
+            // CRITICAL FIX: Always show and manage submit button correctly
+            const submitBtn = document.getElementById('submit-btn');
+            if (submitBtn) {
+                submitBtn.style.display = 'inline-block'; // ALWAYS visible
+                submitBtn.disabled = true; // Disabled until input provided
+            }
+            
             document.getElementById('hint-btn').style.display = 'inline-block';
             document.getElementById('next-btn').style.display = 'none';
             document.getElementById('finish-btn').style.display = currentMode === 'practice' ? 'inline-block' : 'none';
@@ -3805,25 +3904,16 @@
             trackLiveSession();
         }
 
+        // CRITICAL FIX: This function is now handled individually in showQuestion()
+        // to ensure robust Enter key handling that survives DOM manipulations
         function handleKeyPress(event) {
-            if (event.key === 'Enter') {
-                const submitBtn = document.getElementById('submit-btn');
-                if (!submitBtn.disabled) {
-                    submitAnswer();
-                }
-            }
+            // Deprecated - handled in showQuestion() for each input individually
+            console.log('⚠️ Legacy handleKeyPress called - using new system');
         }
 
-        // Enable submit button when answer is entered
-        document.addEventListener('DOMContentLoaded', function() {
-            const answerInput = document.getElementById('answer-input');
-            if (answerInput) {
-                answerInput.addEventListener('input', function() {
-                    const submitBtn = document.getElementById('submit-btn');
-                    submitBtn.disabled = this.value.trim() === '';
-                });
-            }
-        });
+        // CRITICAL FIX: Robust event handling setup
+        // This is now handled in showQuestion() function for each question individually
+        // to prevent event handler loss and ensure reliable Enter key + Submit button functionality
 
         function showHint() {
             if (currentHintShown) return;
@@ -3911,12 +4001,15 @@
                 </div>
             `;
             
-            // Update UI
-            document.getElementById('submit-btn').style.display = 'none';
+            // CRITICAL FIX: Never hide submit button, just disable it after answering
+            const submitBtn = document.getElementById('submit-btn');
+            if (submitBtn) {
+                submitBtn.disabled = true; // Disable but keep visible
+                submitBtn.style.display = 'inline-block'; // ALWAYS visible
+            }
             document.getElementById('next-btn').style.display = 'inline-block';
             document.getElementById('hint-btn').style.display = 'none';
             // CRITICAL FIX: Never disable answer input
-            // document.getElementById('answer-input').disabled = true; // REMOVED
             
             // Update score display
             const percentage = Math.round((score / totalQuestions) * 100);
@@ -3928,12 +4021,15 @@
         function nextQuestion() {
             currentQuestionIndex++;
             
-            // CRITICAL FIX: Always ensure answer input is enabled and responsive
-            const answerInput = document.getElementById('answer-input');
-            if (answerInput) {
-                answerInput.disabled = false;
-                answerInput.readOnly = false;
-                answerInput.focus();
+            // CRITICAL FIX: Complete state reset for next question
+            isAnswered = false;
+            currentHintShown = false;
+            
+            // Always reset submit button to proper state
+            const submitBtn = document.getElementById('submit-btn');
+            if (submitBtn) {
+                submitBtn.style.display = 'inline-block'; // ALWAYS visible
+                submitBtn.disabled = true; // Will be enabled when answer typed
             }
             
             if (currentMode === 'challenge' && currentQuestionIndex >= 15) {
@@ -4321,14 +4417,26 @@
             const content = document.getElementById('leaderboard-content');
             let html = '';
             
-            if (data.length === 0) {
-                html = `
-                    <div style="text-align: center; padding: var(--space-48); color: var(--color-text-secondary);">
-                        <div style="font-size: var(--font-size-4xl); margin-bottom: var(--space-16);">🏆</div>
-                        <p>No data yet! Start practicing to appear on the leaderboard.</p>
-                    </div>
-                `;
-            } else {
+            // CRITICAL FIX: Always show loading state initially
+            content.innerHTML = `
+                <div style="text-align: center; padding: var(--space-32); color: var(--color-text-secondary);">
+                    <div style="font-size: var(--font-size-2xl); margin-bottom: var(--space-8);">⏳</div>
+                    <p>Loading leaderboard data...</p>
+                </div>
+            `;
+            
+            // Simulate loading delay to show the spinner
+            setTimeout(() => {
+                try {
+                    if (!data || data.length === 0) {
+                        html = `
+                            <div style="text-align: center; padding: var(--space-48); color: var(--color-text-secondary);">
+                                <div style="font-size: var(--font-size-4xl); margin-bottom: var(--space-16);">🏆</div>
+                                <p>No leaderboard data yet!</p>
+                                <p style="font-size: var(--font-size-sm); margin-top: var(--space-8);">Start practicing to appear on the leaderboard.</p>
+                            </div>
+                        `;
+                    } else {
                 html = `
                     <div class="leaderboard-table">
                         <div class="leaderboard-header">
