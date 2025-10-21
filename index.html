@@ -1150,32 +1150,6 @@
                 grid-template-columns: 1fr;
             }
         }
-            #submit-btn {
-                transition: all 0.2s ease-in-out !important;
-                min-width: 140px !important;
-            }
-            
-            #submit-btn:disabled {
-                opacity: 0.6 !important;
-                cursor: not-allowed !important;
-            }
-            
-            #submit-btn:not(:disabled) {
-                opacity: 1 !important;
-                cursor: pointer !important;
-                background: var(--app-primary) !important;
-            }
-            
-            /* Ensure answer input is always usable */
-            .answer-input {
-                opacity: 1 !important;
-                pointer-events: auto !important;
-            }
-            
-            .answer-input:disabled {
-                background: var(--color-gray-200) !important;
-                opacity: 0.7 !important;
-            }
     </style>
 </head>
 <body>
@@ -1499,7 +1473,7 @@
 
 
     <footer style="position: fixed; bottom: 10px; right: 15px; font-size: 11px; color: rgba(255,255,255,0.7); background: rgba(0,0,0,0.2); padding: 4px 8px; border-radius: 4px;">
-        Version 2.0 - Cloud Sync Edition ☁️ | Powered by Firebase | Real-time sync across all devices
+        Version 3.0 - Cloud Sync Edition ☁️ | Powered by Firebase | Real Madrid Best Team in the World
     </footer>
 
 
@@ -3786,7 +3760,7 @@
             
             const question = questionBank[currentQuestionIndex];
             
-            // CRITICAL FIX: Always ensure answer input is fully responsive
+            // CRITICAL FIX: Always responsive answer input
             const questionTextEl = document.getElementById('question-text');
             if (questionTextEl) {
                 questionTextEl.textContent = question.question;
@@ -3794,49 +3768,10 @@
             
             const answerInput = document.getElementById('answer-input');
             if (answerInput) {
-                // CRITICAL: Reset input state completely
-                answerInput.disabled = false;
-                answerInput.readOnly = false;
-                answerInput.value = '';
-                answerInput.style.opacity = '1';
-                answerInput.style.pointerEvents = 'auto';
-                
-                // CRITICAL: Re-attach event listeners every time
-                answerInput.oninput = null; // Clear previous
-                answerInput.onkeydown = null; // Clear previous
-        
-                // Enable submit button when user types
-                answerInput.oninput = function() {
-                    const submitBtn = document.getElementById('submit-btn');
-                    const hasValue = this.value.trim() !== '';
-                    submitBtn.disabled = !hasValue;
-                    
-                    // Visual feedback
-                    if (hasValue) {
-                        submitBtn.style.opacity = '1';
-                        submitBtn.style.cursor = 'pointer';
-                    } else {
-                        submitBtn.style.opacity = '0.6';
-                        submitBtn.style.cursor = 'not-allowed';
-                    }
-                };
-                
-                // Enhanced Enter key handling
-                answerInput.onkeydown = function(event) {
-                    if (event.key === 'Enter') {
-                        const submitBtn = document.getElementById('submit-btn');
-                        if (!submitBtn.disabled) {
-                            submitAnswer();
-                            event.preventDefault(); // Prevent form submission behavior
-                        }
-                    }
-                };
-        
-                // Focus and select the input
-                setTimeout(() => {
-                    answerInput.focus();
-                    answerInput.select();
-                }, 100);
+                answerInput.disabled = false; // Always enabled
+                answerInput.readOnly = false; // Never readonly
+                answerInput.value = ''; // Clear previous answer
+                answerInput.focus(); // Auto-focus for immediate typing
             }
             
             // Update progress
@@ -3851,16 +3786,8 @@
             const percentage = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
             document.getElementById('score-display').textContent = `Score: ${score}/${totalQuestions} (${percentage}%)`;
             
-            // CRITICAL: Reset UI states completely
-            const submitBtn = document.getElementById('submit-btn');
-            if (submitBtn) {
-                submitBtn.disabled = true;
-                submitBtn.style.display = 'inline-block';
-                submitBtn.style.opacity = '0.6';
-                submitBtn.style.cursor = 'not-allowed';
-                submitBtn.textContent = 'Submit Answer';
-            }
-            
+            // Reset UI
+            document.getElementById('submit-btn').disabled = true;
             document.getElementById('hint-btn').style.display = 'inline-block';
             document.getElementById('next-btn').style.display = 'none';
             document.getElementById('finish-btn').style.display = currentMode === 'practice' ? 'inline-block' : 'none';
@@ -3877,20 +3804,12 @@
             // Track live session progress
             trackLiveSession();
         }
-        
+
         function handleKeyPress(event) {
             if (event.key === 'Enter') {
                 const submitBtn = document.getElementById('submit-btn');
-                const answerInput = document.getElementById('answer-input');
-                
-                // Allow Enter to submit even if button appears disabled but input has value
-                if (answerInput && answerInput.value.trim() !== '') {
-                    // Temporarily enable the button for this submission
-                    submitBtn.disabled = false;
-                    setTimeout(() => {
-                        submitAnswer();
-                    }, 10);
-                    event.preventDefault();
+                if (!submitBtn.disabled) {
+                    submitAnswer();
                 }
             }
         }
@@ -3904,22 +3823,6 @@
                     submitBtn.disabled = this.value.trim() === '';
                 });
             }
-            const observer = new MutationObserver(function(mutations) {
-                    mutations.forEach(function(mutation) {
-                        if (mutation.type === 'childList') {
-                            const answerInput = document.getElementById('answer-input');
-                            if (answerInput && answerInput.style.display === 'none') {
-                                answerInput.style.display = 'block';
-                            }
-                        }
-                    });
-                });
-    
-                observer.observe(document.body, {
-                    childList: true,
-                    subtree: true
-                });
-            });
         });
 
         function showHint() {
