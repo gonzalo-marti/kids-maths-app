@@ -1477,7 +1477,7 @@
 
 
     <footer style="position: fixed; bottom: 10px; right: 15px; font-size: 11px; color: rgba(255,255,255,0.7); background: rgba(0,0,0,0.2); padding: 4px 8px; border-radius: 4px;">
-        Version 3.0 - Cloud Sync Edition ☁️ | Powered by Firebase | Real Madrid Best Team in the World
+        Version 3.1 - Cloud Sync Edition ☁️ | Powered by Firebase | Real Madrid Best Team in the World
     </footer>
 
 
@@ -3790,8 +3790,13 @@
             const percentage = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
             document.getElementById('score-display').textContent = `Score: ${score}/${totalQuestions} (${percentage}%)`;
             
-            // Reset UI
-            document.getElementById('submit-btn').disabled = true;
+            // Reset UI - FIXED: Ensure submit button is visible and initially disabled
+            const submitBtn = document.getElementById('submit-btn');
+            if (submitBtn) {
+                submitBtn.style.display = 'inline-block'; // Make sure it's visible
+                submitBtn.disabled = true; // Initially disabled until user types
+            }
+            
             document.getElementById('hint-btn').style.display = 'inline-block';
             document.getElementById('next-btn').style.display = 'none';
             document.getElementById('finish-btn').style.display = currentMode === 'practice' ? 'inline-block' : 'none';
@@ -3812,7 +3817,11 @@
         function handleKeyPress(event) {
             if (event.key === 'Enter') {
                 const submitBtn = document.getElementById('submit-btn');
-                if (!submitBtn.disabled) {
+                const answerInput = document.getElementById('answer-input');
+        
+                // Only submit if there's text and we haven't answered yet
+                if (!isAnswered && answerInput && answerInput.value.trim() !== '' && submitBtn && !submitBtn.disabled) {
+                    event.preventDefault(); // Prevent any form submission
                     submitAnswer();
                 }
             }
@@ -3822,9 +3831,25 @@
         document.addEventListener('DOMContentLoaded', function() {
             const answerInput = document.getElementById('answer-input');
             if (answerInput) {
-                answerInput.addEventListener('input', function() {
+                // Remove any existing listeners first
+                const newInput = answerInput.cloneNode(true);
+                answerInput.parentNode.replaceChild(newInput, answerInput);
+                
+                // Add fresh input event listener
+                newInput.addEventListener('input', function() {
                     const submitBtn = document.getElementById('submit-btn');
-                    submitBtn.disabled = this.value.trim() === '';
+                    if (submitBtn) {
+                        const hasText = this.value.trim() !== '';
+                        submitBtn.disabled = !hasText || isAnswered;
+                    }
+                });
+        
+                // Add keypress listener for Enter key
+                newInput.addEventListener('keypress', function(event) {
+                    if (event.key === 'Enter') {
+                        event.preventDefault();
+                        handleKeyPress(event);
+                    }
                 });
             }
         });
@@ -3915,12 +3940,21 @@
                 </div>
             `;
             
-            // Update UI
-            document.getElementById('submit-btn').style.display = 'none';
+            // Update UI - ensure submit button is hidden and answer input stays enabled
+            const submitBtn = document.getElementById('submit-btn');
+            if (submitBtn) {
+                submitBtn.style.display = 'none'; // Hide submit button after answering
+            }
+            
             document.getElementById('next-btn').style.display = 'inline-block';
             document.getElementById('hint-btn').style.display = 'none';
-            // CRITICAL FIX: Never disable answer input
-            // document.getElementById('answer-input').disabled = true; // REMOVED
+            
+            // CRITICAL: Keep answer input enabled for review
+            const answerInput = document.getElementById('answer-input');
+            if (answerInput) {
+                answerInput.disabled = false; // Keep enabled
+                answerInput.readOnly = true; // Make read-only so user can see their answer
+            }
             
             // Update score display
             const percentage = Math.round((score / totalQuestions) * 100);
