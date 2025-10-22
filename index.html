@@ -1477,7 +1477,7 @@
 
 
     <footer style="position: fixed; bottom: 10px; right: 15px; font-size: 11px; color: rgba(255,255,255,0.7); background: rgba(0,0,0,0.2); padding: 4px 8px; border-radius: 4px;">
-        Version 3.1 - Cloud Sync Edition ☁️ | Powered by Firebase | Real Madrid Best Team in the World
+        Version 3.2 - Cloud Sync Edition ☁️ | Powered by Firebase | Real Madrid Best Team in the World
     </footer>
 
 
@@ -3050,7 +3050,7 @@
             
             return answer;
         }
-
+        const normalizeAnswer = normalizeMoneyAnswer;
         // CRITICAL FIX: Enhanced remainder answer validation system
         function validateRemainderAnswer(userAnswer, correctAnswer) {
             // Normalize both answers
@@ -3220,14 +3220,14 @@
             const userMoney = normalizeMoneyAnswer(userAnswer);
             const correctMoney = correctAnswer.toFixed(2);
             const correctPence = Math.round(correctAnswer * 100).toString();
-            
+    
             // Accept various formats: 0.19, 19, 19p, £0.19, .19
             if (Math.abs(parseFloat(userMoney) - correctAnswer) < 0.01) {
                 return true;
             }
-            
+    
             // Check pence format
-            const normalizedUser = normalizeAnswer(userAnswer);
+            const normalizedUser = normalizeMoneyAnswer(userAnswer);  // ← FIXED THIS LINE
             if (normalizedUser === correctPence || normalizedUser === correctPence + 'p') {
                 return true;
             }
